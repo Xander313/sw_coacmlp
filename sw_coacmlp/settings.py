@@ -43,7 +43,11 @@ INSTALLED_APPS = [
     'Aplicaciones.Historia',
     'Aplicaciones.Noticia',
     'Aplicaciones.Objetivos',
+    'Aplicaciones.Pregunta',
+    'Aplicaciones.Progreso',
 
+
+    
 ]
 
 MIDDLEWARE = [
