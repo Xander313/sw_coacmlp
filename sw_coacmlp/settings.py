@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'Aplicaciones.Examen',
     'Aplicaciones.Historia',
     'Aplicaciones.Noticia',
+    'Aplicaciones.Objetivos',
+
 ]
 
 MIDDLEWARE = [
