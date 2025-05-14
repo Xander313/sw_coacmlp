@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'Aplicaciones.Mision',
     'Aplicaciones.Vision',
     'Aplicaciones.Examen',
+    'Aplicaciones.Historia',
+    'Aplicaciones.Noticia',
 ]
 
 MIDDLEWARE = [
