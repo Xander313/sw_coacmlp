@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'Aplicaciones.Objetivos',
     'Aplicaciones.Pregunta',
     'Aplicaciones.Progreso',
+    'Aplicaciones.Testimonios',
+
 
 
     
