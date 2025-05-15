@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'Aplicaciones.Vision',
     'Aplicaciones.Examen',
     'Aplicaciones.Historia',
-    'Aplicaciones.Noticia',
+    'Aplicaciones.Noticias',
     'Aplicaciones.Objetivos',
     'Aplicaciones.Pregunta',
     'Aplicaciones.Progreso',
@@ -119,7 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'es-ec'
 
-TIME_ZONE = 'America/Guayaqui'
+TIME_ZONE = 'America/Guayaquil'
 
 USE_I18N = True
 
