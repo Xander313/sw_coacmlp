@@ -6,4 +6,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('social_django.urls', namespace='social')),
 
+
+    path('usuario/', include('Aplicaciones.Educacion.urls')),  # Aquí agregas la app usuario
+
+
 ]

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Perfil de Usuario</title>
+</head>
+<body>
+
+{% for social in user.social_auth.all %}
+    {% if social.provider == 'google-oauth2' %}
+        <p>Nombre completo: {{ social.extra_data.name }}</p>
+        <p>Nombre: {{ social.extra_data.given_name }}</p>
+        <p>Apellido: {{ social.extra_data.family_name }}</p>
+        <p>Email: {{ social.extra_data.email }}</p>
+        <img src="{{ social.extra_data.picture }}" alt="Foto de perfil" style="height: 50px; width: 50px; border-radius: 100%;">
+    {% endif %}
+{% endfor %}
+
+</body>
+</html>
