@@ -4,10 +4,17 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+
+
+
+
+    ##############################################
+    ####### URLS PARA EDUCACION FINANCIERA #######
+    ##############################################
+
+    path('educacion/', include('Aplicaciones.Educacion.urls')),  
     path('auth/', include('social_django.urls', namespace='social')),
-
-
-    path('usuario/', include('Aplicaciones.Educacion.urls')),  # Aquí agregas la app usuario
 
 
 ]

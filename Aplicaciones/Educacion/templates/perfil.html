@@ -1,20 +1,65 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
+    
+
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <title>Perfil de Usuario</title>
 </head>
 <body>
 
-{% for social in user.social_auth.all %}
-    {% if social.provider == 'google-oauth2' %}
-        <p>Nombre completo: {{ social.extra_data.name }}</p>
-        <p>Nombre: {{ social.extra_data.given_name }}</p>
-        <p>Apellido: {{ social.extra_data.family_name }}</p>
-        <p>Email: {{ social.extra_data.email }}</p>
-        <img src="{{ social.extra_data.picture }}" alt="Foto de perfil" style="height: 50px; width: 50px; border-radius: 100%;">
-    {% endif %}
-{% endfor %}
+    <aside class="sidebar">
+        <form class="sidebar__form">
+            <input type="checkbox" id="open-menu">
+            <label for="open-menu" class="material-symbols-outlined close-button">close</label>
+            <label for="open-menu" class="material-symbols-outlined open-button">open_in_full</label>
+        </form>
+        <picture class="sidebar__picture">
+            <img src="../html/relaciones.png" alt="">
+        </picture>
+        <nav class="sidebar__nav">
+            <ul>
+                <li class="sidebar__item">
+                    <span class="material-symbols-outlined">Notifications</span>
+                    <a href="#">Notificaciones</a>
+                </li>
+                <li class="sidebar__item">
+                    <span class="material-symbols-outlined">Mail</span>
+                    <a href="#">Emails</a>
+                </li>
+                <li class="sidebar__item">
+                    <span class="material-symbols-outlined">Shopping_cart</span>
+                    <a href="#">Carrito de compras</a>
+                </li>
+                <li class="sidebar__item">
+                    <span class="material-symbols-outlined">account_balance</span>
+                    <a href="#">Balance de cuenta</a>
+                </li>
+                <li class="sidebar__item">
+                    <span class="material-symbols-outlined">Settings</span>
+                    <a href="#">Confiuraciones</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="sidebar__profile">
+            <ul>
+                <li class="sidebar__item item__profile">
+                    <img src="{{ picture }}" alt="Foto de perfil" style="height: 50px; width: 50px; border-radius: 100%;">
+                    <span class="profile__option">Profile</span>
+                </li>
+                <li class="sidebar__item">
+                    <span class="material-symbols-outlined">logout</span>
+                    <a href="{% url 'logout' %}">Cerrar sesión</a>
+
+                </li>
+            </ul>
+        </div>
+    </aside>
 
 </body>
 </html>
