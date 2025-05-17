@@ -5,6 +5,7 @@ charset-normalizer==3.4.2
 cryptography==44.0.3
 defusedxml==0.7.1
 Django==5.2.1
+git-filter-repo==2.47.0
 idna==3.10
 oauthlib==3.2.2
 pycparser==2.22
