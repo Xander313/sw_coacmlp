@@ -31,7 +31,7 @@ def postlogin(request):
         name = social.extra_data.get('name') if social else None
         email = social.extra_data.get('email') if social else user.email
 
-        return render(request, 'perfil.html', {
+        return render(request, 'sesionIniciada.html', {
             'user': user,
             'picture': picture,
             'name': name,

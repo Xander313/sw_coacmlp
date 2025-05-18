@@ -2,15 +2,29 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: 'Times New Roman', Times, serif;
+
 }
 
-body{
-    --bg-color: color-mix(in srgb, #f62 70%, #fff);
-    --sidebar-color: #fff;
-    --main-color: #f62;
-    --text-color: #444;
-    background-color: var(--bg-color);
+
+:root {
+    --bg-color: #FFF8C6;
+    --sidebar-color: #FFD4FF;
+    --main-color: #000;
+    --text-color: #000;
 }
+
+
+body{
+    background-color: var(--bg-color);
+    display: flex; 
+    height: 100vh; 
+    margin: 0; 
+    overflow: hidden; 
+}
+
+
+
 
 label, span, a{
     user-select: none;
@@ -26,8 +40,8 @@ label, span, a{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 30px 0 30px 6px;
     font-family: 'Times New Roman', Times, serif;
+    width: 20%;
 
 }
 
@@ -38,6 +52,7 @@ label, span, a{
 .sidebar__nav{
     flex: 1;
     display: flex;
+    margin: 0;
 }
 
 .sidebar__nav ul{
@@ -45,6 +60,8 @@ label, span, a{
     flex-direction: column;
     justify-content: center;
     width: 100%;
+    padding: 0;
+    margin: 0;
 }
 
 
@@ -53,9 +70,8 @@ label, span, a{
     display: flex;
     align-items: center;
     font-size: .9rem;
-    padding-right: 6px;
+    padding-right: 0;
     color: var(--main-color);
-    transition: background-color .3s linear, color .3s linear;
     border-radius: 36px 0 0 36px;
     position: relative;
 }
@@ -63,8 +79,6 @@ label, span, a{
 .sidebar__item span{
     padding: 12px;
     font-size: 2.2rem;
-
-
 }
 
 
@@ -72,6 +86,7 @@ label, span, a{
     color: inherit;
     text-transform: uppercase;
     text-decoration: none;
+
 }
 
 
@@ -81,7 +96,7 @@ label, span, a{
 
 .sidebar__item:hover{
     background-color: var(--bg-color);
-    color: var(--sidebar-color);
+    color: #000;
 }
 
 .sidebar__item:hover::before,
@@ -110,8 +125,6 @@ label, span, a{
     bottom: -18px;
     border-top-right-radius:25px;
     box-shadow: 4px -4px 0 4px var(--bg-color);
-
-
 }
 
 
@@ -119,7 +132,7 @@ label, span, a{
 .sidebar__picture img{
     width: clamp(4rem, 100%, 20rem);
     margin: auto;
-    opacity: .85;
+    opacity: 1;
 
 
 }
@@ -148,23 +161,25 @@ label, span, a{
 .item__profile{
     width: fit-content;
     margin: 12px;
-    color: var(--text-color);
+    color: #000;
 
 }
 
 .item__profile:hover{
     border-radius: 25px;
-    color: var(--sidebar-color);
+    color: #000;
 }
 
-
-.item__profile::before, .item__profile::after{
-    display: none;
-
-}
 
 .sidebar__profile{
     text-transform: uppercase;
+
+}
+
+.sidebar__profile ul{
+    text-transform: uppercase;
+    padding: 0;
+
 }
 
 
@@ -182,7 +197,7 @@ input[type="checkbox"]{
 .sidebar label{
     position: relative;
     background-color: var(--bg-color);
-    color: var(--sidebar-color);
+    color: #000;
     font-size: 2rem;
     border-radius: 50%;
     padding: .4rem;
@@ -222,14 +237,14 @@ input[type="checkbox"]{
 
 
 input[type="checkbox"]:checked ~ label{ 
-    color: var(--bg-color);
+    color: #000;
     background-color: var(--sidebar-color);
 }
 
 
 input[type="checkbox"]:checked ~ label::before, input[type="checkbox"]:checked ~ label::after{ 
     display: none;
-
+    color: #000;
 }
 
 .sidebar:has(input[type="checkbox"]:checked){
@@ -263,3 +278,168 @@ input[type="checkbox"]:checked ~ label::before, input[type="checkbox"]:checked ~
 .sidebar__form .open-button{
     display: none;
 }
+
+.item__profile {
+    position: relative;
+    border-radius: 25px;
+    padding: 8px 12px;
+    margin-left: 0;
+    
+}
+
+.item__profile:hover {
+    background-color: var(--bg-color);
+    color: #000;
+}
+
+/* Pseudo-elementos como esquinas redondeadas */
+.item__profile:hover::before,
+.item__profile:hover::after {
+    content: '';
+    background-color: var(--bg-color);
+    position: absolute;
+    right: 0;
+    width: 18px;
+    height: 18px;
+    background-color: transparent;
+}
+
+.item__profile:hover::before {
+    top: -18px;
+    border-bottom-right-radius: 25px;
+    box-shadow: 4px 4px 0 4px var(--bg-color);
+}
+
+.item__profile:hover::after {
+    bottom: -18px;
+    border-top-right-radius: 25px;
+    box-shadow: 4px -4px 0 4px var(--bg-color);
+}
+
+
+.main {
+    width: 90%; 
+    height: 100vh;
+    overflow-y: auto;
+    transition: width 0.3s ease; /
+}
+
+
+.sidebar:has(input[type="checkbox"]:checked) {
+    width: 80px; 
+}
+
+.sidebar:has(input[type="checkbox"]:checked) + .main {
+    width: calc(100% - 90px); 
+}
+
+.item__profile::before,
+.item__profile::after {
+    display: none !important;
+}
+
+
+
+
+
+
+.sidebar {
+    background-color: var(--sidebar-color);
+    width: 15%;
+    height: 100vh;
+    font-size: clamp(1rem, 2.2dvh, 3rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px 0 30px 6px;
+    font-family: 'Times New Roman', Times, serif;
+    position: relative;
+    transition: width 0.3s ease;
+    z-index: 100;
+}
+
+.sidebar:has(input[type="checkbox"]:checked) + .main {
+    width: calc(100% - 80px);
+}
+
+
+@media (max-width: 992px) {
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 60% !important;
+        height: 100vh;
+        transition: left 0.3s ease;
+        z-index: 1000;
+        border-top-right-radius: 30px;
+        border-bottom-right-radius: 30px;
+        opacity: .9;
+    }
+
+    .sidebar.active {
+        left: 0;
+    }
+
+    .sidebar.active + .main {
+        filter: blur(3px);
+        transition: filter 0.3s ease;
+        pointer-events: none;
+    }
+
+    .navbar-toggler {
+        display: flex !important;
+        position: fixed;
+        left: 10%;
+        top: 90%;
+        transform: translateX(-50%);
+        z-index: 1100;
+        background: var(--main-color);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        opacity: .8;
+    }
+
+    .navbar-toggler.hidden {
+        display: none !important;
+    }
+
+    #closeSidebar {
+        display: block !important;
+        position: absolute;
+        width: 35px;
+        height: 35px;
+        top: 5px;
+        right: 15px;
+        z-index: 1100;
+        font-size: 1.5rem;
+        background: var(--main-color);
+        color: #fff;
+        border-radius: 100%;
+        opacity: 1;
+    }
+
+    .main {
+        width: 100% !important;
+        margin-left: 0 !important;
+    }
+
+    .sidebar__form {
+        display: none !important;
+    }
+}
+
+
+.navbar-toggler {
+    display: none;
+}
+
+
+

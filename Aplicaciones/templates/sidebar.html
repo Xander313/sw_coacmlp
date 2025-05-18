@@ -1,12 +1,69 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons (opcional, ya que usas Material Symbols) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Tus estilos existentes -->
+    <link rel="stylesheet" href="{% static 'styles/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <title>Perfil de Usuario</title>
 </head>
-<body>
-    
-    
+
+    <button class="navbar-toggler d-lg-none fixed-top m-3" type="button" id="sidebarToggle">
+        <span class="material-symbols-outlined">menu</span>
+    </button>
+
+    <aside class="sidebar" id="sidebar">
+
+        <button class="btn-close d-lg-none position-absolute top-0 end-0 m-3" id="closeSidebar">X</button>
+
+
+        <form class="sidebar__form">
+            <input type="checkbox" id="open-menu">
+            <label for="open-menu" class="material-symbols-outlined close-button">close</label>
+            <label for="open-menu" class="material-symbols-outlined open-button">open_in_full</label>
+        </form>
+        <picture class="sidebar__picture">
+            <img src="../html/relaciones.png" alt="">
+        </picture>
+        <nav class="sidebar__nav">
+            <ul>
+                <li class="sidebar__item">
+                    <span class="material-symbols-outlined">menu_book</span>
+                    <a href="#">capitulo 1</a>
+                </li>
+
+            </ul>
+        </nav>
+        <div class="sidebar__profile">
+            <ul>
+                <li class="sidebar__item item__profile">
+                    <img src="{{ picture }}" alt="Foto de perfil" style="height: 50px; width: 50px; border-radius: 100%;">
+                    <span class="profile__option">{{name}}</span>
+                </li>
+                <li class="sidebar__item">
+                    <span class="material-symbols-outlined">logout</span>
+                    <a href="{% url 'logout' %}">Cerrar sesión</a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+    <div class="main" id="mainContent"> 
+        {% block content %}
+
+        {% endblock %}
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="{% static 'js/sidebar.js' %}"></script>
+
 </body>
 </html>

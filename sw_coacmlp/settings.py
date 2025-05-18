@@ -61,7 +61,7 @@ ROOT_URLCONF = 'sw_coacmlp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join('Aplicaciones','templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
