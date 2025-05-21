@@ -1,0 +1,45 @@
+{% extends 'sidebarEducacion.html' %}
+{% load static %}
+
+{% block content %}
+<h2 style="text-align: center; margin-top: 20px;">CREAR NUEVO CAPITULO</h2>
+
+<div class="contenedor-formularios">
+    <div class="formulario-capitulo">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="titulo" class="form-label">Título: </label>
+                <input type="text" class="form-control" name="titulo" id="titulo" required>
+            </div>
+            <div class="mb-3">
+                <label for="orden" class="form-label">Orden:</label>
+                <input type="number" class="form-control" name="orden" id="orden" required>
+            </div>
+            <label for="cuerpo" class="form-label">Cuerpo: <span><small style="margin-top: 0;" class="text-muted">Detalle el contenido capítulo.</small></span></label>
+            <div class="cuerpoform" id="cuerpo">
+                {{ form.cuerpo }}
+            </div>
+            <div class="mb-3">
+                <label for="imagenURL" class="form-label">URL de la imagen:</label>
+                <textarea name="imagenURL" row="5" id="imagenURL" placeholder="https://laimagen.com"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="videoURL" class="form-label">URL del video:</label>
+                <textarea name="videoURL" row="5" id="videoURL" placeholder="https://elvideo.com"></textarea>
+            </div>
+            <div class="mb-3">
+                <input type="checkbox" name="examenS" id="examenS">
+                <label for="examenS" class="form-label" style="text-align: center;">Aplica examen</label>
+            </div>
+            <button type="submit" class="boton-guardar">Guardar</button>
+        </form>
+    </div>
+    <div class="examenForm" style="display: none;">
+        <h3>Formulario del examen</h3>
+        <label for="pregunta">Pregunta:</label>
+        <input type="text" id="pregunta" name="pregunta" style="width: 100%; padding: 8px; margin-bottom: 1rem;">
+    </div>
+</div>
+{{ form.media }}
+{% endblock %}

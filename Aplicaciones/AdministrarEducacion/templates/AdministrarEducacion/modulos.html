@@ -1,0 +1,54 @@
+{% extends "sidebarEducacion.html"%}
+
+{% block content %}
+
+<h1 style="text-align: center; margin-top: 20px;">GESTIÓN DE EDUCACIÓN FINANCIERA</h1>
+
+<div style="width: 95%; margin: auto;">
+<div class="d-flex justify-content-end mb-3">
+        <a href="#" class="btn btn-outline-primary">Crear Capítulo <i class="fa fa-pen"></i></a>
+
+</div>
+
+<table class="mi-tabla-personalizada table table-bordered table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Orden</th>
+            <th class="col-titulo">Título</th>
+            <th>Horas Aproximadas</th>
+            <th>Fecha de Creacion</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for capitulo in capitulos %}
+        <tr>
+            <td>{{ capitulo.id }}</td>
+            <td>{{ capitulo.orden }}</td>
+            <td class="col-titulo"><span class="badge bg-info">{{ capitulo.titulo }}</span></td>
+            <td>{{ capitulo.horasProximadas }}</td>
+            <td>{{ capitulo.fechaCreacion }}</td>
+
+            <td>
+                <a href="" class="btn btn-outline-warning btn-sm mb-1">
+                    <i class="fas fa-edit"></i> Editar
+                </a>
+                <a href="#" onclick="return confirm('¿Estás seguro de eliminar este asesor?')" class="btn btn-outline-danger btn-sm">
+                    <i class="fa fa-trash"></i> Eliminar
+                </a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="8" class="text-center">No hay capítulos registrados</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</div>
+
+
+
+{% endblock %}

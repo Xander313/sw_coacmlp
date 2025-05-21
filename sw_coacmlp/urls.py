@@ -17,4 +17,13 @@ urlpatterns = [
     path('auth/', include('social_django.urls', namespace='social')),
 
 
+
+
+    ####################################################################
+    ####### URLS PARA ADMINISTRAR MODULO DE EDUCACION FINANCIERA #######
+    ####################################################################
+
+    
+    path('administrarEducacion/', include('Aplicaciones.AdministrarEducacion.urls')),  
+
 ]

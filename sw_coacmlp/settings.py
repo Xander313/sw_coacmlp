@@ -25,6 +25,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
+    'ckeditor',
     'social_django',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -33,7 +34,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Aplicaciones.Mision',
     'Aplicaciones.Vision',
-    'Aplicaciones.Examen',
     'Aplicaciones.Historia',
     'Aplicaciones.Noticias',
     'Aplicaciones.Objetivos',
@@ -42,8 +42,26 @@ INSTALLED_APPS = [
     'Aplicaciones.Testimonios',
     'Aplicaciones.Valores',
     'Aplicaciones.Educacion',
-    
+    'Aplicaciones.Capitulo',
+    'Aplicaciones.Examen',
+    'Aplicaciones.AdministrarEducacion',
+
 ]
+
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline'],
+            ['NumberedList', 'BulletedList'],
+            ['Link', 'Unlink'],
+            ['RemoveFormat', 'Source']
+        ],
+        'height': '100%',
+        'width': '100%',
+    },
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -61,7 +79,7 @@ ROOT_URLCONF = 'sw_coacmlp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join('Aplicaciones','templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'Aplicaciones','templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

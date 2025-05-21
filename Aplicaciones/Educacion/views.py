@@ -16,7 +16,7 @@ def salir(request):
 
 
 def iniciarSesion(request):
-    return render(request, 'iniciarSesion.html')
+    return render(request, 'Educacion/iniciarSesion.html')
 
 
 
@@ -31,7 +31,7 @@ def postlogin(request):
         name = social.extra_data.get('name') if social else None
         email = social.extra_data.get('email') if social else user.email
 
-        return render(request, 'sesionIniciada.html', {
+        return render(request, 'Educacion/sesionIniciada.html', {
             'user': user,
             'picture': picture,
             'name': name,
@@ -39,7 +39,6 @@ def postlogin(request):
         })
 
     except Exception as e:
-
         return redirect('salir_definitivo')
 
 
@@ -47,18 +46,11 @@ def salirDefinitivo(request):
     logout(request)
     request.session.flush()
 
-    return render(request, 'errorSesion.html')
+    return render(request, 'Educacion/errorSesion.html')
 
 
-def volver_inicio(request):
+def volverInicio(request):
     logout(request)
     request.session.flush()
     return redirect('/')
 
-
-def error_social_auth(request):
-    if request.method == 'POST':
-        logout(request)
-        request.session.flush()
-        return redirect('/')
-    return render(request, 'error_social_auth.html')

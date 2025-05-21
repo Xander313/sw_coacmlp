@@ -1,0 +1,169 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+:root {
+    --bg-color: #FFF8C6;
+    --sidebar-color: #FFD4FF;
+    --main-color: #000;
+    --text-color: #000;
+}
+
+
+
+.formulario-capitulo {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: var(--bg-color);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.examenForm {
+    width: 100%;
+    max-width: 500px;
+    padding: 2rem;
+    background-color: #F5F5F5;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+
+.contenedor-formulario {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+
+.contenedor-formulario {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    align-items: start;
+    margin-top: 2rem;
+}
+
+
+.formulario-capitulo label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.formulario-capitulo input[type="text"],
+.formulario-capitulo input[type="url"],
+.formulario-capitulo input[type="number"] {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1.5rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    border: 3px solid var(--sidebar-color);
+    background-color: var(--bg-color);
+}
+
+.django-ckeditor-widget {
+    margin-bottom: 1.5rem !important;
+    width: 100%;
+    height: 100%;
+    border: 3px solid var(--sidebar-color); 
+}
+
+.cke_editor_cuerpo, 
+.cke_contents,      
+.ck-editor__editable {
+    width: 100% !important;
+    box-sizing: border-box;
+
+}
+
+
+.cke_chrome {
+    border-radius: 4px !important;
+    border: 1px solid #ddd !important;
+    box-shadow: none !important;
+
+}
+
+.cke_top {
+    background: var(--sidebar-color) !important;
+    border-bottom: 1px solid var(--bg-color) !important;
+
+}
+
+.boton-guardar {
+    background: #4CAF50;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s;
+}
+
+.boton-guardar:hover {
+    background: #45a049;
+}
+
+textarea {
+    resize: vertical; 
+    min-height: 80px;
+    max-height: 130px; 
+    width: 100%; 
+    overflow-y: auto; 
+    padding: 10px; 
+    border-radius: 5px; 
+    border: 3px solid var(--sidebar-color); 
+    background-color: var(--bg-color);
+
+}
+
+
+.contenedor-formularios {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+    margin: 2rem auto;
+    flex-wrap: wrap;
+}
+
+.formulario-capitulo,
+.examenForm {
+    flex: 1;
+    max-width: 500px;
+    background-color: var(--bg-color);
+    border: 3px solid var(--sidebar-color);
+}
+
+
+
+.examenForm{
+    margin-right: 1rem;
+
+}
+
+
+@media (max-width: 968px) {
+    .formulario-capitulo,
+    .examenForm {
+        width: 95%;
+        max-width: none;
+    }
+
+    .contenedor-formulario {
+        flex-direction: column;
+        align-items: center;
+    }
+}
