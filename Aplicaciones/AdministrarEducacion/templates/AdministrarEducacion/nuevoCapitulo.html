@@ -1,4 +1,6 @@
 {% extends 'sidebarEducacion.html' %}
+{% block title %}Crear Nuevo Capítulo{% endblock %}
+
 {% load static %}
 
 {% block content %}
@@ -6,19 +8,23 @@
 
 <div class="contenedor-formularios">
     <div class="formulario-capitulo">
-        <form method="post" enctype="multipart/form-data">
+        <form action="{% url 'crearNuevoCapitulo' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="mb-3">
                 <label for="titulo" class="form-label">Título: </label>
                 <input type="text" class="form-control" name="titulo" id="titulo" required>
             </div>
             <div class="mb-3">
-                <label for="orden" class="form-label">Orden:</label>
+                <label for="orden" class="form-label">Orden: </label>
                 <input type="number" class="form-control" name="orden" id="orden" required>
             </div>
             <label for="cuerpo" class="form-label">Cuerpo: <span><small style="margin-top: 0;" class="text-muted">Detalle el contenido capítulo.</small></span></label>
             <div class="cuerpoform" id="cuerpo">
                 {{ form.cuerpo }}
+            </div>
+            <div class="mb-3">
+                <label for="haprox" class="form-label">Horas aproximadas:</label>
+                <input type="number" class="form-control" name="haprox" id="haprox" required>
             </div>
             <div class="mb-3">
                 <label for="imagenURL" class="form-label">URL de la imagen:</label>

@@ -33,10 +33,12 @@
         </picture>
         <nav class="sidebar__nav">
             <ul>
+                {% for capitulo in capitulos %}
                 <li class="sidebar__item">
                     <span class="material-symbols-outlined">menu_book</span>
-                    <a href="#">capitulo 1</a>
+                    <a href="{% url 'capitulo' capitulo.orden %}">capitulo {{capitulo.orden}}</a>
                 </li>
+                {% endfor %}
 
             </ul>
         </nav>

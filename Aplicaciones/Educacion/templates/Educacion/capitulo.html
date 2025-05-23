@@ -1,0 +1,39 @@
+{% extends "sidebar.html" %}
+{% load static %}
+{% load embed_video %}
+
+
+
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'styles/capitulo.css' %}">
+<script src="{% static 'js/capitulo.js' %}"></script>
+
+
+<div class="encabezado">
+    <h1>Capítulo {{ capitulo.orden }}: {{ capitulo.titulo }}</h1>
+</div>
+
+<div class="cuerpo">
+    {{ capitulo.cuerpo|safe }}
+</div>
+
+<div id="contenidoExtra" class="contenido">
+    <div class="imagen">
+        <img src="{{ capitulo.imagenURL }}" alt="">
+    </div>
+    <div class="video">
+        {{ capitulo.videoURL|embed_video|safe }}
+    </div>
+</div>
+
+<div class="buttonContent">
+    <button class="boton" id="toggleContenidoBtn">
+        Mostrar contenido extra
+        <span id="icono" class="material-symbols-outlined">keyboard_arrow_down</span>
+    </button>
+</div>
+
+
+{% endblock %}

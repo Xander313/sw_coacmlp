@@ -4,7 +4,7 @@ from ckeditor.fields import RichTextField
 
 class Capitulo(models.Model):
     titulo = models.CharField(max_length=500)
-    cuerpo = RichTextField()
+    cuerpo = RichTextField() 
     imagenURL = models.TextField()
     videoURL = models.TextField()
     horasProximadas = models.IntegerField()
@@ -19,12 +19,4 @@ class Capitulo(models.Model):
         related_name='capitulo'
     )
 
-class Documento(models.Model):
-    titulo = models.CharField(max_length=200)
-    contenido = RichTextField()
-    fecha_creacion = models.DateTimeField(auto_now_add=True)
-    fecha_actualizacion = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.titulo
 
