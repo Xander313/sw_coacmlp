@@ -35,5 +35,17 @@
     </button>
 </div>
 
+<div class="buttonNext">
+    <button class="boton" id="toggleContenidoBtn">
+        {% if capitulo.idExamen == none %}
+            Avanzar a examen
+            <span class="material-symbols-outlined">chevron_right</span>
+        {% else %}
+            Avanzar al siguiente capitulo
+            <span class="material-symbols-outlined">assignment</span>
+        {% endif %}
+    </button>
+</div>
+
 
 {% endblock %}
