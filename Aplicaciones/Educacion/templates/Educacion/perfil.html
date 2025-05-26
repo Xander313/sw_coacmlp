@@ -1,0 +1,33 @@
+{% extends "sidebar.html" %}
+{% load static %}
+
+{% block content %}
+
+
+
+<h2>Perfil de {{ name }}</h2>
+<img src="{{ picture }}" alt="Foto de perfil" width="100">
+
+<table border="1" cellpadding="5">
+    <thead>
+        <tr>
+            <th>Título del Capítulo</th>
+            <th>Fecha de Verificación</th>
+            <th>Nota Obtenida</th>
+            <th>Aprobado</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in actividad %}
+        <tr>
+            <td>{{ item.titulo }}</td>
+            <td>{{ item.fecha }}</td>
+            <td>{{ item.nota }}</td>
+            <td>{{ item.aprobado }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}

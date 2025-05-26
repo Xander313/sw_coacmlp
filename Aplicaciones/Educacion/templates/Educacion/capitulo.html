@@ -8,11 +8,11 @@
 {% block content %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'styles/capitulo.css' %}">
-<script src="{% static 'js/capitulo.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'styles/barraActivacion.css' %}">
 
 
-<div class="encabezado">
-    <h1>Capítulo {{ capitulo.orden }}: {{ capitulo.titulo }}</h1>
+<div class="encabezadoTitulo">
+    <h1>Capítulo {{ capitulo.orden }}: {{ capitulo.titulo }} </h1>
 </div>
 
 <div class="cuerpo">
@@ -35,17 +35,46 @@
     </button>
 </div>
 
-<div class="buttonNext">
-    <button class="boton" id="toggleContenidoBtn">
-        {% if capitulo.idExamen == none %}
-            Avanzar a examen
-            <span class="material-symbols-outlined">chevron_right</span>
+
+<button id="botonAvance"
+        class="boton next {% if aprobado %}aprobado{% endif %}"
+        {% if not aprobado %}disabled{% endif %}
+        data-url="{% url examen|yesno:'examen_capitulo,avanzarCapitulo' capitulo.id %}"
+        data-activacion="{{ capitulo.activacion|default:0 }}">
+    {% if aprobado %}
+        Capítulo aprobado
+    {% else %}
+        {% if examen %}
+            Avanzar a examen 
         {% else %}
-            Avanzar al siguiente capitulo
-            <span class="material-symbols-outlined">assignment</span>
+            Aprobar capítulo 
         {% endif %}
-    </button>
+    {% endif %}
+    
+    <span class="material-symbols-outlined">
+        {% if aprobado %}
+            task_alt
+        {% else %}
+            {% if examen %}
+                assignment
+            {% else %}
+                chevron_right
+            {% endif %}
+        {% endif %}
+    </span>
+    
+    <div class="barraCarga"></div>
+</button>
+
+<div class="tiempo">
+    <span id="mensajeActivacion"><small>{% if aprobado%} {%else%}{{ capitulo.activacion }} ⌚ {%endif%}</small></span>
 </div>
+
+
+
+<script src="{% static 'js/capitulo.js' %}"></script>
+<script src="{% static 'js/avance.js' %}"></script>
+
 
 
 {% endblock %}

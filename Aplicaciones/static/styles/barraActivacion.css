@@ -1,0 +1,8 @@
+.tiempo{
+    display: flex;
+    position: fixed;
+    right: 20px;
+    bottom: 60px;
+}
+
+

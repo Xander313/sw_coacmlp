@@ -14,15 +14,15 @@
 
 <div class="contenedor-formularios">
     <div class="formulario-capitulo">
-        <form action="{% url 'crearNuevoCapitulo' %}" method="post" enctype="multipart/form-data">
+        <form action="{% url 'ejecutarEdicionCapitulo' capitulo.id  %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="mb-3">
                 <label for="titulo" class="form-label">Título: </label>
-                <input type="text" class="form-control" value="{{ titulo|default:'' }}" name="titulo" id="titulo" required>
+                <input type="text" class="form-control" value="{{ titulo|default:capitulo.titulo }}"" name="titulo" id="titulo" required>
             </div>
             <div class="mb-3">
                 <label for="orden" class="form-label">Orden: </label>
-                <input type="number" class="form-control" value="{{ orden|default:'' }}" name="orden" id="orden" required>
+                <input type="number" class="form-control" value="{{ orden|default:capitulo.orden }}" name="orden" id="orden" required>
             </div>
             <label for="cuerpo" class="form-label">Cuerpo: <span><small style="margin-top: 0;" class="text-muted">Detalle el contenido capítulo.</small></span></label>
             <div class="cuerpoform" id="cuerpo">
@@ -30,30 +30,29 @@
             </div>
             <div class="mb-3">
                 <label for="haprox" class="form-label">Horas aproximadas:</label>
-                <input type="number" value="{{ haprox|default:'' }}" class="form-control" name="haprox" id="haprox" required>
+                <input type="number" value="{{ haprox|default:capitulo.horasProximadas }}" class="form-control" name="haprox" id="haprox" required>
             </div>
             <div class="mb-3">
                 <label for="imagenURL" class="form-label">URL de la imagen:</label>
-                <textarea name="imagenURL" rows="5" id="imagenURL" placeholder="https://laimagen.com"> {{imagenURL|default:''}} </textarea>
+                <textarea name="imagenURL" rows="5" id="imagenURL" placeholder="https://laimagen.com"> {{ imagenURL|default:capitulo.imagenURL }} </textarea>
             </div>
             <div class="mb-3">
                 <label for="videoURL" class="form-label">URL del video:</label>
-                <textarea name="videoURL" rows="5" id="videoURL" placeholder="https://elvideo.com"> {{videoURL|default:''}} </textarea>
+                <textarea name="videoURL" rows="5" id="videoURL" placeholder="https://elvideo.com"> {{ videoURL|default:capitulo.videoURL }} </textarea>
             </div>
             <div class="mb-3">
                 <label for="timer" class="form-label">Tiempo de activacion: <span><small style="margin-top: 0;" class="text-muted">En segundos</small></span> </label>
-                <input type="number" value="{{ timer|default:'' }}" class="form-control" name="timer" id="timer" required>
+                <input type="number" value="{{ timer|default:capitulo.activacion }}" class="form-control" name="timer" id="timer" required>
             </div>
             <div class="mb-3">
-                <input type="checkbox" {% if examen %}checked{% endif %} name="examenS" id="examenS">
+                <input type="checkbox" {% if aplica_examen or examen %}checked{% endif %} name="examenS" id="examenS">
                 <label for="examenS" class="form-label" style="text-align: center;">Aplica examen</label>
             </div>
-            <div class="examenForm" style="display: block;">
+            <div class="examenForm" style="display: none;">
                 <h3>Formulario del examen</h3>
 
-                <div id="contenedorPreguntas">
+            <div id="contenedorPreguntas">
                 {{ preguntas_data|json_script:"preguntas-json" }}
-
                 <script>
                     const preguntasDesdeServidor = JSON.parse(document.getElementById("preguntas-json").textContent);
                     window.addEventListener('DOMContentLoaded', () => {
@@ -63,6 +62,7 @@
                                 const nuevaPregunta = document.createElement("div");
                                 nuevaPregunta.className = "elementoPregunta";
                                 nuevaPregunta.dataset.index = p.index;
+
                                 let respuestasHTML = "";
                                 p.respuestas.forEach((resp, i) => {
                                     const checked = (p.correcta == i.toString()) ? "checked" : "";
@@ -87,16 +87,16 @@
                                     </div>
                                     <button type="button" onclick="agregarRespuesta(this)">Nueva respuesta</button>
                                 `;
+
                                 contenedor.appendChild(nuevaPregunta);
                             });
 
-                            // Actualizar contador
                             contadorPreguntas = preguntasDesdeServidor.length;
                             actualizarBotonesEliminar();
                         }
                     });
                 </script>
-                </div>
+            </div>
 
             <button type="button" onclick="agregarPregunta()">Nueva pregunta</button>
             </div>

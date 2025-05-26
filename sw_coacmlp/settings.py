@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'Aplicaciones.Capitulo',
     'Aplicaciones.Examen',
     'Aplicaciones.AdministrarEducacion',
+    'Aplicaciones.Respuesta',
 
 ]
 

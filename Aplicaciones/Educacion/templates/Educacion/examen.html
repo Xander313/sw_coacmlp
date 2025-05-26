@@ -1,0 +1,34 @@
+{% extends "sidebar.html" %}
+{% load static %}
+
+
+{% block content %}
+
+
+{% if examen %}
+    <div class="examen">
+        <h2>Examen: {{ examen.titulo }}</h2>
+
+        <form method="post" action="{% url 'evaluarExamen' capitulo.id %}">
+            {% csrf_token %}
+            {% for pregunta in preguntas %}
+                <div class="pregunta">
+                    <p><strong>{{ forloop.counter }}. {{ pregunta.texto }}</strong></p>
+
+                    {% for respuesta in pregunta.respuestas.all %}
+                        <label>
+                            <input type="radio" name="pregunta_{{ pregunta.id }}" value="{{ respuesta.id }}">
+                            {{ respuesta.texto }}
+                        </label><br>
+                    {% endfor %}
+                </div>
+                <hr>
+            {% endfor %}
+
+            <button type="submit">Enviar respuestas</button>
+        </form>
+    </div>
+{% endif %}
+
+
+{% endblock %}

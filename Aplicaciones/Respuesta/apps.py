@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 class RespuestaConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'Respuesta'
+    name = 'Aplicaciones.Respuesta'

@@ -6,6 +6,10 @@ urlpatterns = [
     path('administracion/', views.administracion, name='administracion'),
     path('crearCapitulo/', views.crearCapitulo, name='crearCapitulo'),
     path('crearNuevoCapitulo/', views.crearNuevoCapitulo, name='crearNuevoCapitulo'),
+    path('edicion/<int:id>', views.servirEdicion, name='edicion'),
+    path('ejecutarEdicionCapitulo/<int:capitulo_id>', views.ejecutarEdicionapitulo, name='ejecutarEdicionCapitulo'),
+
+
 
 
 
