@@ -180,13 +180,6 @@ def servirEdicion(request, id):
     })
 
 
-    return render(request, 'AdministrarEducacion/editarCapitulo.html', {
-        'capitulo': cap,
-        'examen': exam,
-        'preguntas_data': preguntas_data,
-        'form': form 
-    })
-
 
 
 def ejecutarEdicionapitulo(request, capitulo_id):
@@ -270,7 +263,8 @@ def ejecutarEdicionapitulo(request, capitulo_id):
                     examen.save()
 
                 # Borrar preguntas previas
-                examen.pregunta_set.all().delete()
+                examen.preguntas.all().delete()
+
 
                 # Reconstruir preguntas y respuestas
                 preguntas_data = {}
@@ -373,3 +367,10 @@ def ejecutarEdicionapitulo(request, capitulo_id):
             'preguntas_data': preguntas_data,
             'capitulo': capitulo
         })
+
+
+def ejecutareliminacionCapitulo(request, id):
+    capitulo = Capitulo.objects.get(id=id)
+    capitulo.delete()
+    return redirect('administracion')
+

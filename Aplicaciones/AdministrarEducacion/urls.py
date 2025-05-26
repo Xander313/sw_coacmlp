@@ -8,6 +8,7 @@ urlpatterns = [
     path('crearNuevoCapitulo/', views.crearNuevoCapitulo, name='crearNuevoCapitulo'),
     path('edicion/<int:id>', views.servirEdicion, name='edicion'),
     path('ejecutarEdicionCapitulo/<int:capitulo_id>', views.ejecutarEdicionapitulo, name='ejecutarEdicionCapitulo'),
+    path('ejecutareliminacionCapitulo/<int:id>', views.ejecutareliminacionCapitulo, name='ejecutareliminacionCapitulo'),
 
 
 

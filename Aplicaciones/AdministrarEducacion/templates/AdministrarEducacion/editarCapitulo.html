@@ -45,10 +45,11 @@
                 <input type="number" value="{{ timer|default:capitulo.activacion }}" class="form-control" name="timer" id="timer" required>
             </div>
             <div class="mb-3">
-                <input type="checkbox" {% if aplica_examen or examen %}checked{% endif %} name="examenS" id="examenS">
+                <input type="checkbox" {% if  aplica_examen or examen %}checked{% endif %} name="examenS" id="examenS">
                 <label for="examenS" class="form-label" style="text-align: center;">Aplica examen</label>
             </div>
-            <div class="examenForm" style="display: none;">
+            <div class="examenForm" style="display: {% if aplica_examen or examen %}block{% else %}none{% endif %};">
+
                 <h3>Formulario del examen</h3>
 
             <div id="contenedorPreguntas">
