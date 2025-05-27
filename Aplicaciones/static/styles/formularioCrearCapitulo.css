@@ -15,7 +15,7 @@
 
 
 .formulario-capitulo {
-    width: 100%;
+    width: 95%;
     max-width: 600px;
     margin: 0 auto;
     padding: 2rem;
@@ -23,6 +23,7 @@
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
+
 
 .examenForm {
     width: 100%;
@@ -64,8 +65,8 @@
 .formulario-capitulo input[type="url"],
 .formulario-capitulo input[type="number"] {
     width: 100%;
-    padding: 0.75rem;
-    margin-bottom: 1.5rem;
+    padding: 0.50rem;
+    margin-bottom: 0.75rem;
     border-radius: 4px;
     font-size: 1rem;
     border: 3px solid var(--sidebar-color);
@@ -142,7 +143,7 @@ textarea {
 .formulario-capitulo,
 .examenForm {
     flex: 1;
-    max-width: 500px;
+    max-width: 98%;
     background-color: var(--bg-color);
     border: 3px solid var(--sidebar-color);
 }
@@ -158,7 +159,7 @@ textarea {
 @media (max-width: 968px) {
     .formulario-capitulo,
     .examenForm {
-        width: 95%;
+        width: 98%;
         max-width: none;
     }
 

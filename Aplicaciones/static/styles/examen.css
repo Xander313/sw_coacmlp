@@ -1,0 +1,129 @@
+
+:root {
+    --bg-color: #FFF8C6;
+    --sidebar-color: #FFD4FF;
+    --main-color: #000;
+    --text-color: #000;
+}
+
+
+
+.respuestasContainer input[type="text"] {
+    width: 100%;
+    border-radius: 4px;
+    font-size: 1rem;
+    border: 3px solid var(--sidebar-color);
+    background-color: var(--bg-color);
+}
+
+.respuestasContainer {
+    width: 90%; 
+    margin-left: auto;
+}
+
+.respuestaItemExamen{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    align-content: center;
+
+}
+.botonAgregar{
+    width: 100%;
+    padding: 0.50rem;
+    margin-bottom: 1.5rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    border: 3px solid var(--sidebar-color);
+    background-color: var(--bg-color);
+}
+
+.preguntaBotonAgregar {
+    max-width: 50%;
+    margin: 1rem auto; 
+    display: block; 
+}
+
+
+h3{
+    text-align: center;
+}
+
+.botonAgregarNuevaRespuesta{
+    max-width: 30%;
+    display: block; 
+}
+
+.contenedorPregutasExamen{
+    display: flex;
+    width: auto;
+    height: auto;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    gap: 10px;
+}
+
+
+
+.preguntaLinea {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.preguntaLinea input[type="text"] {
+    flex: 1;
+    border-radius: 4px;
+    font-size: 1rem;
+    border: 3px solid var(--sidebar-color);
+    background-color: var(--bg-color);
+}
+
+
+
+
+.contenedor-formularios {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.formulario-wrapper {
+  display: flex; /* SOLO este div es flex */
+  gap: 20px;
+  width: 100%;
+}
+
+.formulario-capitulo,
+.examenForm {
+  flex: 1; /* ambos toman mitad aprox */
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.examenForm {
+  border-left: 1px solid #ddd;
+}
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+    .formulario-wrapper {
+        flex-direction: column;
+    }
+
+  .formulario-capitulo,
+  .examenForm {
+    max-width: 100%; /* Para que tomen todo el ancho */
+    border-left: none; /* Opcional: quitar el borde lateral en móvil */
+  }
+}
