@@ -233,10 +233,10 @@ def perfilVisitante(request):
 
     actividad = []
 
-
     for capitulo in capitulos:
         progreso = progreso_dict.get(capitulo.id)
         actividad.append({
+            'orden': capitulo.orden,
             'titulo': capitulo.titulo,
             'fecha': progreso.fechaProgreso.strftime('%Y-%m-%d %H:%M') if progreso else 'No registrado',
             'nota': progreso.calificacion if progreso else 'No registrado',
