@@ -26,4 +26,12 @@ urlpatterns = [
     
     path('administrarEducacion/', include('Aplicaciones.AdministrarEducacion.urls')),  
 
+
+
+
+    ##############################################
+    ############## URLS PARA NOTICIAS#############
+    ##############################################
+    
+
 ]
