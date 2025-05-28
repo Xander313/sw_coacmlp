@@ -4,101 +4,108 @@
 {% load static %}
 
 
-<script src="{% static 'js/examen.js' %}"></script>
-
-
 
 
 {% block content %}
+
+<script src="{% static 'js/examen.js' %}"></script>
+
+
+<link rel="stylesheet" href="{% static 'styles/examen.css' %}">
+
 <h2 style="text-align: center; margin-top: 20px;">CREAR NUEVO CAPITULO</h2>
 
 <div class="contenedor-formularios">
     <div class="formulario-capitulo">
         <form action="{% url 'crearNuevoCapitulo' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="mb-3">
-                <label for="titulo" class="form-label">Título: </label>
-                <input type="text" class="form-control" value="{{ titulo|default:'' }}" name="titulo" id="titulo" required>
-            </div>
-            <div class="mb-3">
-                <label for="orden" class="form-label">Orden: </label>
-                <input type="number" class="form-control" value="{{ orden|default:'' }}" name="orden" id="orden" required>
-            </div>
-            <label for="cuerpo" class="form-label">Cuerpo: <span><small style="margin-top: 0;" class="text-muted">Detalle el contenido capítulo.</small></span></label>
-            <div class="cuerpoform" id="cuerpo">
-                {{ form.cuerpo }}
-            </div>
-            <div class="mb-3">
-                <label for="haprox" class="form-label">Horas aproximadas:</label>
-                <input type="number" value="{{ haprox|default:'' }}" class="form-control" name="haprox" id="haprox" required>
-            </div>
-            <div class="mb-3">
-                <label for="imagenURL" class="form-label">URL de la imagen:</label>
-                <textarea name="imagenURL" rows="5" id="imagenURL" placeholder="https://laimagen.com"> {{imagenURL|default:''}} </textarea>
-            </div>
-            <div class="mb-3">
-                <label for="videoURL" class="form-label">URL del video:</label>
-                <textarea name="videoURL" rows="5" id="videoURL" placeholder="https://elvideo.com"> {{videoURL|default:''}} </textarea>
-            </div>
-            <div class="mb-3">
-                <label for="timer" class="form-label">Tiempo de activacion: <span><small style="margin-top: 0;" class="text-muted">En segundos</small></span> </label>
-                <input type="number" value="{{ timer|default:'' }}" class="form-control" name="timer" id="timer" required>
-            </div>
-            <div class="mb-3">
-                <input type="checkbox" {% if examen %}checked{% endif %} name="examenS" id="examenS">
-                <label for="examenS" class="form-label" style="text-align: center;">Aplica examen</label>
-            </div>
-            <div class="examenForm" style="display: none;">
-                <h3>Formulario del examen</h3>
+            <div id="formulario-wrapper" class="formulario-wrapper">
+                <div class="formulario-capitulo">
+                    <div class="mb-3">
+                        <label for="titulo" class="form-label">Título: </label>
+                        <input type="text" class="form-control" value="{{ titulo|default:'' }}" name="titulo" id="titulo" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="orden" class="form-label">Orden: </label>
+                        <input type="number" class="form-control" value="{{ orden|default:'' }}" name="orden" id="orden" required>
+                    </div>
+                    <label for="cuerpo" class="form-label">Cuerpo: <span><small style="margin-top: 0;" class="text-muted">Detalle el contenido capítulo.</small></span></label>
+                    <div class="cuerpoform" id="cuerpo">
+                        {{ form.cuerpo }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="haprox" class="form-label">Horas aproximadas:</label>
+                        <input type="number" value="{{ haprox|default:'' }}" class="form-control" name="haprox" id="haprox" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="imagenURL" class="form-label">URL de la imagen:</label>
+                        <textarea name="imagenURL" rows="5" id="imagenURL" placeholder="https://laimagen.com"> {{imagenURL|default:''}} </textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="videoURL" class="form-label">URL del video:</label>
+                        <textarea name="videoURL" rows="5" id="videoURL" placeholder="https://elvideo.com"> {{videoURL|default:''}} </textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="timer" class="form-label">Tiempo de activacion: <span><small style="margin-top: 0;" class="text-muted">En segundos</small></span> </label>
+                        <input type="number" value="{{ timer|default:'' }}" class="form-control" name="timer" id="timer" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="checkbox" {% if examen %}checked{% endif %} name="examenS" id="examenS">
+                        <label for="examenS" class="form-label" style="text-align: center;">Aplica examen</label>
+                    </div>
+                    </div>
+                <div class="examenForm" style="display: none;">
+                    <h3>Formulario del examen</h3>
 
-                <div id="contenedorPreguntas">
-                {{ preguntas_data|json_script:"preguntas-json" }}
+                    <div id="contenedorPreguntas" class="div-examen">
+                    {{ preguntas_data|json_script:"preguntas-json" }}
 
-                <script>
-                    const preguntasDesdeServidor = JSON.parse(document.getElementById("preguntas-json").textContent);
-                    window.addEventListener('DOMContentLoaded', () => {
-                        if (Array.isArray(preguntasDesdeServidor)) {
-                            preguntasDesdeServidor.forEach(p => {
-                                const contenedor = document.getElementById("contenedorPreguntas");
-                                const nuevaPregunta = document.createElement("div");
-                                nuevaPregunta.className = "elementoPregunta";
-                                nuevaPregunta.dataset.index = p.index;
-                                let respuestasHTML = "";
-                                p.respuestas.forEach((resp, i) => {
-                                    const checked = (p.correcta == i.toString()) ? "checked" : "";
-                                    respuestasHTML += `
-                                        <div class="respuestaItem">
-                                            <label>Respuesta:</label>
-                                            <input type="text" name="preguntas[${p.index}][respuestas][]" value="${resp}" required>
-                                            <label>
-                                                <input type="radio" name="preguntas[${p.index}][respuesta_correcta]" value="${i}" ${checked}>
-                                                Correcta
-                                            </label>
-                                            <span class="material-symbols-outlined delete-icon" onclick="eliminarElemento(this)">delete</span>
-                                        </div>`;
+                    <script>
+                        const preguntasDesdeServidor = JSON.parse(document.getElementById("preguntas-json").textContent);
+                        window.addEventListener('DOMContentLoaded', () => {
+                            if (Array.isArray(preguntasDesdeServidor)) {
+                                preguntasDesdeServidor.forEach(p => {
+                                    const contenedor = document.getElementById("contenedorPreguntas");
+                                    const nuevaPregunta = document.createElement("div");
+                                    nuevaPregunta.className = "elementoPregunta";
+                                    nuevaPregunta.dataset.index = p.index;
+                                    let respuestasHTML = "";
+                                    p.respuestas.forEach((resp, i) => {
+                                        const checked = (p.correcta == i.toString()) ? "checked" : "";
+                                        respuestasHTML += `
+                                            <div class="respuestaItem">
+                                                <label>Respuesta:</label>
+                                                <input type="text" name="preguntas[${p.index}][respuestas][]" value="${resp}" required>
+                                                <label>
+                                                    <input type="radio" name="preguntas[${p.index}][respuesta_correcta]" value="${i}" ${checked}>
+                                                    Correcta
+                                                </label>
+                                                <span class="material-symbols-outlined delete-icon" onclick="eliminarElemento(this)">delete</span>
+                                            </div>`;
+                                    });
+
+                                    nuevaPregunta.innerHTML = `
+                                        <label>Pregunta:</label>
+                                        <input type="text" name="preguntas[${p.index}][texto]" value="${p.texto}" required>
+                                        <span class="material-symbols-outlined delete-icon" onclick="eliminarElemento(this)">delete</span>
+                                        <div class="respuestasContainer">
+                                            ${respuestasHTML}
+                                        </div>
+                                        <button type="button" onclick="agregarRespuesta(this)">Nueva respuesta</button>
+                                    `;
+                                    contenedor.appendChild(nuevaPregunta);
                                 });
 
-                                nuevaPregunta.innerHTML = `
-                                    <label>Pregunta:</label>
-                                    <input type="text" name="preguntas[${p.index}][texto]" value="${p.texto}" required>
-                                    <span class="material-symbols-outlined delete-icon" onclick="eliminarElemento(this)">delete</span>
-                                    <div class="respuestasContainer">
-                                        ${respuestasHTML}
-                                    </div>
-                                    <button type="button" onclick="agregarRespuesta(this)">Nueva respuesta</button>
-                                `;
-                                contenedor.appendChild(nuevaPregunta);
-                            });
+                                // Actualizar contador
+                                contadorPreguntas = preguntasDesdeServidor.length;
+                                actualizarBotonesEliminar();
+                            }
+                        });
+                    </script>
+                    </div>
 
-                            // Actualizar contador
-                            contadorPreguntas = preguntasDesdeServidor.length;
-                            actualizarBotonesEliminar();
-                        }
-                    });
-                </script>
+                <button type="button" class="botonAgregar preguntaBotonAgregar" onclick="agregarPregunta()">Nueva pregunta</button>
                 </div>
-
-            <button type="button" onclick="agregarPregunta()">Nueva pregunta</button>
             </div>
             <button type="submit" class="boton-guardar">Guardar</button>
         </form>

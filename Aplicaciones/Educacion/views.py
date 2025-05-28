@@ -76,7 +76,7 @@ def capitulo(request, id):
     except Examen.DoesNotExist:
         esta = None 
 
-    capitulo = Capitulo.objects.get(id=id)
+    capitulo = Capitulo.objects.get(orden=id)
     lCap = Capitulo.objects.all()
 
     # Recuperar datos de sesión

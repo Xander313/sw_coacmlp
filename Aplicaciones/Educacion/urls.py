@@ -20,7 +20,7 @@ urlpatterns = [
     path('examen/<int:id>/', views.examen, name='examen_capitulo'),
 
     #####################################################################
-    ###################SIRVIENDO CAPITULOS####################
+    ###################SIRVIENDO CAPITULOS y certificacion####################
     #####################################################################
 
     path('capitulo/avanzar/<int:id>/', views.avanzarCapitulo, name='avanzarCapitulo'),
