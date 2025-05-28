@@ -11,9 +11,11 @@
 <link rel="stylesheet" type="text/css" href="{% static 'styles/barraActivacion.css' %}">
 
 
+
 <div class="encabezadoTitulo">
-    <h1>Capítulo {{ capitulo.orden }}: {{ capitulo.titulo }} </h1>
+    <h1 class="cuerpoDelCapitulo">Capítulo {{ capitulo.orden }}: {{ capitulo.titulo }} </h1>
 </div>
+
 
 <div class="cuerpo">
     {{ capitulo.cuerpo|safe }}
@@ -37,10 +39,10 @@
 
 
 <button id="botonAvance"
-        class="boton next {% if aprobado %}aprobado{% endif %}"
+        class="boton next  {% if aprobado %}aprobado{% endif %}"
         {% if not aprobado %}disabled{% endif %}
         data-url="{% url examen|yesno:'examen_capitulo,avanzarCapitulo' capitulo.id %}"
-        data-activacion="{{ capitulo.activacion|default:0 }}">
+        data-activacion="{{ capitulo.activacion|default:0 }}" style="z-index: 10000;">
     {% if aprobado %}
         Capítulo aprobado
     {% else %}

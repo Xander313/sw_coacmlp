@@ -3,18 +3,22 @@
 
 {% block content %}
 
+<link rel="stylesheet" type="text/css" href="{% static 'styles/perfil.css' %}">
 
 
-<h2>Perfil de {{ name }}</h2>
-<img src="{{ picture }}" alt="Foto de perfil" width="100">
+<div class="datosPefilDeVisitante">
+    <img src="{{ picture }}" alt="Foto de perfil" width="100">
+    <h3 class="nombreDelVisitante">Perfil de {{ name }}</h3>
+</div>
 
-<table border="1" cellpadding="5">
+<table class="mi-tabla-personalizada table table-bordered table-striped table-hover">
     <thead>
         <tr>
             <th>Título del Capítulo</th>
             <th>Fecha de Verificación</th>
             <th>Nota Obtenida</th>
             <th>Aprobado</th>
+            <th>Ir al capítulo</th>
         </tr>
     </thead>
     <tbody>
@@ -24,10 +28,22 @@
             <td>{{ item.fecha }}</td>
             <td>{{ item.nota }}</td>
             <td>{{ item.aprobado }}</td>
+            <td> 
+                {% if item.aprobado == "Sí" %}
+                    No aplica
+                {% else %}
+                    <a href="{% url 'capitulo' item.orden %}">Ir</a>
+                {% endif %}
+            </td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
-
+<div class="botonCentrar">
+    <a class="botonCertificarme {% if not todo_aprobado %}disabled{% endif %}" 
+       href="{% if todo_aprobado %}/ruta-a-certificacion{% else %}#{% endif %}">
+       Certificarme
+    </a>
+</div>
 
 {% endblock %}

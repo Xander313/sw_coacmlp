@@ -232,20 +232,26 @@ def perfilVisitante(request):
     lCap = Capitulo.objects.all()
 
     actividad = []
+    todo_aprobado = True  # Suponemos que sí, hasta que se demuestre lo contrario
 
     for capitulo in capitulos:
         progreso = progreso_dict.get(capitulo.id)
+        aprobado = progreso and progreso.aprobado
         actividad.append({
-            'orden': capitulo.orden,
             'titulo': capitulo.titulo,
             'fecha': progreso.fechaProgreso.strftime('%Y-%m-%d %H:%M') if progreso else 'No registrado',
             'nota': progreso.calificacion if progreso else 'No registrado',
-            'aprobado': 'Sí' if progreso and progreso.aprobado else ('No' if progreso else 'No registrado')
+            'aprobado': 'Sí' if aprobado else ('No' if progreso else 'No registrado'),
+            'orden': capitulo.orden
         })
+
+        if not aprobado:
+            todo_aprobado = False
 
     return render(request, 'Educacion/perfil.html', {
         'name': request.session.get('name'),
         'picture': request.session.get('picture'),
         'actividad': actividad,
-        'capitulos': lCap
+        'capitulos': lCap,
+        'todo_aprobado': todo_aprobado
     })
