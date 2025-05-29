@@ -8,8 +8,21 @@ from Aplicaciones.Examen.models import Examen
 from django.utils import timezone
 from Aplicaciones.Progreso.models import Progreso
 from Aplicaciones.Respuesta.models import Respuesta
-
 from .models import Visitante
+from functools import wraps
+from django.shortcuts import redirect
+
+
+
+
+def session_required(view_func):
+    @wraps(view_func)
+    def _wrapped_view(request, *args, **kwargs):
+        if not request.session.get('email'):
+            return redirect('errorSesion')
+        return view_func(request, *args, **kwargs)
+    return _wrapped_view
+
 
 
 def salir(request):
@@ -69,7 +82,7 @@ def volverInicio(request):
 #####################################################################
 #####################SIRVIENDO EL CONTENIDO#########################
 #####################################################################
-
+@session_required
 def capitulo(request, id):
     try:
         esta = Examen.objects.get(capitulo=id)
@@ -78,6 +91,9 @@ def capitulo(request, id):
 
     capitulo = Capitulo.objects.get(orden=id)
     lCap = Capitulo.objects.all()
+    email = request.session.get('email')
+    if not email:
+        return redirect('errorSesion')
 
     # Recuperar datos de sesión
     name = request.session.get('name', 'Usuario')
@@ -104,9 +120,12 @@ def capitulo(request, id):
     })
 
 
-
+@session_required
 def examen(request, id):
     capitulo = get_object_or_404(Capitulo, id=id)
+    email = request.session.get('email')
+    if not email:
+        return redirect('errorSesion')
 
     if not hasattr(capitulo, 'examen'):
         return render(request, 'Educacion/sin_examen.html', {'capitulo': capitulo})
@@ -128,10 +147,13 @@ def examen(request, id):
 
     })
 
-
+@session_required
 def avanzarCapitulo(request, id):
     capitulo = get_object_or_404(Capitulo, id=id)
     email = request.session.get('email')
+    if not email:
+        return redirect('errorSesion')
+    
     visitante = get_object_or_404(Visitante, email=email)
 
     progreso_actual, created = Progreso.objects.update_or_create(
@@ -157,9 +179,11 @@ def avanzarCapitulo(request, id):
 
     return redirect('capitulo', id=capitulo.id) 
 
-
+@session_required
 def certificado(request):
-
+    email = request.session.get('email')
+    if not email:
+        return redirect('errorSesion')
     name = request.session.get('name', 'Usuario')
     picture = request.session.get('picture', '')
     lCap = Capitulo.objects.all()
@@ -171,9 +195,12 @@ def certificado(request):
     })
 
 
-
+@session_required
 def evaluarExamen(request, capitulo_id):
     if request.method == 'POST':
+        email = request.session.get('email')
+        if not email:
+            return redirect('errorSesion')
         capitulo = get_object_or_404(Capitulo, id=capitulo_id)
         examen = capitulo.examen
         preguntas = examen.preguntas.prefetch_related('respuestas')
@@ -222,9 +249,12 @@ def evaluarExamen(request, capitulo_id):
 
 
 
-
+@session_required
 def perfilVisitante(request):
     email = request.session.get('email')
+    if not email:
+        return redirect('errorSesion')
+
     visitante = get_object_or_404(Visitante, email=email)
 
     capitulos = Capitulo.objects.all().order_by('orden')

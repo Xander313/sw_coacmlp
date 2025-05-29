@@ -53,6 +53,9 @@ label, span, a{
     flex: 1;
     display: flex;
     margin: 0;
+    display: flex;
+    flex-direction: column; /* permite alinear hijos verticalmente */
+    height: 100%;
 }
 
 .sidebar__nav ul{
@@ -138,15 +141,16 @@ label, span, a{
 }
 
 .sidebar__picture{
-    margin-left: 1.5rem;
     position: relative;
     z-index: 10;
+    width: 97%;
+    height: auto;
+
 }
 
 
 /*sidebar profile styles*/
 .sidebar__profile img{
-
     clip-path: circle(50%);
     width: 2rem;
 
@@ -363,7 +367,7 @@ input[type="checkbox"]:checked ~ label::before, input[type="checkbox"]:checked ~
 }
 
 
-@media (max-width: 992px) {
+@media (max-width: 800px) {
 
     .sidebar {
         position: fixed;
@@ -434,7 +438,43 @@ input[type="checkbox"]:checked ~ label::before, input[type="checkbox"]:checked ~
     .sidebar__form {
         display: none !important;
     }
+    .capitulosEduacacionFInanciera {
+        max-height: 99000px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        direction: rtl;
+        text-align: left;
+        margin-top: auto; 
+    }
+
 }
+
+
+
+
+@media (max-width: 800px) {
+    .capitulosEduacacionFInanciera {
+        margin-top: 50px;
+        height: 100%;
+    }
+
+    .sidebar__nav {
+        margin-top: 20px;
+    }
+
+    .sidebar__picture {
+        display: flex;
+        justify-content: center; 
+        align-items: center;     
+        height: 400px;           
+    }
+
+    .sidebar__picture img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
 
 
 .navbar-toggler {
@@ -442,4 +482,28 @@ input[type="checkbox"]:checked ~ label::before, input[type="checkbox"]:checked ~
 }
 
 
+.capitulosEduacacionFInanciera {
+    height: 310px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    direction: rtl;
+    text-align: left;
+    margin-top: auto; 
+}
 
+.capitulosEduacacionFInanciera > * {
+    direction: ltr;         
+}
+
+
+.capitulosEduacacionFInanciera::-webkit-scrollbar {
+    width: 6px;                  
+}
+
+.capitulosEduacacionFInanciera::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
+.capitulosEduacacionFInanciera:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3); 
+}

@@ -32,7 +32,7 @@
                 {% if item.aprobado == "Sí" %}
                     No aplica
                 {% else %}
-                    <a href="{% url 'capitulo' item.orden %}">Ir</a>
+                    <a class="BarraIrCapitulo" href="{% url 'capitulo' item.orden %}">Ir <span class="material-symbols-outlined">arrow_forward</span></a>
                 {% endif %}
             </td>
         </tr>

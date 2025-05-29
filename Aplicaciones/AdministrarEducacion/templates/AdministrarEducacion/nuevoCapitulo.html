@@ -9,8 +9,6 @@
 {% block content %}
 
 <script src="{% static 'js/examen.js' %}"></script>
-
-
 <link rel="stylesheet" href="{% static 'styles/examen.css' %}">
 
 <h2 style="text-align: center; margin-top: 20px;">CREAR NUEVO CAPITULO</h2>
@@ -53,7 +51,7 @@
                         <input type="checkbox" {% if examen %}checked{% endif %} name="examenS" id="examenS">
                         <label for="examenS" class="form-label" style="text-align: center;">Aplica examen</label>
                     </div>
-                    </div>
+                </div>
                 <div class="examenForm" style="display: none;">
                     <h3>Formulario del examen</h3>
 

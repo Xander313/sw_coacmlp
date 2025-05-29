@@ -29,18 +29,19 @@
             <label for="open-menu" class="material-symbols-outlined open-button">open_in_full</label>
         </form>
         <picture class="sidebar__picture">
-            <img src="../html/relaciones.png" alt="">
+            <img src="{% static 'img/banner.jpg'%}" alt="">
         </picture>
         <nav class="sidebar__nav">
-            <ul>
-                {% for capitulo in capitulos %}
-                <li class="sidebar__item">
-                    <span class="material-symbols-outlined">menu_book</span>
-                    <a href="{% url 'capitulo' capitulo.orden %}">capitulo {{capitulo.orden}}</a>
-                </li>
-                {% endfor %}
-
-            </ul>
+            <div class="capitulosEduacacionFInanciera">
+                <ul>
+                    {% for capitulo in capitulos %}
+                    <li class="sidebar__item">
+                        <span class="material-symbols-outlined redirect-icon" data-url="{% url 'capitulo' capitulo.orden %}">menu_book</span>
+                        <a href="{% url 'capitulo' capitulo.orden %}">capitulo {{capitulo.orden}}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </nav>
         <div class="sidebar__profile">
             <ul>

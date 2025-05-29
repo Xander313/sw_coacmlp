@@ -81,7 +81,15 @@
     cursor: not-allowed;
 }
 
-
+.BarraIrCapitulo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-decoration: none;
+    text-decoration-line: none;
+    color: var(--main-color);
+}
 
 @media screen and (max-width: 600px) {
     .mi-tabla-personalizada {
