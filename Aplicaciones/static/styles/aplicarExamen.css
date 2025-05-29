@@ -1,0 +1,104 @@
+*{
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+:root {
+    --bg-color: #FFF8C6;
+    --sidebar-color: #FFD4FF;
+    --main-color: #514800;
+    --text-color: #514800;
+}
+
+.pregunta{
+    padding-bottom: 20px;
+    border-bottom: 4px solid var(--sidebar-color);
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+
+}
+
+
+.examen-container {
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 30px;
+    border-bottom: 2px solid var(--sidebar-color);
+    margin-bottom: 10px;
+    
+}
+
+.examen-navbar {
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-color);
+    border-bottom: 2px solid var(--sidebar-color);
+    padding: 10px 20px;
+    z-index: 1000;
+}
+
+.examen-titulo {
+    margin: 0;
+    font-size: 1.5rem;
+    white-space: normal; 
+    word-wrap: break-word; 
+    overflow: visible; 
+    text-align: center;
+    font-weight: bold;
+}
+
+
+.examen-cuerpo {
+    background-color: var(--bg-color);
+    padding: 20px;
+    border: 4px solid var(--sidebar-color);
+    margin-top: 20px;
+    border-radius: 15px;
+
+
+}
+
+
+
+.contenedorbotonEnviarExamen{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: right;
+}
+
+.botonEnviarExamen{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    background-color: var(--bg-color);
+    border: 3px solid var(--sidebar-color);
+    border-radius: 10px;
+    padding: 10px;
+    margin-right:  5px;
+    transition: background-color 0.5s ease;
+    color: #000;
+
+}
+
+
+
+
+.botonEnviarExamen:hover{
+    background-color: var(--sidebar-color);
+}
+
+
+
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 768px) {
+    .examen-titulo {
+        font-size: 1rem; /* Texto más pequeño en móviles */
+    }
+    .examen-container {
+        width: 95%;
+        padding-top: 70px;
+    }
+}

@@ -3,31 +3,39 @@
 
 
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/aplicarExamen.css' %}">
 
 
 {% if examen %}
-    <div class="examen">
-        <h2>Examen: {{ examen.titulo }}</h2>
+<div class="examen-container">
+    <div class="examen-navbar">
+        <div class="tituloDelExamen">
+            <h2 class="examen-titulo">{{ examen.titulo }}</h2>
+        </div>
+        <div class="examen-cuerpo">
+            <form method="post" action="{% url 'evaluarExamen' capitulo.id %}">
+                {% csrf_token %}
+                {% for pregunta in preguntas %}
+                    <div class="pregunta">
+                        <p><strong>{{ forloop.counter }}. {{ pregunta.texto }}</strong></p>
 
-        <form method="post" action="{% url 'evaluarExamen' capitulo.id %}">
-            {% csrf_token %}
-            {% for pregunta in preguntas %}
-                <div class="pregunta">
-                    <p><strong>{{ forloop.counter }}. {{ pregunta.texto }}</strong></p>
-
-                    {% for respuesta in pregunta.respuestas.all %}
-                        <label>
-                            <input type="radio" name="pregunta_{{ pregunta.id }}" value="{{ respuesta.id }}">
-                            {{ respuesta.texto }}
-                        </label><br>
-                    {% endfor %}
+                        {% for respuesta in pregunta.respuestas.all %}
+                            <label>
+                                <input type="radio" name="pregunta_{{ pregunta.id }}" value="{{ respuesta.id }}" required>
+                                {{ respuesta.texto }}
+                            </label><br>
+                        {% endfor %}
+                    </div>
+                    
+                {% endfor %}
+                <div class="contenedorbotonEnviarExamen">
+                    <button class="botonEnviarExamen" type="submit"><span class="material-symbols-outlined">send</span> Enviar respuestas</button>
                 </div>
-                <hr>
-            {% endfor %}
+            </form>
+        </div>
 
-            <button type="submit">Enviar respuestas</button>
-        </form>
     </div>
+</div>
 {% endif %}
 
 

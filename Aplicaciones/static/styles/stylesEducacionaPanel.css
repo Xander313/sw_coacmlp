@@ -8,7 +8,7 @@
 :root {
     --bg-color: #FFF8C6;  
     --line-color: #FFD4FF; 
-    --text-color: #000;    
+    --text-color: #514800;    
 }
 
 .checkbox-label {
@@ -41,10 +41,10 @@
     min-width: 200px;
     font-size: clamp(1.2rem, 3.2dvh, 4rem);
 
-    white-space: normal;           /* Permite saltos de línea */
-    word-break: break-word;       /* Rompe palabras largas */
-    overflow-wrap: break-word;    /* Asegura quiebre si es necesario */
-    line-height: 1.3;             /* Mejora la legibilidad al colapsar */
+    white-space: normal;         
+    word-break: break-word;     
+    overflow-wrap: break-word;    
+    line-height: 1.3;            
 }
 
 .col-titulo .badge {
