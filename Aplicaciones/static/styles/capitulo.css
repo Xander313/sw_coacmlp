@@ -7,7 +7,8 @@
     --bg-color: #FFF8C6;
     --sidebar-color: #CA6AB4;
     --main-color: #514800;
-    --text-color: #514800;
+    --text-color: #023196;
+    
 }
 
 
@@ -26,9 +27,18 @@
 }
 
 
+.cuerpoDelCapitulo{
+    color: var(--text-color);
+text-shadow:
+  0 0 15px var(--sidebar-color),
+  0 0 15px var(--sidebar-color),
+  0 0 15px var(--sidebar-color);
+      font-size: clamp(1.5rem, 2.5dvh, 3.5rem);
+}
+
 
 .encabezadoTitulo h1 {
-    font-size: clamp(1.5rem, 2.5dvh, 3.5rem);
+    
     font-weight: bold;
     padding-left: 0px;
     white-space: normal;          
@@ -41,7 +51,7 @@
     width: auto;
     height: auto; 
     padding-right: 60px;   
-    
+
 }
 
 
@@ -51,7 +61,7 @@
     width: 100%;
     text-align: justify;
     font-size: clamp(1.2rem, 2.2dvh, 3rem);
-    color: var(--text-color);
+    color: var(--main-color);
 
 
 }
@@ -93,7 +103,7 @@
     padding: 10px;
     margin:  auto;
     transition: background-color 0.5s ease;
-    color: var(--text-color);
+    color: var(--main-color);
 
 
 }

@@ -42,11 +42,35 @@
     </tbody>
 </table>
 </div>
+
 <div class="botonCentrar">
-    <a class="botonCertificarme {% if not todo_aprobado %}disabled{% endif %}" 
-       href="{% if todo_aprobado %}/ruta-a-certificacion{% else %}#{% endif %}">
-       Certificarme
-    </a>
+<a class="botonCertificarme" valor-confirmado="{{ todo_aprobado}}" href="#" onclick="manejarCertificacion(event)">
+  <span class="material-symbols-outlined"> workspace_premium </span> Certificarme
+</a>
 </div>
+
+
+<script>
+function manejarCertificacion(event) {
+  event.preventDefault(); 
+
+  const enlace = event.currentTarget;
+  const aprobado = enlace.getAttribute("valor-confirmado") === "True"; 
+
+  if (aprobado) {
+    
+    window.location.href = "{% url 'certificadoEducacion' %}";
+  } else {
+    
+    Swal.fire({
+      title: "No puedes certificarte aún",
+      text: "Debes aprobar todos los capítulos antes de continuar.",
+      icon: "error",
+      confirmButtonText: "Entendido"
+    });
+  }
+}
+</script>
+
 
 {% endblock %}

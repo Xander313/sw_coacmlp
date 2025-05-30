@@ -7,4 +7,13 @@
 <h1>beinvenido a certificacion felicidades</h1>
 
 
+<form method="POST" action="{% url 'ejecutarCertificacion' %}" target="iframeCertificado">
+  {% csrf_token %}
+  <input type="text" name="nombre" placeholder="Ingresa tu nombre" required>
+  <button type="submit">Generar certificado</button>
+</form>
+
+<iframe id="iframeCertificado" name="iframeCertificado" width="600" height="400"></iframe>
+
+
 {% endblock %}

@@ -45,7 +45,7 @@ label, span, a{
     justify-content: space-between;
     font-family: 'Times New Roman', Times, serif;
     width: 20%;
-    border-left: 10px solid var(--lines-color); 
+    border-left: 5px solid var(--lines-color); 
 
 }
 

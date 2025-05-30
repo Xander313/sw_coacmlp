@@ -50,13 +50,23 @@
 
 
 .botonCertificarme{
+    display: flex;
+    justify-content: center;
     color: var(--text-color);
     border-radius: 10px;
     border: 2px solid var(--line-color);
     text-decoration-line: none;
     padding: 10px;
     margin-top: 10px;
+    transition: background-color 0.5s ease;
 }
+
+
+.botonCertificarme:hover{
+    background-color: var(--line-color);
+    color: white;
+}
+
 
 .botonCentrar{
     width: 100%;

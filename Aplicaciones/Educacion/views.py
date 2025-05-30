@@ -2,7 +2,6 @@ from decimal import Decimal
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout
-from django.shortcuts import redirect
 from Aplicaciones.Capitulo.models import Capitulo
 from Aplicaciones.Examen.models import Examen
 from django.utils import timezone
@@ -10,7 +9,18 @@ from Aplicaciones.Progreso.models import Progreso
 from Aplicaciones.Respuesta.models import Respuesta
 from .models import Visitante
 from functools import wraps
-from django.shortcuts import redirect
+import os
+from django.http import HttpResponse
+from django.conf import settings
+from PyPDF2 import PdfReader, PdfWriter
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
+from io import BytesIO
+import io
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.lib.pagesizes import letter
+
 
 
 
@@ -175,9 +185,11 @@ def avanzarCapitulo(request, id):
     pendientes = todos - aprobados
 
     if not pendientes:
-        return redirect('certificado')  
+        return redirect('perfilVisitante')  
 
     return redirect('capitulo', id=capitulo.id) 
+
+
 
 @session_required
 def certificado(request):
@@ -193,6 +205,13 @@ def certificado(request):
         'picture': picture,
         'capitulos': lCap,
     })
+
+
+
+
+
+
+
 
 
 @session_required
@@ -239,7 +258,7 @@ def evaluarExamen(request, capitulo_id):
         pendientes = todos - aprobados
 
         if not pendientes:
-            return redirect('certificado')  
+            return redirect('perfilVisitante')  
 
         return redirect('capitulo', id=capitulo.id) 
 
@@ -262,7 +281,7 @@ def perfilVisitante(request):
     lCap = Capitulo.objects.all()
 
     actividad = []
-    todo_aprobado = True  # Suponemos que sí, hasta que se demuestre lo contrario
+    todo_aprobado = True 
 
     for capitulo in capitulos:
         progreso = progreso_dict.get(capitulo.id)
@@ -285,3 +304,44 @@ def perfilVisitante(request):
         'capitulos': lCap,
         'todo_aprobado': todo_aprobado
     })
+
+
+
+
+def ejecutarCertificacion(request):
+
+    email = request.session.get('email')
+    if not email:
+        return redirect('errorSesion')
+    
+    fuente_path = os.path.join('Aplicaciones', 'static', 'fonts', 'Symphony.ttf')
+    pdfmetrics.registerFont(TTFont('Symphony', fuente_path))
+
+    nombre_visitante = request.POST['nombre']
+    plantilla_path = 'Aplicaciones/static/certificado/cert.pdf'
+
+    with open(plantilla_path, "rb") as f:
+        lector_pdf = PdfReader(f)
+        writer_pdf = PdfWriter()
+
+        packet = io.BytesIO()
+        can = canvas.Canvas(packet)
+
+        can.setFont("Symphony", 20)
+
+        can.drawString(100, 500, f"{nombre_visitante}")
+        can.save()
+        packet.seek(0)
+        nuevo_pdf = PdfReader(packet)
+
+        pagina = lector_pdf.pages[0]
+        pagina.merge_page(nuevo_pdf.pages[0])
+        writer_pdf.add_page(pagina)
+
+        salida = io.BytesIO()
+        writer_pdf.write(salida)
+        salida.seek(0)
+
+    response = HttpResponse(salida.read(), content_type='application/pdf')
+    response['Content-Disposition'] = 'inline; filename="certificado.pdf"'
+    return response
