@@ -10,6 +10,8 @@
     <img src="{{ picture }}" alt="Foto de perfil" width="100">
     <h3 class="nombreDelVisitante">Perfil de {{ name }}</h3>
 </div>
+<div class="tabla-contenedor-redondeado">
+
 
 <table class="mi-tabla-personalizada table table-bordered table-striped table-hover">
     <thead>
@@ -39,6 +41,7 @@
         {% endfor %}
     </tbody>
 </table>
+</div>
 <div class="botonCentrar">
     <a class="botonCertificarme {% if not todo_aprobado %}disabled{% endif %}" 
        href="{% if todo_aprobado %}/ruta-a-certificacion{% else %}#{% endif %}">

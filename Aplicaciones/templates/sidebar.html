@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <!-- Tus estilos existentes -->
     <link rel="stylesheet" href="{% static 'styles/stylesModuloEducacion.css' %}">
+
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    
     <title>Perfil de Usuario</title>
 </head>
 
@@ -58,16 +60,15 @@
             </ul>
         </div>
     </aside>
+    
     <div class="main" id="mainContent"> 
+    <div class="boxProgress"></div>
         {% block content %}
 
         {% endblock %}
 
     </div>
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
     <script src="{% static 'js/sidebar.js' %}"></script>
 
 </body>

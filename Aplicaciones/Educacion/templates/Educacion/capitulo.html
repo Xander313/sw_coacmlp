@@ -7,75 +7,112 @@
 
 {% block content %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'styles/capitulo.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'styles/barraActivacion.css' %}">
 
 
 
-<div class="encabezadoTitulo">
-    <h1 class="cuerpoDelCapitulo">Capítulo {{ capitulo.orden }}: {{ capitulo.titulo }} </h1>
-</div>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/capitulo.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/barraActivacion.css' %}">
 
 
-<div class="cuerpo">
-    {{ capitulo.cuerpo|safe }}
-</div>
 
-<div id="contenidoExtra" class="contenido">
-    <div class="imagen">
-        <img src="{{ capitulo.imagenURL }}" alt="">
+    <div class="encabezadoTitulo">
+        <h1 class="cuerpoDelCapitulo">Capítulo {{ capitulo.orden }}: {{ capitulo.titulo }} </h1>
     </div>
-    <div class="video">
-        {{ capitulo.videoURL|embed_video|safe }}
+    <div class="cuerpo">
+        {{ capitulo.cuerpo|safe }}
     </div>
-</div>
-
-<div class="buttonContent">
-    <button class="boton" id="toggleContenidoBtn">
-        Mostrar contenido extra
-        <span id="icono" class="material-symbols-outlined">keyboard_arrow_down</span>
-    </button>
-</div>
-
-
-<button id="botonAvance"
-        class="boton next  {% if aprobado %}aprobado{% endif %}"
-        {% if not aprobado %}disabled{% endif %}
-        data-url="{% url examen|yesno:'examen_capitulo,avanzarCapitulo' capitulo.id %}"
-        data-activacion="{{ capitulo.activacion|default:0 }}" style="z-index: 10000;">
-    {% if aprobado %}
-        Capítulo aprobado
-    {% else %}
-        {% if examen %}
-            Avanzar a examen 
-        {% else %}
-            Aprobar capítulo 
-        {% endif %}
-    {% endif %}
-    
-    <span class="material-symbols-outlined">
+    <div id="contenidoExtra" class="contenido">
+        <div class="imagen">
+            <img src="{{ capitulo.imagenURL }}" alt="">
+        </div>
+        <div class="video">
+            {{ capitulo.videoURL|embed_video|safe }}
+        </div>
+    </div>
+    <div class="buttonContent">
+        <button class="boton" id="toggleContenidoBtn">
+            Mostrar contenido extra
+            <span id="icono" class="material-symbols-outlined">keyboard_arrow_down</span>
+        </button>
+    </div>
+    <button id="botonAvance"
+            class="boton next  {% if aprobado %}aprobado{% endif %}"
+            {% if not aprobado %}disabled{% endif %}
+            data-url="{% url examen|yesno:'examen_capitulo,avanzarCapitulo' capitulo.id %}"
+            data-activacion="{{ capitulo.activacion|default:0 }}" style="z-index: 10000;">
         {% if aprobado %}
-            task_alt
+            Capítulo aprobado
         {% else %}
             {% if examen %}
-                assignment
+                Avanzar a examen 
             {% else %}
-                chevron_right
+                Aprobar capítulo 
             {% endif %}
         {% endif %}
-    </span>
-    
-    <div class="barraCarga"></div>
-</button>
-
-<div class="tiempo">
-    <span id="mensajeActivacion"><small>{% if aprobado%} {%else%}{{ capitulo.activacion }} ⌚ {%endif%}</small></span>
-</div>
-
-
+        
+        <span class="material-symbols-outlined">
+            {% if aprobado %}
+                task_alt
+            {% else %}
+                {% if examen %}
+                    assignment
+                {% else %}
+                    chevron_right
+                {% endif %}
+            {% endif %}
+        </span>
+        
+        <div class="barraCarga"></div>
+    </button>
+    <div class="tiempo">
+        <span id="mensajeActivacion"><small>{% if aprobado%} {%else%}{{ capitulo.activacion }} ⌚ {%endif%}</small></span>
+    </div>
 
 <script src="{% static 'js/capitulo.js' %}"></script>
 <script src="{% static 'js/avance.js' %}"></script>
+
+
+
+<script>
+    const container = document.getElementById("mainContent");
+
+    container.addEventListener("scroll", () => {
+        const box = document.querySelector(".boxProgress");
+
+        const scrollTop = container.scrollTop;
+        const scrollHeight = container.scrollHeight - container.clientHeight;
+        const scrollPercent = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+
+        if (box) {
+            box.style.width = scrollPercent + "%";
+            box.style.backgroundColor = interpolateColor("#CA6AB4", "#023196", scrollPercent / 100);
+        }
+    });
+
+    // Función para interpolar entre dos colores hex
+    function interpolateColor(color1, color2, factor) {
+        const c1 = hexToRgb(color1);
+        const c2 = hexToRgb(color2);
+        const result = {
+            r: Math.round(c1.r + (c2.r - c1.r) * factor),
+            g: Math.round(c1.g + (c2.g - c1.g) * factor),
+            b: Math.round(c1.b + (c2.b - c1.b) * factor)
+        };
+        return `rgb(${result.r}, ${result.g}, ${result.b})`;
+    }
+
+    // Convierte color HEX a RGB
+    function hexToRgb(hex) {
+        hex = hex.replace("#", "");
+        const bigint = parseInt(hex, 16);
+        return {
+            r: (bigint >> 16) & 255,
+            g: (bigint >> 8) & 255,
+            b: bigint & 255
+        };
+    }
+</script>
 
 
 

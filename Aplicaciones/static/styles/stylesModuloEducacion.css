@@ -9,10 +9,13 @@
 
 :root {
     --bg-color: #FFF8C6;
-    --sidebar-color: #FFD4FF;
+    --sidebar-color: #CA6AB4;
     --main-color: #514800;
     --text-color: #514800;
+    --lines-color: #023196;
+
 }
+
 
 
 body{
@@ -20,9 +23,9 @@ body{
     display: flex; 
     height: 100vh; 
     margin: 0; 
-    overflow: hidden; 
+    width: 100%;
+    overflow: hidden;
 }
-
 
 
 
@@ -42,6 +45,7 @@ label, span, a{
     justify-content: space-between;
     font-family: 'Times New Roman', Times, serif;
     width: 20%;
+    border-left: 10px solid var(--lines-color); 
 
 }
 
@@ -483,7 +487,7 @@ input[type="checkbox"]:checked ~ label::before, input[type="checkbox"]:checked ~
 
 
 .capitulosEduacacionFInanciera {
-    height: 290px;
+    height: 310px;
     overflow-y: auto;
     overflow-x: hidden;
     direction: rtl;
