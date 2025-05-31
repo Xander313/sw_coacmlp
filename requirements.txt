@@ -1,6 +1,7 @@
 asgiref==3.8.1
 certifi==2025.4.26
 cffi==1.17.1
+chardet==5.2.0
 charset-normalizer==3.4.2
 cryptography==44.0.3
 defusedxml==0.7.1
@@ -10,10 +11,13 @@ django-js-asset==3.1.2
 git-filter-repo==2.47.0
 idna==3.10
 oauthlib==3.2.2
+pillow==11.2.1
 pycparser==2.22
 PyJWT==2.10.1
+PyPDF2==3.0.1
 python-decouple==3.8
 python3-openid==3.2.0
+reportlab==4.4.1
 requests==2.32.3
 requests-oauthlib==2.0.0
 social-auth-app-django==5.4.3
