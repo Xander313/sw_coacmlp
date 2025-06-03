@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'Aplicaciones.Examen',
     'Aplicaciones.AdministrarEducacion',
     'Aplicaciones.Respuesta',
+    'Aplicaciones.Autenticacion',
+
 
 ]
 
@@ -209,3 +211,17 @@ SOCIAL_AUTH_LOGIN_ERROR_URL = '/errorSesion/'
 SOCIAL_AUTH_LOGIN_ERROR_URL = '/educacion/errorSesion/'
 SOCIAL_AUTH_BACKEND_ERROR_URL = '/educacion/errorSesion/'
 SOCIAL_AUTH_RAISE_EXCEPTIONS = DEBUG 
+
+
+
+################################################
+#####VARIABLES PARA LOS ADMINISTRADORES#########
+################################################
+
+
+
+USER_CONTENIDO = config("USER_CONTENIDO")
+PASSWORD_CONTENIDO = config("PASSWORD_CONTENIDO")
+
+USER_EDUCACION = config("USER_EDUCACION")
+PASSWORD_EDUCACION = config("PASSWORD_EDUCACION")

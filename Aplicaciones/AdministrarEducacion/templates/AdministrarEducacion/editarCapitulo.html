@@ -3,13 +3,14 @@
 
 {% load static %}
 
-
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'styles/formularioCrearCapitulo.css' %}">
+<script src="{% static 'js/examen.js' %}"></script>
+<link rel="stylesheet" href="{% static 'styles/examen.css' %}">
+{% endblock extra_css %}
 
 
 {% block content %}
-
-<script src="{% static 'js/examen.js' %}"></script>
-<link rel="stylesheet" href="{% static 'styles/examen.css' %}">
 
 <h2 style="text-align: center; margin-top: 20px;">EDITAR CAPITULO</h2>
 
@@ -50,7 +51,7 @@
                     </div>
                     <div class="mb-3">
                         <input type="checkbox" {% if  aplica_examen or examen %}checked{% endif %} name="examenS" id="examenS">
-                        <label for="examenS" class="form-label" style="text-align: center;">Aplica examen</label>
+                        <label style="display: flex; justify-content: center; padding: 10px; border-radius: 5px;" for="examenS" class="form-label"> <span class="material-symbols-outlined">assignment</span> Aplica examen</label>
                     </div>
                 </div>
                 <div class="examenForm" style="display: {% if aplica_examen or examen %}block{% else %}none{% endif %};">
@@ -68,35 +69,39 @@
                                     const nuevaPregunta = document.createElement("div");
                                     nuevaPregunta.className = "elementoPregunta";
                                     nuevaPregunta.dataset.index = p.index;
-
                                     let respuestasHTML = "";
                                     p.respuestas.forEach((resp, i) => {
                                         const checked = (p.correcta == i.toString()) ? "checked" : "";
                                         respuestasHTML += `
-                                            <div class="respuestaItem">
-                                                <label>Respuesta:</label>
-                                                <input type="text" name="preguntas[${p.index}][respuestas][]" value="${resp}" required>
-                                                <label>
-                                                    <input type="radio" name="preguntas[${p.index}][respuesta_correcta]" value="${i}" ${checked}>
-                                                    Correcta
-                                                </label>
-                                                <span class="material-symbols-outlined delete-icon" onclick="eliminarElemento(this)">delete</span>
-                                            </div>`;
+                                            <div class="respuestasContainer">
+                                                <div class="respuestaItemExamen">
+                                                    <label>Respuesta:</label>
+                                                    <input type="text" name="preguntas[${p.index}][respuestas][]" value="${resp}" required>
+                                                    <label>
+                                                        <input type="radio" name="preguntas[${p.index}][respuesta_correcta]" value="${i}" ${checked}>
+
+                                                    </label>
+                                                    <span class="material-symbols-outlined delete-icon" onclick="eliminarElemento(this)">delete</span>
+                                                </div>
+                                            </div>`
+                                            ;
                                     });
 
                                     nuevaPregunta.innerHTML = `
-                                        <label>Pregunta:</label>
-                                        <input type="text" name="preguntas[${p.index}][texto]" value="${p.texto}" required>
-                                        <span class="material-symbols-outlined delete-icon" onclick="eliminarElemento(this)">delete</span>
+                                        <div class="preguntaLinea">
+                                            <label>Pregunta:</label>
+                                            <input type="text" name="preguntas[${p.index}][texto]" value="${p.texto}" required>
+                                            <span class="material-symbols-outlined delete-icon" onclick="eliminarElemento(this)">delete</span>
+                                        </div>
                                         <div class="respuestasContainer">
                                             ${respuestasHTML}
                                         </div>
-                                        <button type="button" onclick="agregarRespuesta(this)">Nueva respuesta</button>
+                                        <button type="button" class="botonAgregar botonAgregarNuevaRespuesta" onclick="agregarRespuesta(this)"> <span class="material-symbols-outlined">add</span> Nueva respuesta</button>
                                     `;
-
                                     contenedor.appendChild(nuevaPregunta);
                                 });
 
+                                // Actualizar contador
                                 contadorPreguntas = preguntasDesdeServidor.length;
                                 actualizarBotonesEliminar();
                             }
@@ -104,12 +109,18 @@
                     </script>
                 </div>
 
-                <button type="button" class="botonAgregar preguntaBotonAgregar" onclick="agregarPregunta()">Nueva pregunta</button>
+                <button type="button" class="botonAgregar preguntaBotonAgregar" onclick="agregarPregunta()"> <span class="material-symbols-outlined">add</span> Nueva pregunta</button>
                 </div>
                 </div>
-            <button type="submit" class="boton-guardar">Guardar</button>
+            <div class="contenedorBotonGuardarCapitulo">
+                <button type="button" id="botonEditar" class="botonEditarFork"> <span class="material-symbols-outlined">edit_note</span> Editar Capítulo</button>
+
+            </div>
         </form>
     </div>
 </div>
+
+<script src="{% static 'js/ejecutarAccionesEducacionFiniaciera.js' %}"></script>
+
 {{ form.media }}
 {% endblock %}

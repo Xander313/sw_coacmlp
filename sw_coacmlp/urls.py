@@ -35,6 +35,18 @@ urlpatterns = [
 
 
 
+<<<<<<< HEAD
+=======
+
+
+    #########################################################
+    ############## URLS RUMBO A LA AUTENTICACION#############
+    #########################################################
+
+    path('autenticacion/', include('Aplicaciones.Autenticacion.urls')),  
+
+
+>>>>>>> 5230f0fbe70ac4662625ddfa379a075f651d960b
     
 
 ]

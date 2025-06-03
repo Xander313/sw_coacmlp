@@ -7,7 +7,7 @@
 
 :root {
     --bg-color: #FFF8C6;  
-    --line-color: #FFD4FF; 
+    --line-color: #CA6AB4; 
     --text-color: #514800;    
 }
 
@@ -37,10 +37,8 @@
 }
 
 .col-titulo {
-    width: 600px;
+    width: 550px;
     min-width: 200px;
-    font-size: clamp(1.2rem, 3.2dvh, 4rem);
-
     white-space: normal;         
     word-break: break-word;     
     overflow-wrap: break-word;    
@@ -52,4 +50,13 @@
     display: inline-block;
     text-align: left;
 }
+
+.col-titulo span {
+    background-color: #023196; 
+    padding: 5px;
+    color: var(--bg-color);
+    font-size: clamp(1rem, 1.3dvh, 1.5rem);
+    border-radius: 5px;
+}
+
 

@@ -9,9 +9,10 @@
 
 :root {
     --bg-color: #FFF8C6;
-    --sidebar-color: #FFD4FF;
+    --sidebar-color: #CA6AB4;
     --main-color: #514800;
     --text-color: #514800;
+    --context-color: #000;
 }
 
 
@@ -71,7 +72,7 @@ label, span, a{
     align-items: center;
     font-size: .9rem;
     padding-right: 0;
-    color: var(--main-color);
+    color: var(--context-color);
     border-radius: 36px 0 0 36px;
     position: relative;
 }
@@ -129,6 +130,7 @@ label, span, a{
 
 
 /*estilos del sidebar imagen*/
+/*estilos del sidebar imagen*/
 .sidebar__picture img{
     width: clamp(4rem, 100%, 20rem);
     margin: auto;
@@ -138,9 +140,11 @@ label, span, a{
 }
 
 .sidebar__picture{
-    margin-left: 1.5rem;
     position: relative;
     z-index: 10;
+    width: 97%;
+    height: auto;
+
 }
 
 
@@ -443,3 +447,25 @@ input[type="checkbox"]:checked ~ label::before, input[type="checkbox"]:checked ~
 
 
 
+@media (max-width: 700px) {
+    .capitulosEduacacionFInanciera {
+        margin-top: 50px;
+        height: 100%;
+    }
+
+    .sidebar__nav {
+        margin-top: 20px;
+    }
+
+    .sidebar__picture {
+        display: flex;
+        justify-content: center; 
+        align-items: center;     
+        height: 400px;           
+    }
+
+    .sidebar__picture img {
+        max-width: 100%;
+        height: auto;
+    }
+}

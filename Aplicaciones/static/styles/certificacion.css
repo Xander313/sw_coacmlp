@@ -1,0 +1,104 @@
+*{
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+:root {
+    --bg-color: #FFF8C6;
+    --sidebar-color: #CA6AB4;
+    --main-color: #514800;
+    --text-color: #023196;
+    
+}
+
+
+.iframeCertificado{
+    border: 5px solid var(--text-color);
+    box-shadow: 0 0 60px 0 var(--sidebar-color);
+    margin: auto;
+    width: 75%;
+    height: 450px;
+}
+
+.iframeContenedor{
+    width: 100%;
+    height: 100vh;
+    display: none;
+
+}
+
+.cortificacionElements h1{
+    text-align: center;
+}
+
+.formContainesrCertificacion{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-content: center;
+}
+
+.cortificacionElements{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 80%;
+    color: var(--main-color);
+    gap: 25px;
+}
+
+.buttongenerearCertificado{
+    display: flex;
+    justify-content: center;
+    background-color: var(--bg-color);
+    color: var(--main-color);
+    border-radius: 5px;
+    padding: 8px;
+    border: 3px solid var(--sidebar-color);
+    transition: background-color 0.5s ease,color 0.5s ease ;
+    width: 30%;
+}
+
+
+.buttongenerearCertificado:hover{
+    background-color: var(--sidebar-color);
+    color: #FFF;
+}
+
+.inputNombreCertificado{
+    background-color: var(--bg-color);
+    border: 3px solid var(--sidebar-color);
+    width: 70%;
+
+}
+
+
+.formCertificaionDatosIngresados{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    height: 50px;
+    width: 100%;
+}
+
+
+@media screen and (max-width: 768px) {
+
+    .formCertificaionDatosIngresados{
+        flex-direction: column;
+    }
+
+    .inputNombreCertificado{
+
+        width: 100%;
+    }
+
+    .buttongenerearCertificado{
+        width: 60%;
+        margin-left: auto;
+    }
+
+}
+
