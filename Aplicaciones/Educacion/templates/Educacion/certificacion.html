@@ -1,19 +1,37 @@
-
 {% extends "sidebar.html" %}
 {% load static %}
 
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/certificacion.css' %}">
 
-<h1>beinvenido a certificacion felicidades</h1>
+<div class="formContainesrCertificacion" id="formularioCertificado">
+  <div class="cortificacionElements">
+    <h1>¡Felicidades, usted ahora puede certificarse!</h1>
+    <form class="formCertificaionDatosIngresados" method="GET" action="{% url 'ejecutarCertificacion' %}" 
+          {% if todo_aprobado %} target="iframeCertificado" onsubmit="return mostrarIframe()" {% endif %}>
+      {% csrf_token %}
+      <input type="text" class="form-control inputNombreCertificado" name="nombre" placeholder="Ingresa tu nombre" required
+            >
+      <button class="buttongenerearCertificado" type="submit">
+        <span class="material-symbols-outlined">construction</span>
+        Generar certificado
+      </button>
+    </form>
+  </div>
+</div>
 
+{% if todo_aprobado %}
+  <div class="iframeContenedor" id="contenedorIframe" style="display:none;">
+    <iframe class="iframeCertificado" id="iframeCertificado" name="iframeCertificado"></iframe>
+  </div>
 
-<form method="POST" action="{% url 'ejecutarCertificacion' %}" target="iframeCertificado">
-  {% csrf_token %}
-  <input type="text" name="nombre" placeholder="Ingresa tu nombre" required>
-  <button type="submit">Generar certificado</button>
-</form>
-
-<iframe id="iframeCertificado" name="iframeCertificado" width="600" height="400"></iframe>
-
+  <script>
+    function mostrarIframe() {
+      document.getElementById("formularioCertificado").style.display = "none";
+      document.getElementById("contenedorIframe").style.display = "flex";
+      return true;
+    }
+  </script>
+{% endif %}
 
 {% endblock %}

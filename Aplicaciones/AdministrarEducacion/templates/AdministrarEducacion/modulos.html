@@ -1,15 +1,21 @@
 {% extends "sidebarEducacion.html"%}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'styles/stylesEducacionaPanel.css' %}">
+{% endblock extra_css %}
+
+
 {% block title %}Panel Central{% endblock %}
 
 
 {% block content %}
 
-<h1 style="text-align: center; margin-top: 20px;">GESTIÓN DE EDUCACIÓN FINANCIERA</h1>
+<h1 style="text-align: center; margin-top: 20px; color: #023196;">GESTIÓN DE EDUCACIÓN FINANCIERA</h1>
 
 <div style="width: 95%; margin: auto;">
 <div class="d-flex justify-content-end mb-3">
-        <a href="{% url 'crearNuevoCapitulo' %}" class="btn btn-outline-primary">Crear Capítulo <i class="fa fa-pen"></i></a>
-
+    <a href="{% url 'crearNuevoCapitulo' %}" class="btn btn-outline-primary">Crear Capítulo <i class="fa fa-pen"></i></a>
 </div>
 
 <table class="mi-tabla-personalizada table table-bordered table-striped table-hover">
@@ -17,8 +23,8 @@
         <tr>
             <th>Orden</th>
             <th >Título</th>
-            <th>Horas Aproximadas</th>
-            <th>Fecha de Creacion</th>
+            <th>H. Aprox.</th>
+            <th>Fecha de Crea.</th>
             <th>Acciones</th>
         </tr>
     </thead>
@@ -26,7 +32,7 @@
         {% for capitulo in capitulos %}
         <tr>
             <td>{{ capitulo.orden }}</td>
-            <td class="col-titulo"><span class="badge bg-info">{{ capitulo.titulo }}</span></td>
+            <td class="col-titulo"><span>{{ capitulo.titulo }}</span></td>
             <td>{{ capitulo.horasProximadas }}</td>
             <td>{{ capitulo.fechaCreacion }}</td>
 
@@ -34,9 +40,10 @@
                 <a href="{% url 'edicion' capitulo.id %}" class="btn btn-outline-warning btn-sm mb-1">
                     <i class="fas fa-edit"></i> Editar
                 </a>
-                <a href="{% url 'ejecutareliminacionCapitulo' capitulo.id %}" class="btn btn-outline-danger btn-sm">
+                <a href="#" class="btn btn-outline-danger btn-sm btn-eliminar" data-id="{{capitulo.id}}">
                     <i class="fa fa-trash"></i> Eliminar
                 </a>
+
             </td>
         </tr>
         {% empty %}
@@ -49,6 +56,6 @@
 
 </div>
 
+<script src="{% static 'js/ejecutarAccionesEducacionFiniaciera.js' %}"></script>
 
-
-{% endblock %}
+{% endblock content %}

@@ -6,19 +6,35 @@ from Aplicaciones.Pregunta.models import Pregunta
 from Aplicaciones.Respuesta.models import Respuesta
 from django.utils import timezone 
 from django.contrib import messages
+from functools import wraps
 
 
+
+def admin_required(tipo_admin):
+    def decorator(view_func):
+        @wraps(view_func)
+        def _wrapped_view(request, *args, **kwargs):
+            if request.session.get('admin_token') == tipo_admin:
+                return view_func(request, *args, **kwargs)
+            else:
+                messages.error(request, "No tienes permiso para acceder a esta página. Por favor inicia sesión.")
+                return redirect('loginAdministracion')
+        return _wrapped_view
+    return decorator
+
+@admin_required('educacion')
 def index(request):
+    messages.success(request, "¡Todo en orden, se ha inicado sesión!")
     return render(request, 'AdministrarEducacion/sesionIniciada.html')
 
 
-
+@admin_required('educacion')
 def administracion(request):
     capitulos = Capitulo.objects.all()
     return render(request, 'AdministrarEducacion/modulos.html', {'capitulos': capitulos})
 
 
-
+@admin_required('educacion')
 def crearCapitulo(request):
     if request.method == 'POST':
         form = CuerpoForm(request.POST)
@@ -33,7 +49,7 @@ def crearCapitulo(request):
     })
 
 
-
+@admin_required('educacion')
 def crearNuevoCapitulo(request):
     if request.method == 'POST':
         form = CuerpoForm(request.POST)
@@ -49,11 +65,7 @@ def crearNuevoCapitulo(request):
 
             capitulo_existente = Capitulo.objects.filter(orden=orden).first()
             if capitulo_existente:
-                messages.error(
-                    request,
-                    f'Ya existe un capítulo con el número de orden {orden}: "{capitulo_existente.titulo}".'
-                )
-                print(f'Ya existe un capítulo con el número de orden {orden}: "{capitulo_existente.titulo}".')
+                messages.error(request,f'Ya existe un capítulo con el número de orden {orden}: "{capitulo_existente.titulo}".')
 
                 preguntas_raw = request.POST.getlist('preguntas')  
                 preguntas_data = []
@@ -126,12 +138,13 @@ def crearNuevoCapitulo(request):
                     )
                     for i, texto_respuesta in enumerate(respuestas):
                         if texto_respuesta.strip() == '':
-                            continue  # ignorar respuestas vacías
+                            continue 
                         Respuesta.objects.create(
                             texto=texto_respuesta,
                             correcta=(str(i) == str(correcta)),
                             pregunta=pregunta
                         )
+            messages.success(request,'¡Se ha creado el capítulo correctamente!')
             return redirect('administracion')
     else:
         form = CuerpoForm()
@@ -140,6 +153,9 @@ def crearNuevoCapitulo(request):
     })
 
 
+
+
+@admin_required('educacion')
 def servirEdicion(request, id):
     cap = get_object_or_404(Capitulo, id=id)
     exam = Examen.objects.filter(capitulo=cap).first() 
@@ -181,7 +197,7 @@ def servirEdicion(request, id):
 
 
 
-
+@admin_required('educacion')
 def ejecutarEdicionapitulo(request, capitulo_id):
     capitulo = get_object_or_404(Capitulo, pk=capitulo_id)
     examen = getattr(capitulo, 'examen', None)
@@ -199,14 +215,14 @@ def ejecutarEdicionapitulo(request, capitulo_id):
         timer = request.POST.get('timer', '').strip()
         aplica_examen = request.POST.get('examenS') == 'on'
 
-        # Validar que orden sea entero
+        
         try:
             orden = int(orden_str)
         except (ValueError, TypeError):
             messages.error(request, "El campo orden debe ser un número entero válido.")
             orden = None
 
-        # Validar orden único excepto para el capítulo actual
+        
         if orden is not None:
             capitulo_existente = Capitulo.objects.filter(orden=orden).exclude(pk=capitulo.pk).first()
             if capitulo_existente:
@@ -304,7 +320,7 @@ def ejecutarEdicionapitulo(request, capitulo_id):
                 if examen:
                     examen.delete()
 
-            messages.success(request, "Capítulo actualizado correctamente.")
+            messages.success(request, "¡Capítulo actualizado correctamente!")
             return redirect('administracion')
 
         else:
@@ -368,9 +384,11 @@ def ejecutarEdicionapitulo(request, capitulo_id):
             'capitulo': capitulo
         })
 
-
+@admin_required('educacion')
 def ejecutareliminacionCapitulo(request, id):
     capitulo = Capitulo.objects.get(id=id)
     capitulo.delete()
+    messages.success(request, "¡Capítulo eliminado correctamente!")
+
     return redirect('administracion')
 

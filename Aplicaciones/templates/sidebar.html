@@ -56,8 +56,8 @@
                     </a>
                 </li>
                 <li class="sidebar__item">
-                    <span class="material-symbols-outlined">logout</span>
-                    <a href="{% url 'logout' %}">Cerrar sesión</a>
+                    <span class="material-symbols-outlined" onclick="confirm()" >logout</span>
+                    <a href="#" onclick="confirm()">Cerrar sesión</a>
                 </li>
             </ul>
         </div>
@@ -70,8 +70,45 @@
         {% endblock %}
 
     </div>
+
+    {% if messages %}
+    {% for message in messages %}
+        <script>
+        Swal.fire({
+
+            title: "{% if message.tags == 'error' %}¡ERROR!{% else %}¡ÉXITO!{% endif %}",
+            
+            text: "{{ message }}",
+
+            icon: "{% if message.tags == 'error' %}error{% else %}success{% endif %}"
+
+        });
+        </script>
+    {% endfor %}
+    {% endif %}
+
+    <script>
+    function confirm() {
+        Swal.fire({
+            title: "CONFIRMACIÓN",
+            text: "¿Está seguro de cerrar la sesión?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Sí, cerrar",
+            cancelButtonText: "Cancelar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "educacion/logout";
+            }
+        });
+    }
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{% static 'js/sidebar.js' %}"></script>
+
 
 </body>
 </html>

@@ -1,7 +1,7 @@
 
 :root {
     --bg-color: #FFF8C6;
-    --sidebar-color: #FFD4FF;
+    --sidebar-color: #CA6AB4;
     --main-color: #000;
     --text-color: #000;
 }
@@ -40,10 +40,24 @@
 }
 
 .preguntaBotonAgregar {
-    max-width: 50%;
+    max-width: 35%;
     margin: 1rem auto; 
-    display: block; 
+    display: flex;
+    font-size: 0.9rem;
+    justify-content: center;
+    align-content: center;
+    background-color: transparent;
+    transition: background-color 0.5s ease;
 }
+
+
+
+.preguntaBotonAgregar:hover {
+
+    background-color: var(--sidebar-color);
+    color: #fff;
+}
+
 
 
 h3{
@@ -51,8 +65,20 @@ h3{
 }
 
 .botonAgregarNuevaRespuesta{
-    max-width: 30%;
-    display: block; 
+    max-width: 35%;
+    display: flex;
+    justify-content: center; 
+    text-align: center;
+    align-items: center;
+    font-size: 0.9rem;
+    background-color: transparent;
+    transition: background-color 0.5s ease;
+}
+
+
+.botonAgregarNuevaRespuesta:hover{
+    background-color: var(--sidebar-color);
+    color: #fff;
 }
 
 .contenedorPregutasExamen{
@@ -88,26 +114,26 @@ h3{
 
 
 .contenedor-formularios {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .formulario-wrapper {
-  display: flex; /* SOLO este div es flex */
-  gap: 20px;
-  width: 100%;
+    display: flex; /* SOLO este div es flex */
+    gap: 20px;
+    width: 100%;
 }
 
 .formulario-capitulo,
 .examenForm {
-  flex: 1; /* ambos toman mitad aprox */
-  padding: 10px;
-  box-sizing: border-box;
+    flex: 1; /* ambos toman mitad aprox */
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 .examenForm {
-  border-left: 1px solid #ddd;
+    border-left: 1px solid #ddd;
 }
 
 
@@ -121,9 +147,25 @@ h3{
         flex-direction: column;
     }
 
-  .formulario-capitulo,
-  .examenForm {
-    max-width: 100%; /* Para que tomen todo el ancho */
-    border-left: none; /* Opcional: quitar el borde lateral en móvil */
-  }
+    .formulario-capitulo,
+    .examenForm {
+        max-width: 100%; 
+        border-left: none; 
+    }
+
+    .botonAgregarNuevaRespuesta{
+        max-width: 45%;
+
+    }
+
+
+    .preguntaBotonAgregar {
+        max-width: 50%;
+        margin: 1rem auto; 
+        display: flex;
+        justify-content: center;
+        align-content: center;
+
+    }
+
 }

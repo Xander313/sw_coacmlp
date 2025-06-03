@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 ${generarRespuestaHTML(contadorPreguntas, 0)}
                 ${generarRespuestaHTML(contadorPreguntas, 1)}
             </div>
-            <button type="button" class="botonAgregar botonAgregarNuevaRespuesta" onclick="agregarRespuesta(this)">Nueva respuesta</button>
+            <button type="button" class="botonAgregar botonAgregarNuevaRespuesta" onclick="agregarRespuesta(this)"> <span class="material-symbols-outlined">add</span> Nueva respuesta</button>
         `;
 
         contenedor.appendChild(nuevaPregunta);

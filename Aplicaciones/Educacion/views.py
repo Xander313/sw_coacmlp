@@ -20,6 +20,8 @@ import io
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib.pagesizes import letter
+from django.http import HttpResponse
+from django.contrib import messages
 
 
 
@@ -62,6 +64,7 @@ def postlogin(request):
 
         lCap = Capitulo.objects.all()
 
+        messages.success(request, "¡Sesión iniciada correctamente!")
         return render(request, 'Educacion/sesionIniciada.html', {
             'user': user,
             'picture': picture,
@@ -185,8 +188,9 @@ def avanzarCapitulo(request, id):
     pendientes = todos - aprobados
 
     if not pendientes:
+        messages.success(request, "¡Felicidades, usted ahora puede certificarse!")
         return redirect('perfilVisitante')  
-
+    messages.success(request, "¡Muy bien, ha completado un capítulo más!")
     return redirect('capitulo', id=capitulo.id) 
 
 
@@ -196,15 +200,29 @@ def certificado(request):
     email = request.session.get('email')
     if not email:
         return redirect('errorSesion')
+
+    visitante = get_object_or_404(Visitante, email=email)
     name = request.session.get('name', 'Usuario')
     picture = request.session.get('picture', '')
-    lCap = Capitulo.objects.all()
+
+    capitulos = Capitulo.objects.all()
+
+    progreso_dict = {p.capitulo.id: p for p in Progreso.objects.filter(visitante=visitante)}
+
+    todo_aprobado = True
+    for capitulo in capitulos:
+        progreso = progreso_dict.get(capitulo.id)
+        if not (progreso and progreso.aprobado):
+            todo_aprobado = False
+            break
 
     return render(request, 'Educacion/certificacion.html', {
         'name': name,
         'picture': picture,
-        'capitulos': lCap,
+        'capitulos': capitulos,
+        'todo_aprobado': todo_aprobado,
     })
+
 
 
 
@@ -258,8 +276,9 @@ def evaluarExamen(request, capitulo_id):
         pendientes = todos - aprobados
 
         if not pendientes:
+            messages.success(request, "¡Felicidades, usted ahora puede certificarse!")
             return redirect('perfilVisitante')  
-
+        messages.success(request, "¡Muy bien, ha completado un capítulo más!")
         return redirect('capitulo', id=capitulo.id) 
 
 
@@ -307,17 +326,39 @@ def perfilVisitante(request):
 
 
 
-
 def ejecutarCertificacion(request):
-
     email = request.session.get('email')
     if not email:
         return redirect('errorSesion')
-    
+
+    visitante = get_object_or_404(Visitante, email=email)
+
+    capitulos = Capitulo.objects.all().order_by('orden')
+
+    progreso_dict = {p.capitulo.id: p for p in Progreso.objects.filter(visitante=visitante)}
+
+    todo_aprobado = True
+    for capitulo in capitulos:
+        progreso = progreso_dict.get(capitulo.id)
+        if not progreso or not progreso.aprobado:
+            todo_aprobado = False
+            break
+
+    if not todo_aprobado:
+        messages.error(request, "Usted no puede certificarse sin antes haber completado todos los capítulos.")
+        return redirect('perfilVisitante')
+
     fuente_path = os.path.join('Aplicaciones', 'static', 'fonts', 'Symphony.ttf')
     pdfmetrics.registerFont(TTFont('Symphony', fuente_path))
 
-    nombre_visitante = request.POST['nombre']
+    if request.method == "POST":
+        nombre_visitante = request.POST.get('nombre')
+    else:
+        nombre_visitante = request.GET.get('nombre')
+
+    if not nombre_visitante:
+        return HttpResponse("Nombre no proporcionado.", status=400)
+
     plantilla_path = 'Aplicaciones/static/certificado/cert.pdf'
 
     with open(plantilla_path, "rb") as f:
@@ -326,14 +367,12 @@ def ejecutarCertificacion(request):
 
         packet = io.BytesIO()
         can = canvas.Canvas(packet)
-
         can.setFont("Symphony", 20)
-
         can.drawString(100, 500, f"{nombre_visitante}")
         can.save()
         packet.seek(0)
-        nuevo_pdf = PdfReader(packet)
 
+        nuevo_pdf = PdfReader(packet)
         pagina = lector_pdf.pages[0]
         pagina.merge_page(nuevo_pdf.pages[0])
         writer_pdf.add_page(pagina)
@@ -342,6 +381,12 @@ def ejecutarCertificacion(request):
         writer_pdf.write(salida)
         salida.seek(0)
 
+    descargar = request.GET.get('descargar') == '1'
     response = HttpResponse(salida.read(), content_type='application/pdf')
-    response['Content-Disposition'] = 'inline; filename="certificado.pdf"'
+
+    if descargar:
+        response['Content-Disposition'] = f'attachment; filename="certificado_{nombre_visitante}.pdf"'
+    else:
+        response['Content-Disposition'] = 'inline; filename="certificado.pdf"'
+
     return response
