@@ -1,0 +1,46 @@
+<!-- navbar.html -->
+<style>
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: pink;
+        padding: 10px 20px;
+        border: 2px solid blue; /* como el borde de la imagen */
+    }
+
+    .navbar img {
+        height: 50px;
+        border-radius: 50%;
+    }
+
+    .nav-buttons {
+        display: flex;
+        gap: 15px;
+    }
+
+    .nav-buttons a {
+        background-color: #fff8b3; /* amarillo claro */
+        padding: 10px 15px;
+        text-decoration: none;
+        color: #333;
+        font-weight: bold;
+        border-radius: 5px;
+    }
+
+    .nav-buttons a:hover {
+        background-color: #ffe066;
+    }
+</style>
+
+<header class="navbar">
+    <!-- LOGO -->
+    <img src="{% static 'img/logo.png' %}" alt="Logo">
+    
+    <!-- BOTONES -->
+    <div class="nav-buttons">
+        <a href="#">¿QUIÉNES SOMOS?</a>
+        <a href="#">INICIAR SESIÓN</a>
+        <a href="#">EDUCACIÓN FINANCIERA</a>
+    </div>
+</header>
