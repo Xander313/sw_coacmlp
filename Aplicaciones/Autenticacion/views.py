@@ -15,14 +15,12 @@ def ejecutarInicioSesion(request):
         usuario = request.POST.get('usuario')
         password = request.POST.get('password')
         
-        
         password_hash = hashlib.sha256(password.encode()).hexdigest()
-
+        request.session.flush()
         
         if usuario == settings.USER_CONTENIDO and password_hash == settings.PASSWORD_CONTENIDO:
             request.session['admin_token'] = 'contenido'
-            messages.success(request, 'Sesión iniciada como administrador de Contenido.')
-            return redirect('contenido:index')
+            return redirect('perfilContenido')
 
         elif usuario == settings.USER_EDUCACION and password_hash == settings.PASSWORD_EDUCACION:
             request.session['admin_token'] = 'educacion'

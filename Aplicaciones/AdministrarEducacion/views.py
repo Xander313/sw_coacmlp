@@ -17,7 +17,7 @@ def admin_required(tipo_admin):
             if request.session.get('admin_token') == tipo_admin:
                 return view_func(request, *args, **kwargs)
             else:
-                messages.error(request, "No tienes permiso para acceder a esta página. Por favor inicia sesión.")
+                messages.error(request, "No tienes permiso para acceder a esta página. Por favor, inicia sesión.")
                 return redirect('loginAdministracion')
         return _wrapped_view
     return decorator

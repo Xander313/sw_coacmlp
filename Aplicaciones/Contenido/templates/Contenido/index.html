@@ -1,6 +1,16 @@
-<h1>estamos extendiendo la palntilla del footer</h1>
-{% block footer%}
+{% extends 'base.html'%}
+{% load static %}
+{% block tittle %}Cooperativa de Ahorro y Crédito{% endblock tittle %}
 
-{% include "includes/footer.html" %}
 
-{% endblock footer%}
+{% block content%}
+
+    <div class="caption">
+        <h6>Cooperativa de Ahorro y Crédito</h6>
+        <h2><em>Monseñor</em> Leonidas Proaño</h2>
+        <div class="main-button">
+            <div class="scroll-to-section"><a href="#section2">Acerca de nosotros</a></div>
+        </div>
+    </div>
+
+{% endblock %}

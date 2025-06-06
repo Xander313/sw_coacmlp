@@ -1,4 +1,3 @@
-// 👇 FUNCIONES DEFINIDAS FUERA DEL DOMContentLoaded
 function confirmCreate(formElement) {
     Swal.fire({
         title: "CONFIRMACIÓN",

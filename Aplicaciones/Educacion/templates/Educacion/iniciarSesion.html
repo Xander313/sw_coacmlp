@@ -1,25 +1,21 @@
+{% extends 'base.html'%}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/iniciarConGoogle.css' %}">
+{% block tittle %}Acceso{% endblock tittle %}
+
+
+{% block content%}
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="{% static 'styles/iniciarConGoogle.css' %}">
+
+<div class="MainContentGoogle">
     
-    <title>Document</title>
-</head>
-<body>
-    <div class="mainRoot">
-        <div class="ingregarEducacionFinanciera">
+    <div class="ingregarEducacionFinanciera">
         <a href="{% url 'social:begin' 'google-oauth2' %}" \rel="noopener noreferrer">
-            <span class="material-symbols-outlined">account_circle</span>  Iniciar sesión con Google</a>
-        
-        </div>
-
-
+            <img src="{% static 'img/google.png' %}" alt="" width="32" height="32">  Iniciar sesión con Google
+        </a>
     </div>
-</body>
-</html>
+    
+</div>
 
+{% endblock%}
 

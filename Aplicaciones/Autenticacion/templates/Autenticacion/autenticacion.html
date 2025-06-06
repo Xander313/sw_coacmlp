@@ -1,45 +1,27 @@
+{% extends 'base.html'%}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+{% block tittle %}Acceso{% endblock tittle %}
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/iniciarConGoogle.css' %}">
-    
-    <title>Document</title>
-</head>
-<body>
-    <div class="mainRoot">
-        <div class="ingregarEducacionFinanciera">
-            <form class="formCertificaionDatosIngresados" method="POST" action="{% url 'ejecutarInicioSesion' %}">
-                {% csrf_token %}
-                <label for="usuario">Usuario: </label>
-                <input type="text" class="form-control inputusuario" name="usuario" id="usuario" required>
-                <label for="password">Contraseña: </label>
-                <input type="password" class="form-control inputContrasenia" name="password" id="password" required>
-                <button class="buttongenerearCertificado" type="submit">
-                <span class="material-symbols-outlined">login</span> Inicar sesión</button>
-            </form>
+{% block content%}
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+<link rel="stylesheet" type="text/css" href="{% static 'styles/Autenticacion.css' %}">
+<div class="MainContenainerForm">
+    <form class="formAutenticacion" method="POST" action="{% url 'ejecutarInicioSesion' %}">
+        {% csrf_token %}
+        <div class="contenedorInputs">
+          <label for="usuario" class="form-label ">Usuario:</label>
+          <input type="text" class="inputAutenticacion" name="usuario" id="usuario" required>
+          <label for="password" class="form-label ">Contraseña:</label>
+          <input type="text" class="inputAutenticacion" name="password" id="password" required>
         </div>
-    </div>
-    {% if messages %}
-    {% for message in messages %}
-        <script>
-        Swal.fire({
-            title: "{% if message.tags == 'error' %}¡ERROR!{% else %}¡ÉXITO!{% endif %}",
-            text: "{{ message }}",
-            icon: "{% if message.tags == 'error' %}error{% else %}success{% endif %}"
-        });
-        </script>
-    {% endfor %}
-    {% endif %}
+        <div class="submitBotton">
+            <button class="buttongenerearCertificado" type="submit">
+            <span class="material-symbols-outlined">login</span> Inicar sesión</button>
+        </div>
+    </form>
+</div>
 
-
-</body>
-</html>
-
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% endblock%}

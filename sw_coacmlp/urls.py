@@ -29,14 +29,12 @@ urlpatterns = [
 
 
 
-    ##############################################
-    ############## URLS PARA NOTICIAS#############
-    ##############################################
+    ###########################################################
+    ############## URLS PARA ADMINITRAR CONTENIDOS#############
+    ###########################################################
 
-
-
-<<<<<<< HEAD
-=======
+    path('AdministrarContenido/', include('Aplicaciones.AdministrarContenido.urls')),  
+    
 
 
     #########################################################
@@ -46,7 +44,16 @@ urlpatterns = [
     path('autenticacion/', include('Aplicaciones.Autenticacion.urls')),  
 
 
->>>>>>> 5230f0fbe70ac4662625ddfa379a075f651d960b
+
+    ############################################################
+    ############## URLS RUMBO A LA PAGINA PRINCIPAL#############
+    ############################################################
+
+    path('', include('Aplicaciones.Contenido.urls')),  
+
+
+
+
     
 
 ]

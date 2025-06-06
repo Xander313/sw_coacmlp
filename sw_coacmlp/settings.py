@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'Aplicaciones.AdministrarEducacion',
     'Aplicaciones.Respuesta',
     'Aplicaciones.Autenticacion',
+    'Aplicaciones.Contenido'
 
 
 ]
@@ -82,7 +83,10 @@ ROOT_URLCONF = 'sw_coacmlp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'Aplicaciones','templates')],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'Aplicaciones', 'templates'),
+            os.path.join(BASE_DIR, 'Aplicaciones', 'AdministrarContenido', 'templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -96,6 +100,8 @@ TEMPLATES = [
         },
     },
 ]
+
+
 
 WSGI_APPLICATION = 'sw_coacmlp.wsgi.application'
 
