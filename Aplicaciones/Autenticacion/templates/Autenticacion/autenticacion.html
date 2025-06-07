@@ -8,39 +8,29 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'styles/Autenticacion.css' %}">
 
-<link rel="stylesheet" href="{% static 'styles/aparicion.css' %}">
-
+<div class="mainRoot">
     <div class="titleAutenticacion fade">
-        <h3 style="color: #023196;   text-shadow:
-    -1px -1px 0 #CA6AB4,
-     1px -1px 0 #CA6AB4,
-    -1px  1px 0 #CA6AB4,
-     1px  1px 0 #CA6AB4;">Cooperativa de Ahorro y Crédito</h3>
-        <h4 style="color: #CA6AB4; text-shadow:
-    -4px -4px 0 #023196,
-     4px -4px 0 #023196,
-    -4px  4px 0 #023196,
-     4px  4px 0 #023196;"><em> Monseñor Leonidas Proaño</em></h4>
-
+        <h3 >Cooperativa de Ahorro y Crédito</h3>
+        <h4 ><em> Monseñor Leonidas Proaño</em></h4>
     </div>
 
-<div class="MainContenainerForm fade2">
-    <form class="formAutenticacion" method="POST" action="{% url 'ejecutarInicioSesion' %}">
-        {% csrf_token %}
-         <h4 class="autentication-label"> Identifiques antes de acceder </h4>
+    <div class="MainContenainerForm fade">
+        <form class="formAutenticacion" autocomplete="off" method="POST" action="{% url 'ejecutarInicioSesion' %}">
+            {% csrf_token %}
+                <h4 class="autentication-label"> Identifiques antes de acceder </h4>
 
-        <div class="contenedorInputs">
-          <label for="usuario" class="form-label ">Usuario:</label>
-          <input type="text" class="inputAutenticacion" name="usuario" id="usuario" required>
-          <label for="password" class="form-label ">Contraseña:</label>
-          <input type="password" class="inputAutenticacion" name="password" id="password" required>
-        </div>
-        <div class="submitBotton">
-            <button class="buttongenerearCertificado" type="submit">
-            <span class="material-symbols-outlined">login</span> Inicar sesión</button>
-        </div>
-    </form>
+            <div class="contenedorInputs">
+                <label for="usuario" class="form-label ">Usuario:</label>
+                <input type="text" class="inputAutenticacion" name="usuario" id="usuario" required>
+                <label for="password" class="form-label ">Contraseña:</label>
+                <input type="password" class="inputAutenticacion" name="password" id="password" required>
+            </div>
+            <div class="submitBotton">
+                <button class="buttongenerearCertificado" type="submit">
+                <span class="material-symbols-outlined">login</span> Iniciar sesión</button>
+            </div>
+        </form>
+    </div>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 {% endblock%}

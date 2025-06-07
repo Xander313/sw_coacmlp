@@ -12,10 +12,21 @@
     --text-color: #000;
 }
 
+.mainRoot {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    padding: 80px 0;
+    gap: 10px 
+}
+
 
 .MainContenainerForm{
     width: 100vw;
-    height: 100vh;
     display: flex;
 }
 
@@ -25,12 +36,13 @@
     border: 2px solid var(--main-color);
     padding: 7px;
     border-radius: 10px;
+    color: #FFF;
 }
 
 .formAutenticacion{
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
     color: var(--bg-color);
     font-weight: bold;
     background-color: #ca6ab4a2;
@@ -83,11 +95,46 @@
 
 .titleAutenticacion{
     width: 100%;
-    height: auto;
-    margin-top: 70px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    text-align: center;
+
 }
+
+.titleAutenticacion h3 {
+    color: #023196;   text-shadow:
+            -1px -1px 0 #CA6AB4,
+            1px -1px 0 #CA6AB4,
+            -1px  1px 0 #CA6AB4,
+            1px  1px 0 #CA6AB4;
+}
+
+.titleAutenticacion h4 {
+    color: #CA6AB4; text-shadow:
+            -4px -4px 0 #023196,
+            4px -4px 0 #023196,
+            -4px  4px 0 #023196,
+            4px  4px 0 #023196;
+}
+
+
 
 .autentication-label{
     color: #FFF8C6; 
     text-align: center;
+}
+
+
+.fade {
+    opacity: 0;
+    animation: fade 1.5s ease-out forwards;
+
+}
+
+@keyframes fade {
+    to {
+        opacity: 1;
+
+    }
 }
