@@ -1,0 +1,14 @@
+.fade {
+  opacity: 0;
+  animation: fade 1s ease-out forwards;
+}
+.fade2 {
+  opacity: 0;
+  animation: fade 1.5s ease-out forwards;
+}
+
+@keyframes fade {
+  to {
+    opacity: 1;
+  }
+}

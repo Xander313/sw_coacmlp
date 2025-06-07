@@ -602,15 +602,15 @@ section.why-us {
 #tabs ul .ui-tabs-active {
 }
 #tabs ul .ui-tabs-active a {
-  color: #f5a425;
+  color: var(--sidebar-color);
 }
 #tabs ul .ui-tabs-active a:after {
-  background-color: #f5a425;
+  background-color: var(--sidebar-color);
   width: 15px;
   height: 15px;
 }
 #tabs ul .ui-tabs-active a:before {
-  border-color: #f5a425;
+  border-color: var(--sidebar-color);
 }
 #tabs h4 {
     margin-top: 60px;

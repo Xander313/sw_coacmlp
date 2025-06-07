@@ -4,13 +4,155 @@
 
 
 {% block content%}
+<link rel="stylesheet" href="{% static 'styles/aparicion.css' %}">
 
-    <div class="caption">
-        <h6>Cooperativa de Ahorro y Crédito</h6>
-        <h2><em>Monseñor</em> Leonidas Proaño</h2>
+    <div class="caption fade">
+        <h3 style="color: #023196;   text-shadow:
+    -1px -1px 0 #CA6AB4,
+     1px -1px 0 #CA6AB4,
+    -1px  1px 0 #CA6AB4,
+     1px  1px 0 #CA6AB4;">Cooperativa de Ahorro y Crédito</h3>
+        <h2 style="color: #CA6AB4; text-shadow:
+    -4px -4px 0 #023196,
+     4px -4px 0 #023196,
+    -4px  4px 0 #023196,
+     4px  4px 0 #023196;">Monseñor Leonidas Proaño</h2>
+        <h6 style="color: #FFF8C6;"><em>¡El Ahorro Es Progreso! </em></h6>
         <div class="main-button">
-            <div class="scroll-to-section"><a href="#section2">Acerca de nosotros</a></div>
+            <div class="scroll-to-section"><a href="#section2">Nuestros productos</a></div>
         </div>
     </div>
+{% endblock content %}
 
-{% endblock %}
+  {% block footerMainBloc%}
+  
+
+  <section class="features">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-12">
+          <div class="features-post">
+            <div class="features-content">
+              <div class="content-show">
+                <h4><i class="fa-solid fa-users"></i> Acerca de Nosotros</h4>
+              </div>
+              <div class="content-hide">
+                <p>Curabitur id eros vehicula, tincidunt libero eu, lobortis mi. In mollis eros a posuere imperdiet. Donec maximus elementum ex. Cras convallis ex rhoncus, laoreet libero eu, vehicula libero.</p>
+                <p class="hidden-sm">Curabitur id eros vehicula, tincidunt libero eu, lobortis mi. In mollis eros a posuere imperdiet.</p>
+                <div class="scroll-to-section"><a href="#section2">Más Información</a></div>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-12">
+          <div class="features-post">
+            <div class="features-content">
+              <div class="content-show">
+                <h4><i class="fa-solid fa-clipboard-user"></i>Testimonios</h4>
+              </div>
+              <div class="content-hide">
+                <p>Curabitur id eros vehicula, tincidunt libero eu, lobortis mi. In mollis eros a posuere imperdiet. Donec maximus elementum ex. Cras convallis ex rhoncus, laoreet libero eu, vehicula libero.</p>
+                <p class="hidden-sm">Curabitur id eros vehicula, tincidunt libero eu, lobortis mi. In mollis eros a posuere imperdiet.</p>
+                <div class="scroll-to-section"><a href="#section2">Más Información</a></div>
+            </div>
+            </div>
+          </div>
+        </div>
+        <!--  
+        <div class="col-lg-3 col-12">
+          <div class="features-post second-features">
+            <div class="features-content">
+              <div class="content-show">
+                <h4><i class="fa fa-graduation-cap"></i>Virtual </h4>
+              </div>
+              <div class="content-hide">
+                <p>Curabitur id eros vehicula, tincidunt libero eu, lobortis mi. In mollis eros a posuere imperdiet. Donec maximus elementum ex. Cras convallis ex rhoncus, laoreet libero eu, vehicula libero.</p>
+                <p class="hidden-sm">Curabitur id eros vehicula, tincidunt libero eu, lobortis mi. In mollis eros a posuere imperdiet.</p>
+                <div class="scroll-to-section"><a href="#section3">Details</a></div>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-12">
+          <div class="features-post third-features">
+            <div class="features-content">
+              <div class="content-show">
+                <h4><i class="fa fa-book"></i>Real </h4>
+              </div>
+              <div class="content-hide">
+                <p>Curabitur id eros vehicula, tincidunt libero eu, lobortis mi. In mollis eros a posuere imperdiet. Donec maximus elementum ex. Cras convallis ex rhoncus, laoreet libero eu, vehicula libero.</p>
+                <p class="hidden-sm">Curabitur id eros vehicula, tincidunt libero eu, lobortis mi. In mollis eros a posuere imperdiet.</p>
+                <div class="scroll-to-section"><a href="#section4">Read More</a></div>
+            </div>
+            </div>
+          </div>
+        </div>
+        -->
+      </div>
+    </div>
+  </section>
+{% endblock footerMainBloc%}
+
+
+{% block serviciosContent%}
+
+  <section class="section why-us" data-section="section2">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="section-heading">
+            <h2>Nuestra cooperativa ofrece</h2>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div id='tabs'>
+            <ul>
+              <li><a href='#tabs-1'>Ahorros</a></li>
+              <li><a href='#tabs-2'>Créditos</a></li>
+              <li><a href='#tabs-3'>Inversiones</a></li>
+            </ul>
+            <section class='tabs-content'>
+              <article id='tabs-1'>
+                <div class="row">
+                  <div class="col-md-6">
+                    <img src="{% static 'assets/images/choose-us-image-01.png'%}" alt="">
+                  </div>
+                  <div class="col-md-6">
+                    <h4>Ahorros</h4>
+                    <p>Grad School is free educational HTML template with Bootstrap 4.5.2 CSS layout. Feel free to use it for educational or commercial purposes. You may want to make <a href="https://paypal.me/templatemo" target="_parent" rel="sponsored">a little donation</a> to TemplateMo. Please tell your friends about us. Thank you.</p>
+                  </div>
+                </div>
+              </article>
+              <article id='tabs-2'>
+                <div class="row">
+                  <div class="col-md-6">
+                    <img src="{% static 'assets/images/choose-us-image-02.png'%}" alt="">
+                  </div>
+                  <div class="col-md-6">
+                    <h4>Créditos</h4>
+                    <p>You can modify this HTML layout by editing contents and adding more pages as you needed. Since this template has options to add dropdown menus, you can put many HTML pages.</p> 
+                    <p>Suspendisse tincidunt, magna ut finibus rutrum, libero dolor euismod odio, nec interdum quam felis non ante.</p>
+                  </div>
+                </div>
+              </article>
+              <article id='tabs-3'>
+                <div class="row">
+                  <div class="col-md-6">
+                    <img src="{% static 'assets/images/choose-us-image-03.png'%}" alt="">
+                  </div>
+                  <div class="col-md-6">
+                    <h4>Inversiones</h4>
+                    <p>You are NOT allowed to redistribute this template ZIP file on any template collection website. However, you can use this template to convert into a specific theme for any kind of CMS platform such as WordPress. For more information, you shall <a rel="nofollow" href="https://templatemo.com/contact" target="_parent">contact TemplateMo</a> now.</p>
+                  </div>
+                </div>
+              </article>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  
+  {% endblock serviciosContent%}
