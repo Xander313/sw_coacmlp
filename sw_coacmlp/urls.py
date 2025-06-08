@@ -33,7 +33,8 @@ urlpatterns = [
     ############## URLS PARA ADMINITRAR CONTENIDOS#############
     ###########################################################
 
-    path('AdministrarContenido/', include('Aplicaciones.AdministrarContenido.urls')),  
+    path('AdministrarContenido/', include('Aplicaciones.AdministrarContenido.urls')),
+ 
     
 
 

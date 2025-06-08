@@ -1,0 +1,62 @@
+{% extends "sidebarNoticias.html" %}
+{% load static %}
+{% block title %}Panel Central{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'styles/tablanoticias.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+
+<h1 style="text-align: center; margin-top: 20px; color: var(--text-color);">GESTIÓN DE NOTICIAS</h1>
+
+<div class="contenedor-noticia-redondeado" style="background-color: var(--bg-color); padding: 20px; margin-top: 20px;">
+    <div class="d-flex justify-content-end mb-3">
+        <a href="{% url 'nuevaNoticia' %}" class="boton-leer-noticia">
+            Crear Noticia <i class="fa fa-pen" style="margin-left: 5px;"></i>
+        </a>
+    </div>
+
+    <table class="tabla-noticias">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Imagen</th>
+                <th>Descripción</th>
+                <th>Fecha de Creación</th>
+                <th>Referencia</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for noticiatem in noticia %}
+            <tr>
+                <td>{{ noticiatem.id }}</td>
+                <td>{{ noticiatem.titulo }}</td>
+                <td><img src="{{ noticiatem.imagenURL }}" alt="Imagen" width="100" style="border-radius: 10px;"></td>
+                <td>{{ noticiatem.descripcion|truncatewords:20 }}</td>
+                <td>{{ noticiatem.fechaCreacion }}</td>
+                <td><a href="{{ noticiatem.referenciaURL }}" target="_blank" class="enlace-capitulo-noticia">Ver más</a></td>
+                <td>
+                    <a href="" class="boton-leer-noticia" style="margin-bottom: 5px; display: inline-block;">
+                        <i class="fas fa-edit"></i> Editar
+                    </a>
+                    <form action="" method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="boton-leer-noticia" style="margin-bottom: 5px; display: inline-block;">
+                            <i class="fa fa-trash"></i> Eliminar
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7" style="text-align: center; color: var(--text-color);">No hay noticias registradas</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

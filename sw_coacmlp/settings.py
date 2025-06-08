@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'Aplicaciones.AdministrarEducacion',
     'Aplicaciones.Respuesta',
     'Aplicaciones.Autenticacion',
-    'Aplicaciones.Contenido'
+    'Aplicaciones.Contenido',
+    'Aplicaciones.AdministrarContenido'
 
 
 ]

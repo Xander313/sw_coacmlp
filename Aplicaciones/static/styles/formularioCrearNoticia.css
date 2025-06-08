@@ -1,0 +1,90 @@
+:root {
+    --form-bg-color: #ffffff;
+    --form-border-radius: 10px;
+    --form-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    --form-padding: 25px;
+    --form-max-width: 800px;
+
+    --input-margin-bottom: 20px;
+    --input-border: 1px solid #ccc;
+    --input-padding: 10px;
+    --input-border-radius: 5px;
+
+    --button-bg: #28a745;
+    --button-hover-bg: #218838;
+    --button-color: white;
+    --button-padding: 10px 20px;
+    --button-radius: 5px;
+    --button-font-weight: bold;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+}
+
+.contenedor-formularios {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.formulario-noticias {
+    background-color: var(--form-bg-color);
+    padding: var(--form-padding);
+    border-radius: var(--form-border-radius);
+    box-shadow: var(--form-shadow);
+    width: 100%;
+    max-width: var(--form-max-width);
+}
+
+.formulario-noticias .mb-3 {
+    margin-bottom: var(--input-margin-bottom);
+}
+
+.formulario-noticias label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #444;
+}
+
+.formulario-noticias input,
+.formulario-noticias textarea {
+    width: 100%;
+    padding: var(--input-padding);
+    border: var(--input-border);
+    border-radius: var(--input-border-radius);
+    font-size: 16px;
+}
+
+.cuerpoform {
+    border: var(--input-border);
+    border-radius: var(--input-border-radius);
+    padding: var(--input-padding);
+    min-height: 100px;
+}
+
+.contenedorBotonGuardarNoticias {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.boton-guardar {
+    background-color: var(--button-bg);
+    color: var(--button-color);
+    padding: var(--button-padding);
+    border: none;
+    border-radius: var(--button-radius);
+    font-weight: var(--button-font-weight);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.boton-guardar:hover {
+    background-color: var(--button-hover-bg);
+}

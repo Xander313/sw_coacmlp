@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from functools import wraps
-
+from Aplicaciones.Noticias.models import Noticia
+from Aplicaciones.Noticias.forms import DescripcionForm
 
 def redireccionador(request):
     return redirect('loginAdministracion')
@@ -26,3 +27,38 @@ def admin_required(tipo_admin):
 def perfilContenido(request):
     messages.success(request, "¡Todo en orden, se ha inicado sesión!")
     return render(request, 'inicio/inicioSesion.html')
+
+#ACCIONES PARA ADMINISTRAR LAS NOTICAS
+#Se mostratará el listado de la noticias disponibles
+def inicio(request):
+    listadoNoticias = Noticia.objects.all()
+    return render(request, "Noticias/iniciote.html", {'noticia': listadoNoticias})
+# Crearemos la noticia
+def nuevaNoticia(request):
+    if request.method == 'POST':
+        form = DescripcionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('iniciote')
+    else:
+        form = DescripcionForm()
+    
+    return render(request,"Noticias/nuevaNoticia.html", {
+        'form': form 
+    })
+#Guardaremos los datos de noticias en la Bdd
+def guardarNoticia(request):
+    
+    titulo=request.POST["titulo"]
+    imagenURL=request.POST["imagenURL"]
+    descripcion=request.POST["descripcion"]
+    referenciaURL=request.POST["referenciaURL"]
+
+    nuevaNoticia=Noticia.objects.create(
+        titulo=titulo,
+        imagenURL=imagenURL,
+        descripcion=descripcion,
+        referenciaURL=referenciaURL)
+    #mensaje de confirmacion
+    messages.success(request,"Noticia guardada exitosamente")
+    return redirect(request,'Noticias/iniciote.html')
