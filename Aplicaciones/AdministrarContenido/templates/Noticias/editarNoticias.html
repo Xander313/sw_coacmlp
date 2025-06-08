@@ -1,0 +1,58 @@
+{% extends "sidebarNoticias.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'styles/formularioCrearNoticia.css' %}">
+{% endblock extra_css %}
+
+{% block title %}Editar Noticia{% endblock %}
+
+
+{% block content %}
+<h2 style="text-align: center; margin-top: 20px;">EDITAR NOTICIA</h2>
+
+<div class="contenedor-formularios">
+    <div class="formulario-capitulo">
+        <form action="{% url 'procesarEdicionNoticia' %}" method="POST">
+            {% csrf_token %}
+            <div id="formulario-wrapper" class="formulario-wrapper">
+                <div class="formulario-capitulo">
+                    <input type="hidden" name="id" value="{{noticiaEditar.id}}">
+                    <div class="mb-3">
+                        <label for="titulo" class="form-label">Título: </label>
+                        <input type="text" class="form-control" name="titulo" id="titulo" value="{{noticiaEditar.titulo}}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="imagenURL" class="form-label">URL de la imagen:</label>
+                        <textarea name="imagenURL" rows="4" id="imagenURL" class="form-control">{{noticiaEditar.imagenURL}}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label">Descripción:</label>
+                        <div class="cuerpoform">
+                            <textarea name="descripcion" id="descripcion" class="form-control" rows="6" required>{{ noticiaEditar.descripcion }}</textarea>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="referenciaURL" class="form-label">Referencia URL:</label>
+                        <textarea name="referenciaURL" rows="4" id="referenciaURL" class="form-control" >{{noticiaEditar.referenciaURL}}</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contenedorBotones">
+                <a href="{% url 'iniciote' %}" class="boton-cancelar">
+                    <span class="material-symbols-outlined">cancel</span> Cancelar
+                </a>
+                <button type="submit" class="boton-guardar">
+                    <span class="material-symbols-outlined">save</span> Editar Noticia
+                </button>
+            </div>            
+        </form>
+    </div>
+</div>
+
+
+{{ form.media }}
+{% endblock %}

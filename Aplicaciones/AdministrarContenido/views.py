@@ -61,4 +61,31 @@ def guardarNoticia(request):
         referenciaURL=referenciaURL)
     #mensaje de confirmacion
     messages.success(request,"Noticia guardada exitosamente")
-    return redirect(request,'Noticias/iniciote.html')
+    return redirect('iniciote')
+def eliminarNoticia(request,id):
+    noticiaEliminar=Noticia.objects.get(id=id)
+    noticiaEliminar.delete()
+    #mensaje de confirmacion
+    messages.success(request,"Noticia eliminada exitosamente")
+    return redirect('iniciote')
+
+def editarNoticia(request,id):
+    noticiaEditar=Noticia.objects.get(id=id)
+    return render(request,"Noticias/editarNoticias.html",{'noticiaEditar':noticiaEditar})
+
+def procesarEdicionNoticia(request):
+    id = request.POST['id']
+    titulo=request.POST["titulo"]
+    imagenURL=request.POST["imagenURL"]
+    descripcion=request.POST["descripcion"]
+    referenciaURL=request.POST["referenciaURL"]
+
+    noticia=Noticia.objects.get(id=id)
+    noticia.titulo=titulo
+    noticia.imagenURL=imagenURL
+    noticia.descripcion=descripcion
+    noticia.referenciaURL=referenciaURL
+    noticia.save()
+    #mensaje de confirmacion
+    messages.success(request,"Noticia actualizada exitosamente")
+    return redirect('iniciote')

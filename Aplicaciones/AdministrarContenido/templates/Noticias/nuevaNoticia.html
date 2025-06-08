@@ -40,14 +40,18 @@
                 </div>
             </div>
 
-            <div class="contenedorBotonGuardarCapitulo">
-                <button type="submit" class="boton-guardar existeExamneLabel">
+            <div class="contenedorBotones">
+                <a href="{% url 'iniciote' %}" class="boton-cancelar">
+                    <span class="material-symbols-outlined">cancel</span> Cancelar
+                </a>
+                <button type="submit" class="boton-guardar">
                     <span class="material-symbols-outlined">save</span> Crear Noticia
                 </button>
-            </div>
+            </div>            
         </form>
     </div>
 </div>
+
 
 {{ form.media }}
 {% endblock %}

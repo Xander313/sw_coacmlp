@@ -1,14 +1,14 @@
 :root {
     --form-bg-color: #ffffff;
     --form-border-radius: 10px;
-    --form-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    --form-padding: 25px;
+    --form-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    --form-padding: 30px;
     --form-max-width: 800px;
 
     --input-margin-bottom: 20px;
     --input-border: 1px solid #ccc;
-    --input-padding: 10px;
-    --input-border-radius: 5px;
+    --input-padding: 12px;
+    --input-border-radius: 8px;
 
     --button-bg: #28a745;
     --button-hover-bg: #218838;
@@ -22,12 +22,15 @@ h2 {
     text-align: center;
     margin-top: 20px;
     color: #333;
+    font-size: 1.8rem;
+    font-weight: 700;
 }
 
 .contenedor-formularios {
     display: flex;
     justify-content: center;
     margin-top: 30px;
+    padding: 0 15px;
 }
 
 .formulario-noticias {
@@ -37,6 +40,11 @@ h2 {
     box-shadow: var(--form-shadow);
     width: 100%;
     max-width: var(--form-max-width);
+    transition: transform 0.3s ease;
+}
+
+.formulario-noticias:hover {
+    transform: scale(1.01);
 }
 
 .formulario-noticias .mb-3 {
@@ -45,9 +53,10 @@ h2 {
 
 .formulario-noticias label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     font-weight: 600;
-    color: #444;
+    color: #333;
+    font-size: 1rem;
 }
 
 .formulario-noticias input,
@@ -56,14 +65,23 @@ h2 {
     padding: var(--input-padding);
     border: var(--input-border);
     border-radius: var(--input-border-radius);
-    font-size: 16px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.formulario-noticias input:focus,
+.formulario-noticias textarea:focus {
+    border-color: var(--button-bg);
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.2);
 }
 
 .cuerpoform {
     border: var(--input-border);
     border-radius: var(--input-border-radius);
     padding: var(--input-padding);
-    min-height: 100px;
+    min-height: 120px;
+    resize: vertical;
 }
 
 .contenedorBotonGuardarNoticias {
@@ -87,4 +105,29 @@ h2 {
 
 .boton-guardar:hover {
     background-color: var(--button-hover-bg);
+}
+.contenedorBotones {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.boton-cancelar {
+    background-color: rgba(202, 106, 180, 0.3); /* Color morado suave */
+    color: #6f2c5d; /* Texto oscuro para buen contraste */
+    padding: var(--button-padding);
+    border: none;
+    border-radius: var(--button-radius);
+    font-weight: var(--button-font-weight);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.boton-cancelar:hover {
+    background-color: rgba(202, 106, 180, 0.5); /* Un poco más intenso al pasar el mouse */
 }
