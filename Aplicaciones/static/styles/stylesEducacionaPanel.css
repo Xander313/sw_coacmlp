@@ -8,7 +8,7 @@
 :root {
     --bg-color: #FFF8C6;  
     --line-color: #CA6AB4; 
-    --text-color: #514800;    
+    --text-color: #000;    
 }
 
 .checkbox-label {

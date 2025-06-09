@@ -1,6 +1,6 @@
 .fade {
   opacity: 0;
-  animation: fade 2s ease-out forwards;
+  animation: fade 1s ease-out forwards;
 
 
 }
@@ -11,6 +11,17 @@
 
   }
 }
+
+
+
+.fade2 {
+  opacity: 0;
+  animation: fade 2s ease-out forwards;
+
+
+}
+
+
 
 
 .aparecerBorde{

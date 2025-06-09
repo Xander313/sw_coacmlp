@@ -2,7 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Montserrat';
 
 }
 
@@ -10,9 +10,10 @@
 :root {
     --bg-color: #FFF8C6;
     --sidebar-color: #CA6AB4;
-    --main-color: #514800;
-    --text-color: #514800;
+    --main-color: #000;
+    --text-color: #000;
     --lines-color: #023196;
+    --degrade-color: #CC7173;
 
 }
 
@@ -35,7 +36,11 @@ label, span, a{
 
 /*sidebar sylres*/
 .sidebar{
-    background-color: var(--sidebar-color);
+    background:
+        linear-gradient(180deg, var(--lines-color), rgba(0, 255, 0, 0) 50.71%), 
+        linear-gradient(360deg, var(--lines-color), rgba(0, 255, 0, 0) 50.71%), 
+        linear-gradient(217deg, var(--sidebar-color), rgba(255, 0, 0, 0) 70.71%),
+        linear-gradient(336deg, var(--sidebar-color), rgba(0, 0, 255, 0) 70.71%);
     position: fixed;
     height: 100dvh;
     width: clamp(220px, 20dvh, 300px);
@@ -43,11 +48,11 @@ label, span, a{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    font-family: 'Times New Roman', Times, serif;
     width: 20%;
-    border-left: 5px solid var(--lines-color); 
+    border-left: 10px solid var(--lines-color); 
 
 }
+
 
 .sidebar__form{
     position: absolute;
@@ -58,7 +63,7 @@ label, span, a{
     display: flex;
     margin: 0;
     display: flex;
-    flex-direction: column; /* permite alinear hijos verticalmente */
+    flex-direction: column; 
     height: 100%;
 }
 
@@ -81,6 +86,7 @@ label, span, a{
     color: var(--main-color);
     border-radius: 36px 0 0 36px;
     position: relative;
+    cursor: pointer;
 }
 
 .sidebar__item span{
@@ -93,6 +99,7 @@ label, span, a{
     color: inherit;
     text-transform: uppercase;
     text-decoration: none;
+
 
 }
 
@@ -137,8 +144,9 @@ label, span, a{
 
 /*estilos del sidebar imagen*/
 .sidebar__picture img{
-    width: clamp(4rem, 100%, 20rem);
+    width: clamp(1rem, 45%, 5rem);
     margin: auto;
+    cursor: pointer;
     opacity: 1;
 
 
@@ -149,6 +157,7 @@ label, span, a{
     z-index: 10;
     width: 97%;
     height: auto;
+    display: flex;
 
 }
 
@@ -170,17 +179,23 @@ label, span, a{
     width: fit-content;
     margin: 12px;
     color: #000;
+    cursor: pointer;
+    transition: scale 0.5s ease, background-color 0.5s ease;
+    scale: 1;
+    font-weight: bold;
 
 }
 
 .item__profile:hover{
     border-radius: 25px;
-    color: #000;
+    scale: 1.05;
 }
 
 
 .sidebar__profile{
     text-transform: uppercase;
+    cursor: pointer;
+
 
 }
 
@@ -221,6 +236,7 @@ input[type="checkbox"]{
     width: 13px;
     height: 25px ;
     background-color: transparent ;
+    z-index: 0;
     
 }
 
@@ -360,7 +376,6 @@ input[type="checkbox"]:checked ~ label::before, input[type="checkbox"]:checked ~
     flex-direction: column;
     justify-content: space-between;
     padding: 30px 0 30px 6px;
-    font-family: 'Times New Roman', Times, serif;
     position: relative;
     transition: width 0.3s ease;
     z-index: 100;
@@ -487,7 +502,9 @@ input[type="checkbox"]:checked ~ label::before, input[type="checkbox"]:checked ~
 
 
 .capitulosEduacacionFInanciera {
+    padding: 12px 0;
     height: 310px;
+    max-height: 310px;
     overflow-y: auto;
     overflow-x: hidden;
     direction: rtl;

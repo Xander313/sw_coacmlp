@@ -4,11 +4,19 @@ document.addEventListener('DOMContentLoaded', function () {
     const wrapper = document.querySelector(".wrapper"); // Asegúrate de tener este contenedor en tu HTML
     let contadorPreguntas = 0;
 
-    // Muestra u oculta el formulario del examen
+        // Muestra u oculta el formulario del examen
+    let preguntaAgregada = false; // bandera global
+
     function toggleExamenForm() {
         if (checkbox.checked) {
             examenForm.style.display = 'block';
             wrapper?.classList.add('doble-columna');
+
+            // Ejecutar agregarPregunta() solo una vez
+            if (!preguntaAgregada) {
+                agregarPregunta();
+                preguntaAgregada = true;
+            }
 
             examenForm.querySelectorAll("input, textarea").forEach(el => {
                 if (el.dataset.originalRequired === "true") {
@@ -25,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
     }
+
 
     checkbox.addEventListener("change", toggleExamenForm);
     toggleExamenForm(); // Inicializa al cargar

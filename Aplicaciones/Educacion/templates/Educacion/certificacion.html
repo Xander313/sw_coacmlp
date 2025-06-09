@@ -1,10 +1,15 @@
 {% extends "sidebar.html" %}
 {% load static %}
 
+{% block tittle %}Certificación{% endblock tittle %}
+
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'styles/certificacion.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/aparicion.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/capitulo.css' %}">
 
-<div class="formContainesrCertificacion" id="formularioCertificado">
+
+<div class="formContainesrCertificacion fade" id="formularioCertificado">
   <div class="cortificacionElements">
     <h1>¡Felicidades, usted ahora puede certificarse!</h1>
     <form class="formCertificaionDatosIngresados" method="GET" action="{% url 'ejecutarCertificacion' %}" 
@@ -12,7 +17,7 @@
       {% csrf_token %}
       <input type="text" class="form-control inputNombreCertificado" name="nombre" placeholder="Ingresa tu nombre" required
             >
-      <button class="buttongenerearCertificado" type="submit">
+      <button class="buttongenerearCertificado boton" type="submit">
         <span class="material-symbols-outlined">construction</span>
         Generar certificado
       </button>
@@ -22,15 +27,44 @@
 
 {% if todo_aprobado %}
   <div class="iframeContenedor" id="contenedorIframe" style="display:none;">
+    <div class="textFelicitaciones">
+      <h1>¡FELICITACIONES!</h1>
+      <small><em>Gracias por todo el tiempo compartido</em></small>
+    </div>
+
     <iframe class="iframeCertificado" id="iframeCertificado" name="iframeCertificado"></iframe>
+    <div class="disculpasContiner">
+      <small><em>En dispositivos móviles solo puede descargar el certificado</em></small>
+      <small><em>Disculpas por las molestias</em></small>
+    </div>
+    
+        <a style="text-decoration-line: none;" href="{% url 'ejecutarCertificacion' %}?nombre={{ request.GET.nombre|default:'' }}&descargar=1" 
+        class="buttongenerearCertificado boton" 
+        id="descargaDirecta"
+        download="certificado.pdf">
+      <span class="material-symbols-outlined">download</span>
+      Descargar Certificado
+    </a>
   </div>
 
   <script>
-    function mostrarIframe() {
-      document.getElementById("formularioCertificado").style.display = "none";
-      document.getElementById("contenedorIframe").style.display = "flex";
-      return true;
-    }
+function mostrarIframe() {
+  document.getElementById("formularioCertificado").style.display = "none";
+
+  const contenedor = document.getElementById("contenedorIframe");
+  contenedor.style.display = "flex";
+  
+  contenedor.classList.remove("fade2");
+  void contenedor.offsetWidth;
+  contenedor.classList.add("fade2");
+
+  const nombre = document.querySelector('.inputNombreCertificado').value;
+  const enlaceDescarga = document.getElementById('descargaDirecta');
+  enlaceDescarga.href = "{% url 'ejecutarCertificacion' %}?nombre=" + encodeURIComponent(nombre) + "&descargar=1";
+  
+  return true;
+}
+
   </script>
 {% endif %}
 

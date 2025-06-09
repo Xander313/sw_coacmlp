@@ -5,6 +5,8 @@
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'styles/formularioCrearCapitulo.css' %}">
 <link rel="stylesheet" href="{% static 'styles/examen.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/aparicion.css' %}">
+
 {% endblock extra_css %}
 
 
@@ -22,7 +24,7 @@
 
 <h2 style="text-align: center; margin-top: 20px;">CREAR NUEVO CAPITULO</h2>
 
-<div class="contenedor-formularios">
+<div class="contenedor-formularios fade">
     <div class="formulario-capitulo">
         <form action="{% url 'crearNuevoCapitulo' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
@@ -42,15 +44,15 @@
                     </div>
                     <div class="mb-3">
                         <label for="haprox" class="form-label">Horas aproximadas:</label>
-                        <input type="number" value="{{haprox|default:'' }}" class="form-control" name="haprox" id="haprox" required>
+                        <input type="number" value="{{haprox|default:''}}" class="form-control" name="haprox" id="haprox" required>
                     </div>
                     <div class="mb-3">
                         <label for="imagenURL" class="form-label">URL de la imagen:</label>
-                        <textarea name="imagenURL" rows="5" id="imagenURL" placeholder="https://laimagen.com">{{imagenURL|default:''}} </textarea>
+                        <textarea name="imagenURL" rows="5" id="imagenURL" placeholder="https://laimagen.com">{{imagenURL|default:''}}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="videoURL" class="form-label">URL del video:</label>
-                        <textarea name="videoURL" rows="5" id="videoURL" placeholder="https://elvideo.com">{{videoURL|default:''}} </textarea>
+                        <textarea name="videoURL" rows="5" id="videoURL" placeholder="https://elvideo.com">{{videoURL|default:''}}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="timer" class="form-label">Tiempo de activacion: <span><small style="margin-top: 0;" class="text-muted">En segundos</small></span> </label>
@@ -61,7 +63,7 @@
                         <label style="display: flex; justify-content: center; padding: 10px; border-radius: 5px;" for="examenS" class="form-label"> <span class="material-symbols-outlined">assignment</span> Aplica examen</label>
                     </div>
                 </div>
-                <div class="examenForm" style="display: {% if aplica_examen or examen %}block{% else %}none{% endif %};">
+                <div id="formularioExamen" class="examenForm" style="display: {% if aplica_examen or examen %}block{% else %}none{% endif %};">
                     <h3>Formulario del examen</h3>
 
                     <div id="contenedorPreguntas" class="div-examen">
@@ -114,7 +116,7 @@
                             }
                         });
                     </script>
-                    </div>
+                </div>
 
                 <button type="button" class="botonAgregar preguntaBotonAgregar" onclick="agregarPregunta()"> <span class="material-symbols-outlined">add</span> Nueva pregunta</button>
                 </div>
@@ -128,6 +130,31 @@
     </div>
 </div>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const checkbox = document.getElementById('examenS');
+    const examenForm = document.getElementById('formularioExamen');
+
+    // Mostrar u ocultar al cargar
+    if (checkbox.checked) {
+      examenForm.style.display = 'block';
+      examenForm.classList.add('fade');
+    }
+
+    // Manejo dinámico al marcar/desmarcar
+    checkbox.addEventListener('change', function () {
+      if (this.checked) {
+        examenForm.style.display = 'block';
+        examenForm.classList.remove('fade'); // Reiniciar si ya tiene
+        void examenForm.offsetWidth; // Forzar reflow para reiniciar animación
+        examenForm.classList.add('fade');
+      } else {
+        examenForm.style.display = 'none';
+        examenForm.classList.remove('fade');
+      }
+    });
+  });
+</script>
 
 
 <script src="{% static 'js/examen.js' %}"></script>

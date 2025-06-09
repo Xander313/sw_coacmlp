@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.querySelectorAll('.redirect-icon').forEach(icon => {
         icon.addEventListener('click', function () {
-            window.location.href = this.dataset.url;
+            window.location.href = "/administrarEducacion/administracion/";
         });
     });
 

@@ -5,16 +5,20 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'styles/formularioCrearCapitulo.css' %}">
-<script src="{% static 'js/examen.js' %}"></script>
 <link rel="stylesheet" href="{% static 'styles/examen.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/aparicion.css' %}">
+
 {% endblock extra_css %}
 
 
 {% block content %}
 
+
+
+
 <h2 style="text-align: center; margin-top: 20px;">EDITAR CAPITULO</h2>
 
-<div class="contenedor-formularios">
+<div class="contenedor-formularios fade">
     <div class="formulario-capitulo">
         <form action="{% url 'ejecutarEdicionCapitulo' capitulo.id  %}" method="post" enctype="multipart/form-data">
             
@@ -54,7 +58,7 @@
                         <label style="display: flex; justify-content: center; padding: 10px; border-radius: 5px;" for="examenS" class="form-label"> <span class="material-symbols-outlined">assignment</span> Aplica examen</label>
                     </div>
                 </div>
-                <div class="examenForm" style="display:{% if aplica_examen or examen %}block{% else %}none{% endif %};">
+                <div id="formularioExamen" class="examenForm" style="display:{% if aplica_examen or examen %}block{% else %}none{% endif %};">
 
                     <h3>Formulario del examen</h3>
 
@@ -120,7 +124,37 @@
     </div>
 </div>
 
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const checkbox = document.getElementById('examenS');
+    const examenForm = document.getElementById('formularioExamen');
+
+    // Mostrar u ocultar al cargar
+    if (checkbox.checked) {
+      examenForm.style.display = 'block';
+      examenForm.classList.add('fade');
+    }
+
+    // Manejo dinámico al marcar/desmarcar
+    checkbox.addEventListener('change', function () {
+      if (this.checked) {
+        examenForm.style.display = 'block';
+        examenForm.classList.remove('fade'); // Reiniciar si ya tiene
+        void examenForm.offsetWidth; // Forzar reflow para reiniciar animación
+        examenForm.classList.add('fade');
+      } else {
+        examenForm.style.display = 'none';
+        examenForm.classList.remove('fade');
+      }
+    });
+  });
+</script>
+
+
 <script src="{% static 'js/ejecutarAccionesEducacionFiniaciera.js' %}"></script>
+<script src="{% static 'js/examen.js' %}"></script>
 
 {{ form.media }}
 {% endblock %}

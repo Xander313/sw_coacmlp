@@ -1,50 +1,54 @@
 {% extends "sidebar.html" %}
 {% load static %}
 
+{% block tittle %}Perfil de usuario{% endblock tittle %}
+
+
 {% block content %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'styles/perfil.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/aparicion.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/capitulo.css' %}">
 
 
-<div class="datosPefilDeVisitante">
+
+<div class="datosPefilDeVisitante fade">
     <img src="{{ picture }}" alt="Foto de perfil" width="100">
     <h3 class="nombreDelVisitante">Perfil de {{ name }}</h3>
 </div>
 <div class="tabla-contenedor-redondeado">
-
-
-<table class="mi-tabla-personalizada table table-bordered table-striped table-hover">
-    <thead>
-        <tr>
-            <th>Título del Capítulo</th>
-            <th>Fecha de Verificación</th>
-            <th>Nota Obtenida</th>
-            <th>Aprobado</th>
-            <th>Ir al capítulo</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for item in actividad %}
-        <tr>
-            <td>{{ item.titulo }}</td>
-            <td>{{ item.fecha }}</td>
-            <td>{{ item.nota }}</td>
-            <td>{{ item.aprobado }}</td>
-            <td> 
-                {% if item.aprobado == "Sí" %}
-                    No aplica
-                {% else %}
-                    <a class="BarraIrCapitulo" href="{% url 'capitulo' item.orden %}">Ir <span class="material-symbols-outlined">arrow_forward</span></a>
-                {% endif %}
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+  <table class="mi-tabla-personalizada table table-bordered table-striped table-hover fade">
+      <thead>
+          <tr>
+              <th>Título del Capítulo</th>
+              <th>Fecha de Verificación</th>
+              <th>Nota Obtenida</th>
+              <th>Aprobado</th>
+              <th>Ir al capítulo</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for item in actividad %}
+          <tr>
+              <td>{{ item.titulo }}</td>
+              <td>{{ item.fecha }}</td>
+              <td>{{ item.nota }}</td>
+              <td>{{ item.aprobado }}</td>
+              <td> 
+                  {% if item.aprobado == "Sí" %}
+                      No aplica
+                  {% else %}
+                      <a class="BarraIrCapitulo" href="{% url 'capitulo' item.orden %}">Ir <span class="material-symbols-outlined">arrow_forward</span></a>
+                  {% endif %}
+              </td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
 </div>
 
-<div class="botonCentrar">
-<a class="botonCertificarme" valor-confirmado="{{ todo_aprobado}}" href="#" onclick="manejarCertificacion(event)">
+<div class="botonCentrar fade" style="margin-top: 10px;">
+<a class="botonCertificarme boton" valor-confirmado="{{ todo_aprobado}}" href="#" onclick="manejarCertificacion(event)">
   <span class="material-symbols-outlined"> workspace_premium </span> Certificarme
 </a>
 </div>

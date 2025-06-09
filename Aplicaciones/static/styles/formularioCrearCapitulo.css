@@ -39,7 +39,6 @@
     width: 100%;
     max-width: 500px;
     padding: 2rem;
-    background-color: #F5F5F5;
     border-radius: 8px;
     margin-right: 1rem;
 
@@ -194,7 +193,6 @@ textarea {
 
 .botonEditarFork:hover{
     background-color: var(--bg-color);
-
     border: 3px solid var(--sidebar-color);
 
 }

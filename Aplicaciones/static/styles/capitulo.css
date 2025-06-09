@@ -1,69 +1,80 @@
 *{
     box-sizing: border-box;
-    font-family: 'Times New Roman', Times, serif;
+    margin: 0;
+    padding: 0;
+    font-family: inherit;
 }
 
 :root {
     --bg-color: #FFF8C6;
     --sidebar-color: #CA6AB4;
-    --main-color: #514800;
+    --main-color: #000;
     --text-color: #023196;
+    --content-body-color: #514800;
     
 }
 
 
+.MainChapterRoot{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    font-family: inherit;
+    background:
+        linear-gradient(180deg, #fff , rgba(0, 255, 0, 0) 100%), 
+        linear-gradient(360deg, var(--bg-color), rgba(0, 255, 0, 0) 50%);
+
+}
 
 .encabezadoTitulo {
+    position: sticky;
     top: 0;
-    position: fixed;
-    width: 100%;
-    background-color: #fff8c6bb;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(10px); 
     z-index: 1000;
-    margin-left: 20px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: linear-gradient(to right, transparent, var(--sidebar-color));
     color: var(--text-color);
+    width: 100%;
+}
+
+
+
+
+.encabezadoTitulo h1 {
+    
+    white-space: normal;          
+    word-wrap: break-word;         
+    overflow-wrap: break-word;
+    line-height: 1.2;
+    width: 100%;
+    padding: 20px 20px;
+    width: auto;
+    height: auto; 
+    text-align: center; 
+    text-transform: uppercase;
 
 }
 
 
 .cuerpoDelCapitulo{
     color: var(--text-color);
-text-shadow:
-  0 0 15px var(--sidebar-color),
-  0 0 15px var(--sidebar-color),
-  0 0 15px var(--sidebar-color);
-      font-size: clamp(1.5rem, 2.5dvh, 3.5rem);
+    text-shadow:
+    -1PX 0 15px var(--sidebar-color),
+    0 0 15px var(--sidebar-color),
+    -1PX 0 15px var(--sidebar-color);
+    font-size: clamp(1.5rem, 2.5dvh, 3.5rem);
 }
 
-
-.encabezadoTitulo h1 {
-    
-    font-weight: bold;
-    padding-left: 0px;
-    white-space: normal;          
-    word-wrap: break-word;         
-    overflow-wrap: break-word;
-    line-height: 1.2;
-    max-width: 85%;   
-    padding: 20px 20px;
-    text-align: center;   
-    width: auto;
-    height: auto; 
-    padding-right: 60px;   
-
-}
 
 
 .cuerpo {
-    margin-top: 70px;
-    padding: 0 50px;
+    padding: 0 50px 0 50px;
     width: 100%;
     text-align: justify;
-    font-size: clamp(1.2rem, 2.2dvh, 3rem);
-    color: var(--main-color);
-
-
+    font-size: clamp(1.1rem, 2.2dvh, 3rem);
+    color: var(--content-body-color);
 }
 
 
@@ -102,8 +113,9 @@ text-shadow:
     border-radius: 10px;
     padding: 10px;
     margin:  auto;
-    transition: background-color 0.5s ease;
+    transition: background-color 0.5s ease, scale 0.5s ease;
     color: var(--main-color);
+    scale: 1;
 
 
 }
@@ -113,6 +125,7 @@ text-shadow:
 
     background-color:  var(--sidebar-color);
     font-size: 1000;
+    scale: 1.05;
 
 
 }

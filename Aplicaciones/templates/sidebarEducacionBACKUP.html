@@ -1,3 +1,6 @@
+
+
+<!---->
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
@@ -8,14 +11,27 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons (opcional, ya que usas Material Symbols) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <!-- Tus estilos existentes -->
-    <link rel="stylesheet" href="{% static 'styles/stylesModuloEducacion.css' %}">
+    
+    <!--  Estilos del sidebar -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
+    <!-- Font Awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Font de google-->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <!--  Estilos del panel central -->
+    <link rel="stylesheet" href="{% static 'styles/stylesEducacion.css' %}">
     
-    <title>{% block tittle %} {% endblock tittle %}</title>
+    {% block extra_css %}
+    
+    {% endblock %}
+    
+
+    <title>{% block title %}Panel Central{% endblock %}</title>
+
 </head>
 
     <button class="navbar-toggler d-lg-none fixed-top m-3" type="button" id="sidebarToggle">
@@ -31,50 +47,39 @@
             <input type="checkbox" id="open-menu">
             <label for="open-menu" class="material-symbols-outlined close-button">close</label>
             <label for="open-menu" class="material-symbols-outlined open-button">open_in_full</label>
-        </form>
-<picture class="sidebar__picture">
-    <script>
-        var postloginUrl = "{% url 'postlogin' %}";
-    </script>
-    <img src="{% static 'img/banner.png' %}" alt="Banner"
-         onclick="console.log('click'); window.location.href = postloginUrl;">
-</picture>
+            <a href="{% url 'perfil' %}">
+                <picture class="sidebar__picture">
+                    <img src="{% static 'img/banner.png' %}" alt="Banner">
+                </picture>
+            </a>
 
         <nav class="sidebar__nav">
-            <div class="capitulosEduacacionFInanciera">
-                <ul>
-                    {% for capitulo in capitulos %}
-                    <li class="sidebar__item">
-                        <span class="material-symbols-outlined redirect-icon" data-url="{% url 'capitulo' capitulo.orden %}">menu_book</span>
-                        <a href="{% url 'capitulo' capitulo.orden %}">capitulo {{capitulo.orden}}</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
+            <ul>
+                <li class="sidebar__item">
+                    <span class="material-symbols-outlined">menu_book</span>
+                    <a href="{% url 'administracion' %}">Educación Financiera</a>
+                </li>
+            </ul>
         </nav>
         <div class="sidebar__profile">
             <ul>
-                <li class="sidebar__item item__profile">
-                    <a href="{% url 'perfilVisitante' %}" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
-                        <img src="{{ picture }}" alt="Foto de perfil" style="height: 50px; width: 50px; border-radius: 100%; margin-right: 10px;">
-                        <span class="profile__option">{{ name }}</span>
-                    </a>
-                </li>
                 <li class="sidebar__item">
-                    <span class="material-symbols-outlined" onclick="confirm()" >logout</span>
-                    <a href="#" onclick="confirm()">Cerrar sesión</a>
+                    <span class="material-symbols-outlined">logout</span>
+                    <a href="{% url 'logout' %}">Cerrar sesión</a>
                 </li>
             </ul>
         </div>
+
     </aside>
-    
     <div class="main" id="mainContent"> 
-    <div class="boxProgress"></div>
         {% block content %}
 
         {% endblock %}
 
     </div>
+
+
+
 
     {% if messages %}
     {% for message in messages %}
@@ -83,7 +88,7 @@
 
             title: "{% if message.tags == 'error' %}¡ERROR!{% else %}¡ÉXITO!{% endif %}",
             
-            text: "{{ message }}",
+            text: "{{ message|escapejs }}",
 
             icon: "{% if message.tags == 'error' %}error{% else %}success{% endif %}"
 
@@ -105,15 +110,14 @@
             cancelButtonText: "Cancelar"
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = "/educacion/logout/";
+                window.location.href = "logout";
             }
         });
     }
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{% static 'js/sidebar.js' %}"></script>
-
+    <script src="{% static 'js/examen.js' %}"></script>
 
 </body>
 </html>

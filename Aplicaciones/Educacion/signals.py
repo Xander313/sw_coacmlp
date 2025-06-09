@@ -16,5 +16,6 @@ def registrar_visitante(sender, request, user, **kwargs):
                     'ultimoAcceso': now()
                 }
             )
+            request.session['from_login'] = True
     except UserSocialAuth.DoesNotExist:
         pass

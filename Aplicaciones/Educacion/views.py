@@ -20,7 +20,6 @@ import io
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib.pagesizes import letter
-from django.http import HttpResponse
 from django.contrib import messages
 
 
@@ -64,7 +63,9 @@ def postlogin(request):
 
         lCap = Capitulo.objects.all()
 
-        messages.success(request, "¡Sesión iniciada correctamente!")
+        if request.session.pop('from_login', False):
+            messages.success(request, "¡Sesión iniciada correctamente!")
+
         return render(request, 'Educacion/sesionIniciada.html', {
             'user': user,
             'picture': picture,
@@ -76,6 +77,7 @@ def postlogin(request):
     except Exception as e:
         print(e)
         return redirect('errorSesion')
+
 
 
 
