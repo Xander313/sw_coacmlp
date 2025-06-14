@@ -27,6 +27,7 @@ urlpatterns = [
     path('capitulo/<int:capitulo_id>/evaluar/', views.evaluarExamen, name='evaluarExamen'),
     path('certificado/', views.certificado, name='certificadoEducacion'),
     path('ejecutarCertificacion/', views.ejecutarCertificacion, name='ejecutarCertificacion'),
+
     
 
 ]

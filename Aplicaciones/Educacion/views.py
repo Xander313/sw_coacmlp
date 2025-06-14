@@ -7,20 +7,31 @@ from Aplicaciones.Examen.models import Examen
 from django.utils import timezone
 from Aplicaciones.Progreso.models import Progreso
 from Aplicaciones.Respuesta.models import Respuesta
+from Aplicaciones.Certificacion.models import Certificacion
 from .models import Visitante
 from functools import wraps
 import os
 from django.http import HttpResponse
-from django.conf import settings
 from PyPDF2 import PdfReader, PdfWriter
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
-from io import BytesIO
 import io
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.lib.pagesizes import letter
 from django.contrib import messages
+from reportlab.lib.colors import HexColor
+from django.db.models import Sum
+import locale
+from django.utils.timezone import now
+from datetime import datetime, timedelta
+from django.http import FileResponse, Http404
+import os
+from django.conf import settings
+import uuid
+
+
+
+locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
 
 
 
@@ -208,26 +219,40 @@ def certificado(request):
     picture = request.session.get('picture', '')
 
     capitulos = Capitulo.objects.all()
-
     progreso_dict = {p.capitulo.id: p for p in Progreso.objects.filter(visitante=visitante)}
 
-    todo_aprobado = True
-    for capitulo in capitulos:
-        progreso = progreso_dict.get(capitulo.id)
-        if not (progreso and progreso.aprobado):
-            todo_aprobado = False
-            break
+    todo_aprobado = all(progreso_dict.get(cap.id) and progreso_dict.get(cap.id).aprobado for cap in capitulos)
+
+    certificacion = Certificacion.objects.filter(visitante=visitante).first()
+    certificado_status = certificacion.certificado if certificacion else False
+
+    ultima_cert = Certificacion.objects.filter(visitante=visitante, certificado=True).order_by('-fechaCertificacion').first()
+    fecha_certificacion = ultima_cert.fechaCertificacion if ultima_cert else None
 
     return render(request, 'Educacion/certificacion.html', {
         'name': name,
         'picture': picture,
         'capitulos': capitulos,
         'todo_aprobado': todo_aprobado,
+        'certificado_status': certificado_status,
+        'fecha_certificacion': fecha_certificacion,
     })
 
 
+@session_required
+def errorGenreacion (request):
+    email = request.session.get('email')
+    if not email:
+        return redirect('errorSesion')
+    
+    visitante = get_object_or_404(Visitante, email=email)
 
-
+    ultima_cert = Certificacion.objects.filter(visitante=visitante, certificado=True).order_by('-fechaCertificacion').first()
+    if ultima_cert:
+        dias_transcurridos = (now() - ultima_cert.fechaCertificacion).days
+        if dias_transcurridos < 30:
+            messages.error(request, f"Ya se ha certificado el {ultima_cert.fechaCertificacion.strftime('%d/%m/%Y')}. Puede volver a certificarse después de 30 días.")
+            return redirect('perfilVisitante')
 
 
 
@@ -326,8 +351,6 @@ def perfilVisitante(request):
         'todo_aprobado': todo_aprobado
     })
 
-
-
 def ejecutarCertificacion(request):
     email = request.session.get('email')
     if not email:
@@ -335,23 +358,24 @@ def ejecutarCertificacion(request):
 
     visitante = get_object_or_404(Visitante, email=email)
 
+    ultima_cert = Certificacion.objects.filter(visitante=visitante, certificado=True).order_by('-fechaCertificacion').first()
+    if ultima_cert:
+        dias_transcurridos = (now() - ultima_cert.fechaCertificacion).days
+        if dias_transcurridos < 30:
+            messages.error(request, f"Ya se ha certificado el {ultima_cert.fechaCertificacion.strftime('%d/%m/%Y')}. Puede volver a certificarse después de 30 días.")
+            return redirect('perfilVisitante')
+
     capitulos = Capitulo.objects.all().order_by('orden')
-
     progreso_dict = {p.capitulo.id: p for p in Progreso.objects.filter(visitante=visitante)}
-
-    todo_aprobado = True
-    for capitulo in capitulos:
-        progreso = progreso_dict.get(capitulo.id)
-        if not progreso or not progreso.aprobado:
-            todo_aprobado = False
-            break
-
+    todo_aprobado = all(progreso_dict.get(cap.id) and progreso_dict.get(cap.id).aprobado for cap in capitulos)
     if not todo_aprobado:
         messages.error(request, "Usted no puede certificarse sin antes haber completado todos los capítulos.")
         return redirect('perfilVisitante')
 
-    fuente_path = os.path.join('Aplicaciones', 'static', 'fonts', 'Symphony.ttf')
-    pdfmetrics.registerFont(TTFont('Symphony', fuente_path))
+    fuente_symphony = os.path.join('Aplicaciones', 'static', 'fonts', 'Symphony.ttf')
+    fuente_montserrat = os.path.join('Aplicaciones', 'static', 'fonts', 'Montserrat-Regular.ttf')
+    pdfmetrics.registerFont(TTFont('Symphony', fuente_symphony))
+    pdfmetrics.registerFont(TTFont('Montserrat', fuente_montserrat))
 
     if request.method == "POST":
         nombre_visitante = request.POST.get('nombre')
@@ -362,20 +386,37 @@ def ejecutarCertificacion(request):
         return HttpResponse("Nombre no proporcionado.", status=400)
 
     plantilla_path = 'Aplicaciones/static/certificado/cert.pdf'
-
     with open(plantilla_path, "rb") as f:
         lector_pdf = PdfReader(f)
         writer_pdf = PdfWriter()
 
+        pagina = lector_pdf.pages[0]
+        ancho = float(pagina.mediabox.width)
+        alto = float(pagina.mediabox.height)
+
         packet = io.BytesIO()
-        can = canvas.Canvas(packet)
-        can.setFont("Symphony", 20)
-        can.drawString(100, 500, f"{nombre_visitante}")
+        can = canvas.Canvas(packet, pagesize=(ancho, alto))
+
+        can.setFont("Symphony", 40)
+        can.setFillColor(HexColor("#000000"))
+        can.drawCentredString(ancho / 1.65, 340, nombre_visitante)
+
+        fecha_actual = datetime.now()
+        fecha_str = fecha_actual.strftime("%d de %B de %Y")
+        can.setFont("Montserrat", 20)
+        can.setFillColor(HexColor("#ebbd25"))
+        can.drawCentredString(ancho / 1.6, 200, fecha_str)
+
+        total_horas = Capitulo.objects.aggregate(Sum('horasProximadas'))['horasProximadas__sum'] or 0
+        texto_duracion = f"{total_horas}"
+        can.setFont("Montserrat", 20)
+        can.setFillColor(HexColor("#000000"))
+        can.drawCentredString(ancho / 1.55, 230, texto_duracion)
+
         can.save()
         packet.seek(0)
 
         nuevo_pdf = PdfReader(packet)
-        pagina = lector_pdf.pages[0]
         pagina.merge_page(nuevo_pdf.pages[0])
         writer_pdf.add_page(pagina)
 
@@ -383,12 +424,16 @@ def ejecutarCertificacion(request):
         writer_pdf.write(salida)
         salida.seek(0)
 
+    Certificacion.objects.create(
+        visitante=visitante,
+        certificado=True,
+        fechaCertificacion=fecha_actual
+    )
+
     descargar = request.GET.get('descargar') == '1'
     response = HttpResponse(salida.read(), content_type='application/pdf')
-
-    if descargar:
-        response['Content-Disposition'] = f'attachment; filename="certificado_{nombre_visitante}.pdf"'
-    else:
-        response['Content-Disposition'] = 'inline; filename="certificado.pdf"'
+    filename = f"certificado_{nombre_visitante}.pdf" if descargar else "certificado.pdf"
+    content_disposition = f'attachment; filename="{filename}"' if descargar else f'inline; filename="{filename}"'
+    response['Content-Disposition'] = content_disposition
 
     return response

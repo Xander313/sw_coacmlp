@@ -48,7 +48,9 @@ INSTALLED_APPS = [
     'Aplicaciones.Respuesta',
     'Aplicaciones.Autenticacion',
     'Aplicaciones.Contenido',
-    'Aplicaciones.AdministrarContenido'
+    'Aplicaciones.AdministrarContenido',
+    'Aplicaciones.Certificacion'
+
 
 
 ]
@@ -154,6 +156,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATICFILES_DIRS = [
+    BASE_DIR / 'Aplicaciones' / 'static',
+]
+
 X_FRAME_OPTIONS = 'ALLOWALL'
 
 
@@ -232,3 +238,8 @@ PASSWORD_CONTENIDO = config("PASSWORD_CONTENIDO")
 
 USER_EDUCACION = config("USER_EDUCACION")
 PASSWORD_EDUCACION = config("PASSWORD_EDUCACION")
+
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

@@ -37,10 +37,10 @@ label, span, a{
 
 .sidebar {
     background:
-        linear-gradient(180deg, var(--lines-color), rgba(0, 255, 0, 0) 50.71%), 
-        linear-gradient(360deg, var(--lines-color), rgba(0, 255, 0, 0) 50.71%), 
-        linear-gradient(217deg, var(--sidebar-color), rgba(255, 0, 0, 0) 100%),
-        linear-gradient(336deg, var(--sidebar-color), rgba(0, 0, 255, 0) 100%);
+        linear-gradient(180deg, var(--sidebar-color), rgba(0, 255, 0, 0) 40.71%), 
+        linear-gradient(360deg, var(--sidebar-color), rgba(0, 255, 0, 0) 40.71%), 
+        linear-gradient(200deg, var(--lines-color), rgba(255, 0, 0, 0) 200%),
+        linear-gradient(100deg, var(--lines-color), rgba(0, 0, 255, 0) 200%);
     width: 15%;
     height: 100vh;
     font-size: clamp(1rem, 2.2dvh, 3rem);

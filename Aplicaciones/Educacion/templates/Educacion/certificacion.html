@@ -9,20 +9,23 @@
 <link rel="stylesheet" type="text/css" href="{% static 'styles/capitulo.css' %}">
 
 
-<div class="formContainesrCertificacion fade" id="formularioCertificado">
-  <div class="cortificacionElements">
-    <h1>¡Felicidades, usted ahora puede certificarse!</h1>
-    <form class="formCertificaionDatosIngresados" method="GET" action="{% url 'ejecutarCertificacion' %}" 
-          {% if todo_aprobado %} target="iframeCertificado" onsubmit="return mostrarIframe()" {% endif %}>
-      {% csrf_token %}
-      <input type="text" class="form-control inputNombreCertificado" name="nombre" placeholder="Ingresa tu nombre" required
-            >
-      <button class="buttongenerearCertificado boton" type="submit">
-        <span class="material-symbols-outlined">construction</span>
-        Generar certificado
-      </button>
-    </form>
-  </div>
+
+
+
+<div class="formContainesrCertificacion fade" id="formularioCertificado"> 
+
+  <div class="cortificacionElements"> 
+    <h1>¡Felicidades, usted ahora puede certificarse!</h1> 
+    <form class="formCertificaionDatosIngresados" method="GET"
+          action="{% url 'ejecutarCertificacion' %}"
+          target="iframeCertificado"
+          onsubmit="return manejarCertificacion(event)">
+      {% csrf_token %} 
+      <input type="text" class="form-control inputNombreCertificado" maxlength="30" name="nombre" placeholder="Ingresa tu nombre" required > 
+      <button class="buttongenerearCertificado boton" type="submit"> 
+        <span class="material-symbols-outlined">construction</span> Generar certificado </button> 
+    </form> 
+  </div> 
 </div>
 
 {% if todo_aprobado %}
@@ -38,34 +41,107 @@
       <small><em>Disculpas por las molestias</em></small>
     </div>
     
-        <a style="text-decoration-line: none;" href="{% url 'ejecutarCertificacion' %}?nombre={{ request.GET.nombre|default:'' }}&descargar=1" 
+    <a style="text-decoration-line: none; display: none;" href="{% url 'ejecutarCertificacion' %}?nombre={{ request.GET.nombre|default:'' }}&descargar=1" 
         class="buttongenerearCertificado boton" 
         id="descargaDirecta"
         download="certificado.pdf">
       <span class="material-symbols-outlined">download</span>
       Descargar Certificado
     </a>
+    
   </div>
 
-  <script>
-function mostrarIframe() {
-  document.getElementById("formularioCertificado").style.display = "none";
+<script>
+  function mostrarIframe() {
+    document.getElementById("formularioCertificado").style.display = "none";
 
-  const contenedor = document.getElementById("contenedorIframe");
-  contenedor.style.display = "flex";
-  
-  contenedor.classList.remove("fade2");
-  void contenedor.offsetWidth;
-  contenedor.classList.add("fade2");
+    const contenedor = document.getElementById("contenedorIframe");
+    contenedor.style.display = "flex";
+    
+    contenedor.classList.remove("fade2");
+    void contenedor.offsetWidth;
+    contenedor.classList.add("fade2");
 
-  const nombre = document.querySelector('.inputNombreCertificado').value;
-  const enlaceDescarga = document.getElementById('descargaDirecta');
-  enlaceDescarga.href = "{% url 'ejecutarCertificacion' %}?nombre=" + encodeURIComponent(nombre) + "&descargar=1";
-  
-  return true;
-}
+    const nombre = document.querySelector('.inputNombreCertificado').value;
+    const enlaceDescarga = document.getElementById('descargaDirecta');
+    enlaceDescarga.href = "{% url 'ejecutarCertificacion' %}?nombre=" + encodeURIComponent(nombre) + "&descargar=1";
+    
+    return true;
+  }
+</script>
 
-  </script>
 {% endif %}
+
+<script>
+  const certificadoStatus = "{{ certificado_status|yesno:'true,false' }}";
+  const fechaCertificacion = "{{ fecha_certificacion|date:'Y-m-d' }}";  // ✅ Formato compatible
+  const hoy = new Date();
+  const fechaCert = new Date(fechaCertificacion); // ✔️ válido ahora
+  const fechaDisponible = new Date(fechaCert);
+  fechaDisponible.setDate(fechaDisponible.getDate() + 30);
+
+  function manejarCertificacion(event) {
+    const opciones = { day: '2-digit', month: 'long', year: 'numeric' };
+
+    if (certificadoStatus === "true" && hoy < fechaDisponible) {
+      const fechaFormateada = fechaDisponible.toLocaleDateString('es-ES', opciones);
+
+      Swal.fire({
+        title: "Ya estás certificado",
+        text: `Te certificaste el ${fechaCert.toLocaleDateString('es-ES', opciones)}. Podrás volver a hacerlo después del ${fechaFormateada}.`,
+        icon: "error",
+        confirmButtonText: "Aceptar"
+      });
+      return false;
+    }
+
+    // Si no está certificado o ya pasaron los 30 días
+    return confirmarCertificacion(event);
+  }
+
+
+  function confirmarCertificacion(event) {
+    event.preventDefault(); // Previene el envío inmediato del formulario
+
+    const hoy = new Date();
+    const fechaLimite = new Date(hoy);
+    fechaLimite.setDate(hoy.getDate() + 30);
+
+    const opciones = { day: '2-digit', month: 'long', year: 'numeric' };
+    const fechaFormateada = fechaLimite.toLocaleDateString('es-ES', opciones);
+
+    Swal.fire({
+        title: "¿Desea continuar?",
+        text: `No podrá certificarse nuevamente hasta el ${fechaFormateada}`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, certificarme",
+        cancelButtonText: "Cancelar"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            mostrarIframe(); // Oculta el formulario y muestra el iframe
+            event.target.submit(); // Envía el formulario
+        }
+    });
+
+    return false; // Previene el envío automático
+  }
+
+  function mostrarIframe() {
+    document.getElementById("formularioCertificado").style.display = "none";
+    const contenedor = document.getElementById("contenedorIframe");
+    contenedor.style.display = "flex";
+    contenedor.classList.remove("fade2");
+    void contenedor.offsetWidth;
+    contenedor.classList.add("fade2");
+
+    const nombre = document.querySelector('.inputNombreCertificado').value;
+    const enlaceDescarga = document.getElementById('descargaDirecta');
+    enlaceDescarga.href = "{% url 'ejecutarCertificacion' %}?nombre=" + encodeURIComponent(nombre) + "&descargar=1";
+  }
+</script>
+
 
 {% endblock %}

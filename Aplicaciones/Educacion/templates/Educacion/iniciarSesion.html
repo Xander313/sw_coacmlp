@@ -6,14 +6,25 @@
 {% block content%}
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="{% static 'styles/iniciarConGoogle.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/aparicion.css' %}">
 
-<div class="MainContentGoogle">
-    
-    <div class="ingregarEducacionFinanciera">
-        <a href="{% url 'social:begin' 'google-oauth2' %}" \rel="noopener noreferrer">
-            <img src="{% static 'img/google.png' %}" alt="" width="32" height="32">  Iniciar sesión con Google
-        </a>
+
+<div class="MainContentGoogle fade">
+    <div class="titleAutenticacion">
+        <h3 >Cooperativa de Ahorro y Crédito</h3>
+        <h4> Monseñor Leonidas Proaño</h4>
+        <h6 style="color: var(--bg-color)"><em>Módulo de Educación Financiera</em></h6>
     </div>
+    <br>
+    <div  class="MainContenainerForm">
+        <div class="ingregarEducacionFinanciera">
+            <h6 style="color: var(--bg-color)" class="autentication-label"> Puede acceder con: </h6 >
+            <a href="{% url 'social:begin' 'google-oauth2' %}" \rel="noopener noreferrer">
+                <img src="{% static 'img/google.png' %}" alt="" width="32" height="32">  Iniciar sesión con Google
+            </a>
+        </div>
+    </div>
+
     
 </div>
 
