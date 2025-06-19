@@ -1,0 +1,53 @@
+{% extends 'sidebarNoticias.html'%} 
+{% load static %} 
+{% block tittle %}Cooperativa de Ahorro y Crédito{% endblock tittle %} 
+
+{% block content%}
+<link rel="stylesheet" href="{% static 'styles/aparicion.css' %}" />
+<link rel="stylesheet" href="{% static 'styles/contenidoPresentatioAdmin.css' %}" />
+
+
+<div id="masterContainer" class="masterContainer fade">
+  <div id="buttonsContainer" class="buttonsContainer">
+    <a class="butonnssContenido" onclick="mostrarSeccion('mision')"> <span class="material-symbols-outlined">target</span> <span class="titleContent">Misión</span></a>
+    <a class="butonnssContenido" onclick="mostrarSeccion('vision')"> <span class="material-symbols-outlined">handshake</span> <span class="titleContent">Visión</span></a>
+    <a class="butonnssContenido" onclick="mostrarSeccion('historia')"> <span class="material-symbols-outlined"> receipt_long </span> <span class="titleContent">Historia</span></a>
+    <a class="butonnssContenido" onclick="mostrarSeccion('valores')"> <span class="material-symbols-outlined">family_home</span> <span class="titleContent">Valores</span></a>
+  </div>
+  <div class="ElementsMasterCointainer" >
+    <div id="inicio" class="contenContenido fade" style="display:flex;">VAMOS A ADMINISTRAR EL CONTENIDO, SELECCIONA UNA OPCION POR FAVOR</div>
+    <br><br><br><br><br>
+    <div id="mision" class="contenContenido fade" style="display:none;">
+        <form method="post">
+          {% csrf_token %}
+          {{ form.media }} <!-- Esto carga el CKEditor -->
+          {{ form.descripcion }}
+          <br>
+          <button type="submit">Guardar Cambios</button>
+        </form>
+      </div>
+      
+          <div id="historia" class="contenContenido fade" style="display:none;">Contenido de Historia</div>
+    <div id="valores" class="contenContenido fade" style="display:none;">Contenido de Valores</div>
+  </div>
+
+</div>
+
+<script>
+function mostrarSeccion(id) {
+  // Ocultar todos los divs dentro de ElementsMasterCointainer
+  var secciones = document.querySelectorAll('.ElementsMasterCointainer > div');
+  secciones.forEach(function(seccion) {
+    seccion.style.display = 'none';
+  });
+
+  // Mostrar la sección correspondiente al botón presionado
+  document.getElementById(id).style.display = 'block';
+}
+
+
+</script>
+
+
+
+{% endblock content %} 

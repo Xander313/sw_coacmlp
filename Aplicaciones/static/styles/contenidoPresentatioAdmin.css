@@ -1,0 +1,117 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: inherit;
+}
+
+:root {
+    --bg-color: #FFF8C6;
+    --sidebar-color: #CA6AB4;
+    --main-color: #023196;
+    --text-color: #000;
+}
+
+.masterContainer {
+    margin-top: 15px;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row; 
+    align-items: center;
+    justify-content: center;
+    padding: 80px 0;
+    gap: 10px;
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    background: transparent;
+}
+
+
+.buttonsContainer{
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    height: 100%;
+    gap: 10px;
+    justify-content: center;
+
+
+}
+
+.ElementsMasterCointainer{
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    height: 100%;
+}
+
+
+
+.contenContenido{
+    width: 70%;
+    height: 60%;
+    color: black;
+    background:
+        linear-gradient(180deg, var(--bg-color), rgba(255, 0, 0, 0) 140%),
+        linear-gradient(360deg, var(--sidebar-color), rgba(0, 0, 255, 0) 100%);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+
+    padding: 10px;
+    overflow-y: auto; 
+    text-align: justify;
+
+    
+}
+
+.contenContenido::-webkit-scrollbar {
+  width: 10px; /* Ancho del scrollbar vertical */
+}
+
+.contenContenido::-webkit-scrollbar-track {
+    background: #f1f1f1;  /* Fondo del track (canal) */
+    border-radius: 10px;
+}
+
+.contenContenido::-webkit-scrollbar-thumb {
+    background: var(--main-color); /* Color del scroll */
+    border-radius: 10px;
+}
+
+.contenContenido::-webkit-scrollbar-thumb:hover {
+  background: var(--sidebar-color); /* Color cuando el mouse pasa por encima */
+}
+
+
+.butonnssContenido{
+    display: flex;
+    justify-content: center;
+    background-color: transparent;
+    padding: 10px;
+    scale: 1;
+    gap: 10px;
+    color: #000;
+    border: 2px solid transparent;
+    outline: none;
+    font-family: inherit;
+    transition: scale 0.5s ease, border 0.5s ease, border-radius 0.5s ease;
+    cursor: pointer;
+    text-decoration-line: none;
+
+}
+
+.butonnssContenido:hover{
+    scale: 1.089;
+    border: 5px solid var(--main-color);
+    border-radius: 10px;
+    color: var(--main-color);
+    
+}
+
+@media screen and (max-width: 768px) {
+  .butonnssContenido .titleContent {
+    display: none;
+  }
+
+}

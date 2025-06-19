@@ -3,6 +3,8 @@ from django.contrib import messages
 from functools import wraps
 from Aplicaciones.Noticias.models import Noticia
 from Aplicaciones.Noticias.forms import DescripcionForm
+from Aplicaciones.Mision.models import Mision
+
 
 def redireccionador(request):
     return redirect('loginAdministracion')
@@ -89,3 +91,47 @@ def procesarEdicionNoticia(request):
     #mensaje de confirmacion
     messages.success(request,"Noticia actualizada exitosamente")
     return redirect('iniciote')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#######################desion contendio ###############
+
+from Aplicaciones.Mision.models import Mision
+
+def general(request):
+    mision, creado = Mision.objects.get_or_create(id=1)
+    
+    # Si el contenido está vacío, asignar el valor por defecto
+    if not mision.descripcion:
+        mision.descripcion = Mision._meta.get_field('descripcion').default
+        mision.save()
+
+    return render(request, 'AdministrarContenido/templates/contenido/index.html', {
+        'mision': mision
+    })
+
+
+def general(request):
+    mision = Mision.objects.first()  # Trae la primera misión, o ajusta según tu modelo
+    vision = None  # Lo mismo para visión, historia y valores si tienes
+    historia = None
+    valores = None
+
+    return render(request, 'contenido/index.html', {
+        'mision': mision,
+        'vision': vision,
+        'historia': historia,
+        'valores': valores,
+    })
