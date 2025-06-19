@@ -108,30 +108,22 @@ def procesarEdicionNoticia(request):
 
 #######################desion contendio ###############
 
+from django.shortcuts import render, redirect
 from Aplicaciones.Mision.models import Mision
+from Aplicaciones.Mision.forms import MisionForm  # Asegúrate que la importación sea correcta
 
 def general(request):
-    mision, creado = Mision.objects.get_or_create(id=1)
-    
-    # Si el contenido está vacío, asignar el valor por defecto
-    if not mision.descripcion:
-        mision.descripcion = Mision._meta.get_field('descripcion').default
-        mision.save()
+    mision, _ = Mision.objects.get_or_create(id=1)  # Solo una misión
 
-    return render(request, 'AdministrarContenido/templates/contenido/index.html', {
-        'mision': mision
-    })
-
-
-def general(request):
-    mision = Mision.objects.first()  # Trae la primera misión, o ajusta según tu modelo
-    vision = None  # Lo mismo para visión, historia y valores si tienes
-    historia = None
-    valores = None
+    if request.method == 'POST':
+        form = MisionForm(request.POST, instance=mision)
+        if form.is_valid():
+            form.save()
+            return redirect('vista_general')  # Asegúrate que esta ruta esté registrada
+    else:
+        form = MisionForm(instance=mision)
 
     return render(request, 'contenido/index.html', {
+        'form': form,
         'mision': mision,
-        'vision': vision,
-        'historia': historia,
-        'valores': valores,
     })
