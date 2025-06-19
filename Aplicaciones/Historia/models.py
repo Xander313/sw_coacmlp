@@ -1,3 +1,6 @@
 from django.db import models
+from ckeditor.fields import RichTextField
 
-# Create your models here.
+class Historia(models.Model):
+    titulo = models.CharField(max_length=100, default='Historia')
+    descripcion = RichTextField(default='Aquí va la historia institucional...')

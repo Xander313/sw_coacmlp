@@ -110,20 +110,40 @@ def procesarEdicionNoticia(request):
 
 from django.shortcuts import render, redirect
 from Aplicaciones.Mision.models import Mision
-from Aplicaciones.Mision.forms import MisionForm  # Asegúrate que la importación sea correcta
+from Aplicaciones.Vision.models import Vision
+from Aplicaciones.Historia.models import Historia
+from Aplicaciones.Mision.forms import MisionForm
+from Aplicaciones.Vision.forms import VisionForm
+from Aplicaciones.Historia.forms import HistoriaForm
+from Aplicaciones.Valores.models import Valores
+from Aplicaciones.Valores.forms import ValoresForm
 
 def general(request):
-    mision, _ = Mision.objects.get_or_create(id=1)  # Solo una misión
+    mision = Mision.objects.get_or_create(id=1)[0]
+    vision = Vision.objects.get_or_create(id=1)[0]
+    historia = Historia.objects.get_or_create(id=1)[0]
+    valores = Valores.objects.get_or_create(id=1)[0]
+
+    form_mision = MisionForm(request.POST or None, instance=mision)
+    form_vision = VisionForm(request.POST or None, instance=vision)
+    form_historia = HistoriaForm(request.POST or None, instance=historia)
+    form_valores = ValoresForm(request.POST or None, instance=valores)
 
     if request.method == 'POST':
-        form = MisionForm(request.POST, instance=mision)
-        if form.is_valid():
-            form.save()
-            return redirect('vista_general')  # Asegúrate que esta ruta esté registrada
-    else:
-        form = MisionForm(instance=mision)
+        if 'submit_mision' in request.POST and form_mision.is_valid():
+            form_mision.save()
+        elif 'submit_vision' in request.POST and form_vision.is_valid():
+            form_vision.save()
+        elif 'submit_historia' in request.POST and form_historia.is_valid():
+            form_historia.save()
+        elif 'submit_valores' in request.POST and form_valores.is_valid():
+            form_valores.save()
+
+        return redirect('generalParaMOdificar')
 
     return render(request, 'contenido/index.html', {
-        'form': form,
-        'mision': mision,
+        'form': form_mision,
+        'form_vision': form_vision,
+        'form_historia': form_historia,
+        'form_valores': form_valores,
     })

@@ -16,12 +16,19 @@
   </div>
   <div class="ElementsMasterCointainer" >
     <div id="inicio" class="contenContenido fade" style="display:flex;">hola</div>
-    <div id="mision" class="contenContenido fade" style="display:none;">
+    <div id="mision" class="contenContenido fade" style="display:none; text-align:center; font-size: 3.5rem; line-height:1.4; font-weight: bold;">
       {{ mision.descripcion|safe }}
     </div>
-        <div id="vision" class="contenContenido fade" style="display:none;">Contenido de Visión</div>
-    <div id="historia" class="contenContenido fade" style="display:none;">Contenido de Historia</div>
-    <div id="valores" class="contenContenido fade" style="display:none;">Contenido de Valores</div>
+    <div id="vision" class="contenContenido fade" style="display:none; text-align:center; font-size: 3.5rem; line-height:1.4; font-weight: bold;">
+      {{ vision.descripcion|safe }}
+    </div>
+    <div id="historia" class="contenContenido fade" style="display:none; text-align:center; font-size: 3.5rem; line-height:1.4; font-weight: bold;">
+      {{ historia.descripcion|safe }}
+    </div>
+    <div id="valores" class="contenContenido fade" style="display:none; text-align:center; font-size: 3.5rem; line-height:1.4; font-weight: bold;">
+      {{ valores.descripcion|safe }}
+    </div>
+    
   </div>
 
 </div>

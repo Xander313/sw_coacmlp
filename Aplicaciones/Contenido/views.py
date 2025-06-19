@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from Aplicaciones.Mision.models import Mision
 from Aplicaciones.Noticias.models import Noticia
+from Aplicaciones.Vision.models import Vision
+from Aplicaciones.Historia.models import Historia
+from Aplicaciones.Valores.models import Valores
 
 
 # Create your views here.
@@ -10,10 +13,18 @@ def index(request):
 def aboutUs(request):
     return render(request, 'Contenido/contentido.html')
 
-
 def contenido_view(request):
     mision = Mision.objects.first()
-    return render(request, 'Contenido/contenido.html', {'mision': mision})
+    vision = Vision.objects.first()
+    historia = Historia.objects.first()
+    valores = Valores.objects.first()
+
+    return render(request, 'Contenido/contentido.html', {
+        'mision': mision,
+        'vision': vision,
+        'historia': historia,
+        'valores': valores,
+    })
 
 
 

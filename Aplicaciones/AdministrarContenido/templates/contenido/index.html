@@ -23,13 +23,40 @@
           {{ form.media }} <!-- Esto carga el CKEditor -->
           {{ form.descripcion }}
           <br>
-          <button type="submit">Guardar Cambios</button>
+          <button type="submit" name="submit_mision">Guardar Misión</button>
+        </form>
+      </div>
+      <div id="vision" class="contenContenido fade" style="display:none;">
+        <form method="post">
+          {% csrf_token %}
+          {{ form_vision.media }}
+          {{ form_vision.descripcion }}
+          <br>
+          <button type="submit" name="submit_vision">Guardar Visión</button>
         </form>
       </div>
       
-          <div id="historia" class="contenContenido fade" style="display:none;">Contenido de Historia</div>
-    <div id="valores" class="contenContenido fade" style="display:none;">Contenido de Valores</div>
-  </div>
+      
+      
+      <div id="historia" class="contenContenido fade" style="display:none;">
+        <form method="post">
+          {% csrf_token %}
+          {{ form_historia.media }}
+          {{ form_historia.descripcion }}
+          <br>
+          <button type="submit" name="submit_historia">Guardar Historia</button>
+        </form>
+      </div>
+      <div id="valores" class="contenContenido fade" style="display:none;">
+        <form method="post">
+          {% csrf_token %}
+          {{ form_valores.media }}
+          {{ form_valores.descripcion }}
+          <br>
+          <button type="submit" name="submit_valores">Guardar Valores</button>
+        </form>
+      </div>
+        </div>
 
 </div>
 
