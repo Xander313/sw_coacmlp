@@ -1,0 +1,10 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'styles/aparicion.css' %}" />
+<link rel="stylesheet" href="{% static 'styles/inputContenido.css' %}" />
+
+<form method="post" class="fade" >
+  {% csrf_token %}
+  {{ form.media }}
+  {{ form.descripcion }}
+  <button type="submit" name="submit_mision">Guardar Misión</button>
+</form>

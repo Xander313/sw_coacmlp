@@ -118,32 +118,43 @@ from Aplicaciones.Historia.forms import HistoriaForm
 from Aplicaciones.Valores.models import Valores
 from Aplicaciones.Valores.forms import ValoresForm
 
+
+
 def general(request):
+    return render(request, 'contenido/index.html')
+
+
+def mision_view(request):
     mision = Mision.objects.get_or_create(id=1)[0]
+    form = MisionForm(request.POST or None, instance=mision)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        messages.success(request, "SE HA AGREGADO")
+    return render(request, 'contenido/mision.html', {'form': form})
+
+
+def vision_view(request):
     vision = Vision.objects.get_or_create(id=1)[0]
+    form = VisionForm(request.POST or None, instance=vision)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        messages.success(request, "SE HA AGREGADO")
+    return render(request, 'contenido/vision.html', {'form': form})
+
+
+def historia_view(request):
     historia = Historia.objects.get_or_create(id=1)[0]
+    form = HistoriaForm(request.POST or None, instance=historia)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        messages.success(request, "SE HA AGREGADO")
+    return render(request, 'contenido/historia.html', {'form': form})
+
+
+def valores_view(request):
     valores = Valores.objects.get_or_create(id=1)[0]
-
-    form_mision = MisionForm(request.POST or None, instance=mision)
-    form_vision = VisionForm(request.POST or None, instance=vision)
-    form_historia = HistoriaForm(request.POST or None, instance=historia)
-    form_valores = ValoresForm(request.POST or None, instance=valores)
-
-    if request.method == 'POST':
-        if 'submit_mision' in request.POST and form_mision.is_valid():
-            form_mision.save()
-        elif 'submit_vision' in request.POST and form_vision.is_valid():
-            form_vision.save()
-        elif 'submit_historia' in request.POST and form_historia.is_valid():
-            form_historia.save()
-        elif 'submit_valores' in request.POST and form_valores.is_valid():
-            form_valores.save()
-
-        return redirect('generalParaMOdificar')
-
-    return render(request, 'contenido/index.html', {
-        'form': form_mision,
-        'form_vision': form_vision,
-        'form_historia': form_historia,
-        'form_valores': form_valores,
-    })
+    form = ValoresForm(request.POST or None, instance=valores)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        messages.success(request, "SE HA AGREGADO")
+    return render(request, 'contenido/valores.html', {'form': form})

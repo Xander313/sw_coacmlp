@@ -16,6 +16,12 @@ urlpatterns = [
 
     #######################mContenido##########################
     path('general/', views.general, name='generalParaMOdificar'),
+
+
+    path('mision/', views.mision_view, name='misionAd'),
+    path('vision/', views.vision_view, name='visionAd'),
+    path('historia/', views.historia_view, name='historiaAd'),
+    path('valores/', views.valores_view, name='valoresAd'),
     
 
 

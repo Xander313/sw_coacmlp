@@ -1,0 +1,26 @@
+{% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
+
+<link rel="stylesheet" href="{% static 'styles/aparicion.css' %}" />
+<link rel="stylesheet" href="{% static 'styles/inputContenido.css' %}" />
+<link rel="stylesheet" href="{% static 'styles/contenidoPresentatioAdmin.css' %}" />
+
+
+
+
+
+
+<form method="post"  class="fade">
+  {% csrf_token %}
+  <div style="height: 100%; width: 100%;">
+    {{ form.media }}
+    {{ form.descripcion }}
+  </div>
+  <div class="guardarButton">
+    <button type="submit" class="butonnssContenido classButonn" name="submit_vision">
+      <i class="fa-solid fa-floppy-disk"></i> Guardar Visión
+    </button>
+  </div>
+</form>

@@ -1,0 +1,15 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'styles/aparicion.css' %}" />
+<link rel="stylesheet" href="{% static 'styles/inputContenido.css' %}" />
+
+
+<form method="post" class="fade">
+  {% csrf_token %}
+  {{ form.media }}
+  {{ form.descripcion }}
+  <div class="guardarButton">
+    <button type="submit" class="butonnssContenido classButonn" name="submit_historia">
+      <i class="fa-solid fa-floppy-disk"></i> Guardar Historia
+    </button>
+  </div>
+</form>
