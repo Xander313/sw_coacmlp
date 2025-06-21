@@ -171,3 +171,75 @@ def valores_view(request):
         form.save()
         messages.success(request, "Se ha editado los valores correctamente.")
     return render(request, 'contenido/valores.html', {'form': form})
+
+
+
+
+
+
+
+
+##################### VISTAS DE TESTIMONIOS #########################
+from django.shortcuts import render, redirect
+from Aplicaciones.Testimonios.models import Testimonio
+from Aplicaciones.Testimonios.forms import DescripcionForm
+
+def inicios(request):
+    listadoTestimonios = Testimonio.objects.all()
+    return render(request, "Testimonios/iniciotes.html", {'testimonio': listadoTestimonios})
+def nuevoTestimonio(request):
+    if request.method == 'POST':
+        form = DescripcionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('iniciotes')
+    else:
+        form = DescripcionForm()
+    
+    return render(request,"Testimonios/nuevoTestimonio.html", {
+        'form': form 
+    })
+
+def guardarTestimonio(request):
+    
+    titulo=request.POST["titulo"]
+    nombre=request.POST["nombre"]
+    imagenURL=request.POST["imagenURL"]
+    descripcion=request.POST["descripcion"]
+    
+
+    nuevaTestimonio=Testimonio.objects.create(
+        titulo=titulo,
+        nombre=nombre,
+        imagenURL=imagenURL,
+        descripcion=descripcion)
+    #mensaje de confirmacion
+    messages.success(request,"Testimonio guardado exitosamente")
+    return redirect('iniciotes')
+def eliminarTestimonio(request,id):
+    testimonioEliminar=Testimonio.objects.get(id=id)
+    testimonioEliminar.delete()
+    #mensaje de confirmacion
+    messages.success(request,"Testimonio eliminado exitosamente")
+    return redirect('iniciotes')
+
+def editarTestimonios(request,id):
+    testimonioEditar=Testimonio.objects.get(id=id)
+    return render(request,"Testimonios/editarTestimonios.html",{'testimonioEditar':testimonioEditar})
+
+def procesarEdicionTestimonio(request):
+    id = request.POST['id']
+    titulo=request.POST["titulo"]
+    nombre=request.POST["nombre"]
+    imagenURL=request.POST["imagenURL"]
+    descripcion=request.POST["descripcion"]
+
+    testimonio=Testimonio.objects.get(id=id)
+    testimonio.titulo=titulo
+    testimonio.nombre=nombre
+    testimonio.imagenURL=imagenURL
+    testimonio.descripcion=descripcion
+    testimonio.save()
+    #mensaje de confirmacion
+    messages.success(request,"Testimonio actualizado exitosamente")
+    return redirect('iniciotes')
