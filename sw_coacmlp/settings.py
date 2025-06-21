@@ -243,3 +243,14 @@ PASSWORD_EDUCACION = config("PASSWORD_EDUCACION")
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'enterMode': 2,  # CKEDITOR.ENTER_BR — usa <br> en vez de <p>
+        'shiftEnterMode': 1,
+        'removePlugins': 'elementspath',
+        'toolbarCanCollapse': False,
+        'forcePasteAsPlainText': True,
+    }
+}

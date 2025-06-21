@@ -2,7 +2,8 @@
 {% load static %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'styles/formularioCrearTestimonio.css' %}">
+<link rel="stylesheet" href="{% static 'styles/aparicion.css' %}" />
+<link rel="stylesheet" href="{% static 'styles/formularioCrearTestimonios.css' %}">
 {% endblock extra_css %}
 
 {% block title %}Editar Testimonio{% endblock %}
@@ -33,8 +34,8 @@
 
             <div class="mb-3">
                 <label for="descripcion" class="form-label">Descripción:</label>
-                <div class="cuerpoform">
-                    <textarea name="descripcion" id="descripcion" class="form-control" rows="6" required>{{ testimonioEditar.descripcion }}</textarea>
+                <div id="descripcion" class="cuerpoforms">
+                    {{ form.descripcion }}
                 </div>
             </div>
 

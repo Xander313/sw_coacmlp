@@ -225,8 +225,17 @@ def eliminarTestimonio(request,id):
 
 def editarTestimonios(request,id):
     testimonioEditar=Testimonio.objects.get(id=id)
-    return render(request,"Testimonios/editarTestimonios.html",{'testimonioEditar':testimonioEditar})
 
+    if request.method == 'POST':
+        form = DescripcionForm(request.POST)
+        if form.is_valid():
+            testimonioEditar.descripcion = form.cleaned_data['descripcion']
+            testimonioEditar.save()
+            return redirect('iniciotes')
+    else:
+        form = DescripcionForm(instance=testimonioEditar)
+
+    return render(request,"Testimonios/editarTestimonios.html",{'testimonioEditar':testimonioEditar, 'form': form })
 def procesarEdicionTestimonio(request):
     id = request.POST['id']
     titulo=request.POST["titulo"]

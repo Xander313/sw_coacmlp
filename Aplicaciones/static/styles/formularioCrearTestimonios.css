@@ -76,7 +76,7 @@ h2 {
     box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.2);
 }
 
-.cuerpoform {
+.cuerpoforms {
     border: var(--input-border);
     border-radius: var(--input-border-radius);
     padding: var(--input-padding);
