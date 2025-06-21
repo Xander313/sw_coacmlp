@@ -8,24 +8,26 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'styles/capitulo.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'styles/barraActivacion.css' %}">
+<link rel="stylesheet" href="{% static 'styles/aparicion.css' %}" />
 
 
-<div class="encabezadoTitulo">
+
+<div class="encabezadoTitulo fade">
     <h1>Capítulo {{ capitulo.orden }}: {{ capitulo.titulo }} </h1>
 </div>
 
-<div class="cuerpo">
+<div class="cuerpo fade">
     {{ capitulo.cuerpo|safe }}
 </div>
 
-<div id="contenidoExtra" class="contenido">
+<div id="contenidoExtra" class="contenido fade">
     <div class="imagen">
         <img src="{{ capitulo.imagenURL }}" alt="">
     </div>
 </div>
 
     
-    <div class="barraCarga"></div>
+    <div class="barraCarga fade"></div>
 </button>
 
 

@@ -18,15 +18,11 @@
           <div class="item">
             <img src="{{ noticia.imagenURL}}" alt="Course #1">
             <div class="down-content">
-              <h4>{{ noticia.titulo}}</h4>
-              <p>{{ noticia.descripcion|safe}}</p>
-            <!--
-              <div class="author-image">
-                <img src="{% static 'assets/images/author-01.png'%}" alt="Author 1">
-              </div>
-            -->
+              <h6 style="text-align: justify;">{{ noticia.titulo}}</h6>
+              <p style="text-align: justify;">{{ noticia.descripcion|safe}}</p>
+              
               <div class="text-button-pay">
-                <a href="{{ noticia.referencia}}">Saber más <i class="fa fa-angle-double-right"></i></a>
+                <a href="{{ noticia.referenciaURL}}" target="_blank">Saber más <i class="fa fa-angle-double-right"></i></a>
               </div>
             </div>
           </div>

@@ -73,9 +73,9 @@
         </nav>
         <div class="sidebar__profile">
             <ul>
-                <li class="sidebar__item">
+                <li class="sidebar__item" onclick="confirm()">
                     <span class="material-symbols-outlined">logout</span>
-                    <a href="{% url 'inicio' %}">Cerrar sesión</a>
+                    <a href="#">Cerrar sesión</a>
                 </li>
             </ul>
         </div>
@@ -87,15 +87,53 @@
         {% endblock %}
 
     </div>
-    {% if messages%}
-            {% for mensaje in messages%}
-                <script>Swal.fire({
-                title: "CONFIRMACIÓN",
-                text: "{{mensaje}}",
-                icon: "success"
-                });</script>          
-            {% endfor%}
-    {%endif%}
+
+    <script>
+        document.querySelectorAll('.sidebar__item').forEach(item => {
+        item.addEventListener('click', function() {
+                const link = this.querySelector('a');
+                if (link) {
+                    window.location.href = link.href;
+                }
+            });
+        });
+    </script>
+
+
+    {% if messages %}
+    {% for message in messages %}
+        <script>
+        Swal.fire({
+
+            title: "{% if message.tags == 'error' %}¡ERROR!{% else %}¡ÉXITO!{% endif %}",
+            
+            text: "{{ message }}",
+
+            icon: "{% if message.tags == 'error' %}error{% else %}success{% endif %}"
+
+        });
+        </script>
+    {% endfor %}
+    {% endif %}
+
+    <script>
+    function confirm() {
+        Swal.fire({
+            title: "CONFIRMACIÓN",
+            text: "¿Está seguro de cerrar la sesión?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Sí, cerrar",
+            cancelButtonText: "Cancelar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/";
+            }
+        });
+    }
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 

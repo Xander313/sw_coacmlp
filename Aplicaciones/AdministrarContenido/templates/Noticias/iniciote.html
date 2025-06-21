@@ -4,13 +4,15 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'styles/tablanoticias.css' %}">
+<link rel="stylesheet" href="{% static 'styles/aparicion.css' %}" />
+
 {% endblock extra_css %}
 
 {% block content %}
 
-<h1 style="text-align: center; margin-top: 20px; color: var(--text-color);">GESTIÓN DE NOTICIAS</h1>
+<h1 class="fade" style="text-align: center; margin-top: 20px; color: var(--text-color);">GESTIÓN DE NOTICIAS</h1>
 
-<div class="contenedor-noticia-redondeado" style="background-color: var(--bg-color); padding: 20px; margin-top: 20px;">
+<div class="contenedor-noticia-redondeado fade" style="background-color: var(--bg-color); padding: 20px; margin-top: 20px;">
     <div class="d-flex justify-content-end mb-3">
         <a href="{% url 'nuevaNoticia' %}" class="boton-leer-noticia">
             Crear Noticia <i class="fa fa-pen" style="margin-left: 5px;"></i>
@@ -35,7 +37,7 @@
                 <td>{{ noticiatem.id }}</td>
                 <td>{{ noticiatem.titulo }}</td>
                 <td><img src="{{ noticiatem.imagenURL }}" alt="Imagen" width="100" style="border-radius: 10px;"></td>
-                <td>{{ noticiatem.descripcion|truncatewords:20 }}</td>
+                <td>{{ noticiatem.descripcion|safe|truncatewords:20 }}</td>
                 <td>{{ noticiatem.fechaCreacion }}</td>
                 <td><a href="{{ noticiatem.referenciaURL }}" target="_blank" class="enlace-capitulo-noticia">Ver más</a></td>
                 <td>

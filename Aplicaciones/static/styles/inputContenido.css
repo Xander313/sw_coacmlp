@@ -9,7 +9,7 @@
 .django-ckeditor-widget {
     margin-bottom: 1.5rem !important;
     width: 100%;
-    height: 80%;
+    height: auto;
     border: 3px solid var(--sidebar-color);
     box-shadow: 0 0 20px 0 var(--sidebar-color);
 
@@ -42,7 +42,7 @@
 }
 
 .cke_contents {
-    height: 316px !important; 
+    height: 250px !important; 
 }
 
 .formContentElemento{

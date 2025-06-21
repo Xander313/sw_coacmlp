@@ -2,8 +2,12 @@
 {% load static %}
 
 {% block extra_css %}
+<link rel="stylesheet" href="{% static 'styles/aparicion.css' %}" />
 <link rel="stylesheet" href="{% static 'styles/formularioCrearNoticia.css' %}">
+
+
 {% endblock extra_css %}
+
 
 {% block title %}Editar Noticia{% endblock %}
 
@@ -11,8 +15,8 @@
 {% block content %}
 <h2 style="text-align: center; margin-top: 20px;">EDITAR NOTICIA</h2>
 
-<div class="contenedor-formularios">
-    <div class="formulario-capitulo">
+<div class="contenedor-formularios fade">
+    <div class="formulario-noticias">
         <form action="{% url 'procesarEdicionNoticia' %}" method="POST">
             {% csrf_token %}
             <div id="formulario-wrapper" class="formulario-wrapper">
@@ -30,10 +34,11 @@
 
                     <div class="mb-3">
                         <label for="descripcion" class="form-label">Descripción:</label>
-                        <div class="cuerpoform">
-                            <textarea name="descripcion" id="descripcion" class="form-control" rows="6" required>{{ noticiaEditar.descripcion }}</textarea>
+                        <div id="descripcion" class="cuerpoform">
+                            {{ form.descripcion }}
                         </div>
                     </div>
+                    
                     <div class="mb-3">
                         <label for="referenciaURL" class="form-label">Referencia URL:</label>
                         <textarea name="referenciaURL" rows="4" id="referenciaURL" class="form-control" >{{noticiaEditar.referenciaURL}}</textarea>

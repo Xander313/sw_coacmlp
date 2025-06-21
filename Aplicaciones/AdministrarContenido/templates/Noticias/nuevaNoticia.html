@@ -3,16 +3,18 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'styles/formularioCrearNoticia.css' %}">
+<link rel="stylesheet" href="{% static 'styles/aparicion.css' %}" />
+
 {% endblock extra_css %}
 
 {% block title %}Crear Nueva Noticia{% endblock %}
 
 
 {% block content %}
-<h2 style="text-align: center; margin-top: 20px;">CREAR NUEVA NOTICIA</h2>
+<h2 class="fade" style="text-align: center; margin-top: 20px;">CREAR NUEVA NOTICIA</h2>
 
-<div class="contenedor-formularios">
-    <div class="formulario-capitulo">
+<div class="contenedor-formularios fade">
+    <div class="formulario-noticias">
         <form action="{% url 'guardarNoticia' %}" method="POST">
             {% csrf_token %}
             <div id="formulario-wrapper" class="formulario-wrapper">

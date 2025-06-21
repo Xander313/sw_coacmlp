@@ -73,7 +73,17 @@ def eliminarNoticia(request,id):
 
 def editarNoticia(request,id):
     noticiaEditar=Noticia.objects.get(id=id)
-    return render(request,"Noticias/editarNoticias.html",{'noticiaEditar':noticiaEditar})
+
+    if request.method == 'POST':
+        form = DescripcionForm(request.POST)
+        if form.is_valid():
+            noticiaEditar.descripcion = form.cleaned_data['descripcion']
+            noticiaEditar.save()
+            return redirect('iniciote')
+    else:
+        form = DescripcionForm(instance=noticiaEditar)
+
+    return render(request,"Noticias/editarNoticias.html",{'noticiaEditar':noticiaEditar, 'form': form })
 
 def procesarEdicionNoticia(request):
     id = request.POST['id']
@@ -132,7 +142,7 @@ def mision_view(request):
     form = MisionForm(request.POST or None, instance=mision)
     if request.method == 'POST' and form.is_valid():
         form.save()
-        messages.success(request, "Se ha editado la misión exitosamente")
+        messages.success(request, "Se ha editado la misión correctamente.   ")
     return render(request, 'contenido/mision.html', {'form': form})
 
 
@@ -141,7 +151,7 @@ def vision_view(request):
     form = VisionForm(request.POST or None, instance=vision)
     if request.method == 'POST' and form.is_valid():
         form.save()
-        messages.success(request, "Se ha editado la visión exitosamente")
+        messages.success(request, "Se ha editado la visión correctamente.")
     return render(request, 'contenido/vision.html', {'form': form})
 
 
@@ -150,7 +160,7 @@ def historia_view(request):
     form = HistoriaForm(request.POST or None, instance=historia)
     if request.method == 'POST' and form.is_valid():
         form.save()
-        messages.success(request, "Se ha editado la historia exitosamente")
+        messages.success(request, "Se ha editado la historia correctamente.")
     return render(request, 'contenido/historia.html', {'form': form})
 
 
@@ -159,5 +169,5 @@ def valores_view(request):
     form = ValoresForm(request.POST or None, instance=valores)
     if request.method == 'POST' and form.is_valid():
         form.save()
-        messages.success(request, "Se ha editado los valores exitosamente")
+        messages.success(request, "Se ha editado los valores correctamente.")
     return render(request, 'contenido/valores.html', {'form': form})
