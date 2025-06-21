@@ -1,0 +1,137 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+:root {
+    --bg-color: #FFF8C6;
+    --line-color: #CA6AB4;
+    --main-color: #514800;
+    --text-color: #514800;
+}
+
+.contenedor-testimonio-redondeado {
+    width: 90%;
+    margin: 30px auto;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(202, 106, 180, 0.3);
+    background-color: var(--bg-color);
+    padding: 20px;
+}
+
+.tabla-testimonios {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    text-align: center;
+    color: var(--text-color);
+    font-size: 1rem;
+    border: 2px solid var(--line-color);
+    border-radius: 15px;
+    overflow: hidden;
+    table-layout: fixed;
+}
+
+.tabla-testimonios thead {
+    background-color: var(--line-color);
+    color: white;
+    font-weight: bold;
+}
+
+.tabla-testimonios thead th {
+    padding: 12px 10px;
+    border-bottom: 3px solid var(--main-color);
+}
+
+.tabla-testimonios tbody tr:nth-child(even) {
+    background-color: #fff5d9; /* un tono más claro de bg para filas pares */
+}
+
+.tabla-testimonios tbody tr:hover {
+    background-color: var(--line-color);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.tabla-testimonios td, .tabla-testimonios th {
+    padding: 12px 10px;
+    border-right: 2px solid var(--line-color);
+    overflow-wrap: break-word;
+}
+
+.tabla-testimonios td:last-child,
+.tabla-testimonios th:last-child {
+    border-right: none;
+}
+
+.tabla-testimonios td img {
+    border-radius: 10px;
+    max-width: 100px;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Botones */
+.boton-leer-testimonio {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-color);
+    border-radius: 10px;
+    border: 2px solid var(--line-color);
+    text-decoration-line: none;
+    padding: 8px 16px;
+    margin-top: 10px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background-color 0.4s ease, color 0.4s ease;
+    cursor: pointer;
+    user-select: none;
+}
+
+.boton-leer-testimonio i {
+    margin-left: 6px;
+}
+
+.boton-leer-testimonio:hover {
+    background-color: var(--line-color);
+    color: white;
+}
+
+.boton-leer-testimonio.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.enlace-capitulo-testimonio {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: var(--main-color);
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.enlace-capitulo-testimonio:hover {
+    color: var(--line-color);
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 600px) {
+    .tabla-testimonios {
+        font-size: 0.75rem;
+    }
+
+    .boton-leer-testimonio {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+
+    .tabla-testimonios td img {
+        max-width: 70px;
+    }
+}
