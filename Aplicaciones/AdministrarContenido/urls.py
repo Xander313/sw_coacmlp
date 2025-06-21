@@ -16,6 +16,7 @@ urlpatterns = [
 
     #######################mContenido##########################
     path('general/', views.general, name='generalParaMOdificar'),
+    path('main/', views.generalMain, name='generamain'),
 
 
     path('mision/', views.mision_view, name='misionAd'),

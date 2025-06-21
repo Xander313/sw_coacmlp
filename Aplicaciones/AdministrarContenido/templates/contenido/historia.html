@@ -1,15 +1,42 @@
 {% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <link rel="stylesheet" href="{% static 'styles/aparicion.css' %}" />
 <link rel="stylesheet" href="{% static 'styles/inputContenido.css' %}" />
+<link rel="stylesheet" href="{% static 'styles/contenidoPresentatioAdmin.css' %}" />
+
 
 
 <form method="post" class="fade">
-  {% csrf_token %}
-  {{ form.media }}
-  {{ form.descripcion }}
+  <div class="formContentElemento">
+    {% csrf_token %}
+    {{ form.media }}
+    {{ form.descripcion }}
+  </div>
+
   <div class="guardarButton">
     <button type="submit" class="butonnssContenido classButonn" name="submit_historia">
       <i class="fa-solid fa-floppy-disk"></i> Guardar Historia
     </button>
   </div>
 </form>
+
+
+
+
+    {% if messages %}
+    {% for message in messages %}
+        <script>
+        Swal.fire({
+
+            title: "{% if message.tags == 'error' %}¡ERROR!{% else %}¡ÉXITO!{% endif %}",
+            
+            text: "{{ message }}",
+
+            icon: "{% if message.tags == 'error' %}error{% else %}success{% endif %}"
+
+        });
+        </script>
+    {% endfor %}
+    {% endif %}

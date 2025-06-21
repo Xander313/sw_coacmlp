@@ -86,7 +86,7 @@ label, span, a{
     align-items: center;
     font-size: .9rem;
     padding-right: 0;
-    color: var(--main-color);
+    color: #000;
     border-radius: 36px 0 0 36px;
     position: relative;
     cursor: pointer;

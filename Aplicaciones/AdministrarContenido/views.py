@@ -123,13 +123,16 @@ from Aplicaciones.Valores.forms import ValoresForm
 def general(request):
     return render(request, 'contenido/index.html')
 
+def generalMain(request):
+    return render(request, 'contenido/inicioIndex.html')
+
 
 def mision_view(request):
     mision = Mision.objects.get_or_create(id=1)[0]
     form = MisionForm(request.POST or None, instance=mision)
     if request.method == 'POST' and form.is_valid():
         form.save()
-        messages.success(request, "SE HA AGREGADO")
+        messages.success(request, "Se ha editado la misión exitosamente")
     return render(request, 'contenido/mision.html', {'form': form})
 
 
@@ -138,7 +141,7 @@ def vision_view(request):
     form = VisionForm(request.POST or None, instance=vision)
     if request.method == 'POST' and form.is_valid():
         form.save()
-        messages.success(request, "SE HA AGREGADO")
+        messages.success(request, "Se ha editado la visión exitosamente")
     return render(request, 'contenido/vision.html', {'form': form})
 
 
@@ -147,7 +150,7 @@ def historia_view(request):
     form = HistoriaForm(request.POST or None, instance=historia)
     if request.method == 'POST' and form.is_valid():
         form.save()
-        messages.success(request, "SE HA AGREGADO")
+        messages.success(request, "Se ha editado la historia exitosamente")
     return render(request, 'contenido/historia.html', {'form': form})
 
 
@@ -156,5 +159,5 @@ def valores_view(request):
     form = ValoresForm(request.POST or None, instance=valores)
     if request.method == 'POST' and form.is_valid():
         form.save()
-        messages.success(request, "SE HA AGREGADO")
+        messages.success(request, "Se ha editado los valores exitosamente")
     return render(request, 'contenido/valores.html', {'form': form})
