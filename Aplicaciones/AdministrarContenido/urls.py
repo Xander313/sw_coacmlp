@@ -27,4 +27,12 @@ urlpatterns = [
 
 
 
+###############################TESTIMONIOS###############################
+
+    path('iniciotes/',views.inicios, name='iniciotes'),
+    path('nuevoTestimonio/',views.nuevoTestimonio, name='nuevoTestimonio'),
+    path('guardarTestimonio/',views.guardarTestimonio,name='guardarTestimonio'),
+    path('eliminarTestimonio/<int:id>',views.eliminarTestimonio,name='eliminarTestimonio'),
+    path('editarTestimonios/<int:id>',views.editarTestimonios,name='editarTestimonios'),
+    path('procesarEdicionTestimonio/',views.procesarEdicionTestimonio,name='procesarEdicionTestimonio'),
 ]
