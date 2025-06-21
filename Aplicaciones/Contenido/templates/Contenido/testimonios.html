@@ -1,0 +1,33 @@
+{% extends 'base.html'%} 
+{% load static %} 
+{% block tittle %}Cooperativa de Ahorro y Crédito{% endblock tittle %} 
+
+{% block content%}
+
+
+<section class="section courses" data-section="section4">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="section-heading">
+            <h2>Testimonios</h2>
+          </div>
+        </div>
+        <div class="owl-carousel owl-theme">
+        {% for testimonio in testimonios %}
+          <div class="item">
+            <img src="{{ testimonio.imagenURL}}" alt="Course #1">
+            <div class="down-content">
+              <h6 style="text-align: justify;">{{ testimonio.titulo}}</h6>
+              <p style="text-align: justify;">{{ testimonio.descripcion|safe}}</p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+
+{% endblock %}

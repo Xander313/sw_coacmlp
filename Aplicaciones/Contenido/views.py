@@ -4,6 +4,7 @@ from Aplicaciones.Noticias.models import Noticia
 from Aplicaciones.Vision.models import Vision
 from Aplicaciones.Historia.models import Historia
 from Aplicaciones.Valores.models import Valores
+from Aplicaciones.Testimonios.models import Testimonio
 
 
 # Create your views here.
@@ -32,3 +33,8 @@ def contenido_view(request):
 def newsLetter(request):
     noticias = Noticia.objects.all()
     return render(request, 'Contenido/noticias.html', {'noticias': noticias})
+
+########################TARJETA PARA TESTIMONIOS####################
+def testi(request):
+    testimonios = Testimonio.objects.all()
+    return render(request, 'Contenido/testimonios.html', {'testimonios': testimonios})
