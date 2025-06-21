@@ -1,0 +1,54 @@
+{% extends "sidebarTestimonios.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'styles/formularioCrearTestimonio.css' %}">
+{% endblock extra_css %}
+
+{% block title %}Editar Testimonio{% endblock %}
+
+{% block content %}
+<h2 style="text-align: center; margin-top: 20px;">EDITAR TESTIMONIO</h2>
+
+<div class="contenedor-formularios">
+    <div class="formulario-testimonios">
+        <form action="{% url 'procesarEdicionTestimonio' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{ testimonioEditar.id }}">
+
+            <div class="mb-3">
+                <label for="titulo" class="form-label">Título:</label>
+                <input type="text" class="form-control" name="titulo" id="titulo" value="{{ testimonioEditar.titulo }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre del Testigo:</label>
+                <input type="text" class="form-control" name="nombre" id="nombre" value="{{ testimonioEditar.nombre }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="imagenURL" class="form-label">URL de la imagen:</label>
+                <textarea name="imagenURL" rows="4" id="imagenURL" class="form-control" required>{{ testimonioEditar.imagenURL }}</textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="descripcion" class="form-label">Descripción:</label>
+                <div class="cuerpoform">
+                    <textarea name="descripcion" id="descripcion" class="form-control" rows="6" required>{{ testimonioEditar.descripcion }}</textarea>
+                </div>
+            </div>
+
+            <div class="contenedorBotones">
+                <a href="{% url 'iniciotes' %}" class="boton-cancelar">
+                    <span class="material-symbols-outlined">cancel</span> Cancelar
+                </a>
+                <button type="submit" class="boton-guardar">
+                    <span class="material-symbols-outlined">save</span> Guardar Cambios
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{{ form.media }}
+{% endblock %}

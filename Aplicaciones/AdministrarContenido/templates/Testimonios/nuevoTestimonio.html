@@ -1,0 +1,56 @@
+{% extends "sidebarTestimonios.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'styles/formularioCrearTestimonio.css' %}">
+{% endblock extra_css %}
+
+{% block title %}Crear Nuevo Testimonio{% endblock %}
+
+{% block content %}
+<h2 style="text-align: center; margin-top: 20px;">CREAR NUEVO TESTIMONIO</h2>
+
+<div class="contenedor-formularios">
+    <div class="formulario-testimonios">
+        <form action="{% url 'guardarTestimonio' %}" method="POST">
+            {% csrf_token %}
+            <div id="formulario-wrapper" class="formulario-wrapper">
+                <div class="formulario-testimonios">
+                    <div class="mb-3">
+                        <label for="titulo" class="form-label">Título: </label>
+                        <input type="text" class="form-control" name="titulo" id="titulo" value="{{ titulo|default:'' }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre del Testigo:</label>
+                        <input type="text" class="form-control" name="nombre" id="nombre" value="{{ nombre|default:'' }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="imagenURL" class="form-label">URL de la imagen:</label>
+                        <textarea name="imagenURL" rows="4" id="imagenURL" class="form-control" placeholder="https://laimagen.com" required>{{ imagenURL|default:'' }}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label">Descripción:</label>
+                        <div id="descripcion" class="cuerpoform">
+                            {{ form.descripcion }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contenedorBotones">
+                <a href="{% url 'iniciotes' %}" class="boton-cancelar">
+                    <span class="material-symbols-outlined">cancel</span> Cancelar
+                </a>
+                <button type="submit" class="boton-guardar">
+                    <span class="material-symbols-outlined">save</span> Crear Testimonio
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{{ form.media }}
+{% endblock %}
