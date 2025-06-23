@@ -23,4 +23,5 @@ requests-oauthlib==2.0.0
 social-auth-app-django==5.4.3
 social-auth-core==4.6.1
 sqlparse==0.5.3
+tzdata==2025.2
 urllib3==2.4.0

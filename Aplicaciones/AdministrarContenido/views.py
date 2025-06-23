@@ -131,7 +131,7 @@ from Aplicaciones.Valores.forms import ValoresForm
 
 
 def general(request):
-    return render(request, 'contenido/index.html')
+    return render(request, 'contenido/indexEdicion.html')
 
 def generalMain(request):
     return render(request, 'contenido/inicioIndex.html')

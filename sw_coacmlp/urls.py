@@ -36,16 +36,11 @@ urlpatterns = [
     ###########################################################
 
     path('AdministrarContenido/', include('Aplicaciones.AdministrarContenido.urls')),
- 
-    
-
 
     #########################################################
     ############## URLS RUMBO A LA AUTENTICACION#############
     #########################################################
-
     path('autenticacion/', include('Aplicaciones.Autenticacion.urls')),  
-
 
 
     ############################################################
@@ -54,10 +49,6 @@ urlpatterns = [
 
     path('', include('Aplicaciones.Contenido.urls')),  
 
-
-
-
-    
 
 ]
 
