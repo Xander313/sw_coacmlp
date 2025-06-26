@@ -11,28 +11,41 @@
   <div id="buttonsContainer" class="buttonsContainer">
     <a class="butonnssContenido" onclick="mostrarSeccion('mision')"> <span class="material-symbols-outlined">target</span> <span class="titleContent">Misión</span></a>
     <a class="butonnssContenido" onclick="mostrarSeccion('vision')"> <span class="material-symbols-outlined">handshake</span> <span class="titleContent">Visión</span></a>
-    <a class="butonnssContenido" onclick="mostrarSeccion('historia')"> <span class="material-symbols-outlined"> receipt_long </span> <span class="titleContent">Historia</span></a>
+    <a class="butonnssContenido" onclick="mostrarSeccion('historia')"> <span class="material-symbols-outlined">receipt_long</span> <span class="titleContent">Historia</span></a>
     <a class="butonnssContenido" onclick="mostrarSeccion('valores')"> <span class="material-symbols-outlined">family_home</span> <span class="titleContent">Valores</span></a>
   </div>
-  <div class="ElementsMasterCointainer" >
-    <div id="inicio" class="contenContenido fade" style="display:flex;">hola</div>
-    <div id="mision" class="contenContenido fade" style="display:none; ">
+  <div class="ElementsMasterCointainer">
+    <!-- Bloque de inicio (¡Hola!) -->
+    <div id="inicio" class="contenContenido fade" style="display:flex;">
+      <div class="fade" style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: space-around;">
+        <div style="height: 100%; width: 100%; display: flex; flex-direction: column; font-family: 'Montserrat';">
+          <div style="margin: auto;">
+            <h1 style="margin: auto; text-align: center; margin-left: 10px; margin-right: 10px; font-family: 'Montserrat';">¡Hola!</h1>
+            <br><br>
+            <h1 style="text-align: center; color: #023196; text-shadow: -1px -1px 0 #CA6AB4, 1px -1px 0 #CA6AB4, -1px 1px 0 #CA6AB4, 1px 1px 0 #CA6AB4;">Conoce más acerca de nosotros</h1>
+            <br><br>
+            <h4 style="text-align: center;">Cooperativa de Ahorro y Crédito</h4>
+            <h2 style="text-align: center;"><em>Monseñor Leonidas Proaño</em></h2>
+          </div>
+        </div>
+      </div>
+    </div> <!-- ¡CIERRA ESTE DIV! -->
+
+    <!-- Resto de secciones (ahora SÍ son hermanas de div#inicio) -->
+    <div id="mision" class="contenContenido fade" style="display:none;">
       {{ mision.descripcion|safe }}
     </div>
-    <div id="vision" class="contenContenido fade" style="display:none; ">
+    <div id="vision" class="contenContenido fade" style="display:none;">
       {{ vision.descripcion|safe }}
     </div>
-    <div id="historia" class="contenContenido fade" style="display:none; ">
+    <div id="historia" class="contenContenido fade" style="display:none;">
       {{ historia.descripcion|safe }}
     </div>
-    <div id="valores" class="contenContenido fade" style="display:none; ">
+    <div id="valores" class="contenContenido fade" style="display:none;">
       {{ valores.descripcion|safe }}
     </div>
-    
   </div>
-
 </div>
-
 <script>
 function mostrarSeccion(id) {
   // Ocultar todos los divs dentro de ElementsMasterCointainer
@@ -55,69 +68,4 @@ function mostrarSeccion(id) {
 
 
 
-{% block serviciosContent%}
 
-  <sectioUSER_CONTENIDO = sw-COACMLPContenido
-  PASSWORD_CONTENIDO= 'badc742ad211fbe4ad08e1bad86240f81897c45c660760df1811f55f18e92e14'
-  
-  USER_EDUCACION = sw-COACMLPEducacion
-  PASSWORD_EDUCACION = '48f42bbc7b54dfa4e77f6b146a7532c9c4ccd5aad667c88b428dba28f849442c'n class="section why-us" data-section="section2">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="section-heading">
-            <h2>Nuestra cooperativa ofrece</h2>
-          </div>
-        </div>
-        <div class="col-md-12">
-          <div id='tabs'>
-            <ul>
-              <li><a href='#tabs-1'>Ahorros</a></li>
-              <li><a href='#tabs-2'>Créditos</a></li>
-              <li><a href='#tabs-3'>Inversiones</a></li>
-            </ul>
-            <section class='tabs-content'>
-              <article id='tabs-1'>
-                <div class="row">
-                  <div class="col-md-6">
-                    <img src="{% static 'assets/images/choose-us-image-01.png'%}" alt="">
-                  </div>
-                  <div class="col-md-6">
-                    <h4>Ahorros</h4>
-                    <p>Grad School is free educational HTML template with Bootstrap 4.5.2 CSS layout. Feel free to use it for educational or commercial purposes. You may want to make <a href="https://paypal.me/templatemo" target="_parent" rel="sponsored">a little donation</a> to TemplateMo. Please tell your friends about us. Thank you.</p>
-                  </div>
-                </div>
-              </article>
-              <article id='tabs-2'>
-                <div class="row">
-                  <div class="col-md-6">
-                    <img src="{% static 'assets/images/choose-us-image-02.png'%}" alt="">
-                  </div>
-                  <div class="col-md-6">
-                    <h4>Créditos</h4>
-                    <p>You can modify this HTML layout by editing contents and adding more pages as you needed. Since this template has options to add dropdown menus, you can put many HTML pages.</p> 
-                    <p>Suspendisse tincidunt, magna ut finibus rutrum, libero dolor euismod odio, nec interdum quam felis non ante.</p>
-                  </div>
-                </div>
-              </article>
-              <article id='tabs-3'>
-                <div class="row">
-                  <div class="col-md-6">
-                    <img src="{% static 'assets/images/choose-us-image-03.png'%}" alt="">
-                  </div>
-                  <div class="col-md-6">
-                    <h4>Inversiones</h4>
-                    <p>You are NOT allowed to redistribute this template ZIP file on any template collection website. However, you can use this template to convert into a specific theme for any kind of CMS platform such as WordPress. For more information, you shall <a rel="nofollow" href="https://templatemo.com/contact" target="_parent">contact TemplateMo</a> now.</p>
-                  </div>
-                </div>
-              </article>
-            </section>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  
-  {% endblock serviciosContent%}
